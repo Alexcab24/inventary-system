@@ -1,12 +1,13 @@
 'use client';
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export const ViewRoute = () => {
-    const pathName = usePathname();
+    const pathName = usePathname() || ''
     const pathSegments = pathName.split('/').filter(Boolean);
 
-    const capitalize = (str) => {
+    const capitalize = (str: string) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     };
 
@@ -16,9 +17,9 @@ export const ViewRoute = () => {
 
     return (
         <nav aria-label="breadcrumb">
-            <ol className="flex items-center">
+            <ol className="flex items-center ml-4">
                 <li>
-                    <a href="/">Inicio</a>
+                    <Link href={'/'}>Inicio</Link>
                 </li>
                 {pathSegments.map((segment, index) => {
                     const isLast = index === pathSegments.length - 1;
@@ -28,9 +29,9 @@ export const ViewRoute = () => {
                         <li key={index} className="flex items-center">
                             <SvgSeparator />
                             {!isLast ? (
-                                <a href={`/${pathSegments.slice(0, index + 1).join('/')}`}>
+                                <Link href={`/${pathSegments.slice(0, index + 1).join('/')}`}>
                                     {capitalizedSegment}
-                                </a>
+                                </Link>
                             ) : (
                                 <span>{capitalizedSegment}</span>
                             )}

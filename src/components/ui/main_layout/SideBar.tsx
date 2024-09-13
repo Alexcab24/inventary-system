@@ -3,6 +3,8 @@ import { FaBox, FaBoxOpen, FaReceipt, FaTachometerAlt, FaTruck, FaUsers } from '
 import { SideBarItems } from './SideBarItems'
 import { useRouter } from 'next/router'
 import { ViewRoute } from './ViewRoute'
+import { IoAppsSharp } from 'react-icons/io5'
+import { AiFillProduct } from 'react-icons/ai'
 
 
 
@@ -10,33 +12,39 @@ import { ViewRoute } from './ViewRoute'
 
 const menuItems = [
     {
-        icon: <FaTachometerAlt />,
+        icon: <IoAppsSharp />,
         title: 'Dashboard',
-        path: '/'
+        path: '/dashboard'
 
     },
     {
         icon: <FaBoxOpen />,
         title: 'Órdenes',
-        path: '/ordenes'
+        path: '/dashboard/ordenes'
+
+    },
+    {
+        icon: <AiFillProduct />,
+        title: 'Productos',
+        path: '/dashboard/productos'
 
     },
     {
         icon: <FaUsers />,
         title: 'Clientes',
-        path: '/clientes'
+        path: '/dashboard/clientes'
 
     },
     {
         icon: <FaTruck />,
         title: 'Proveedores',
-        path: '/proveedores'
+        path: '/dashboard/proveedores'
 
     },
     {
         icon: <FaReceipt />,
         title: 'Facturación',
-        path: '/facturacion'
+        path: '/dashboard/facturacion'
 
     },
    

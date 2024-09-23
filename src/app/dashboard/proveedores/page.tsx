@@ -1,5 +1,5 @@
 import { Search } from "@/components/ui/Search";
-import { SuppliersTable } from "@/components/ui/Suppliers/SuppliersTable";
+import { SuppliersTable } from "@/components/ui/suppliers/SuppliersTable";
 import Card from "@/components/ui/dashboard/Cards";
 import { Pagination } from "@/components/ui/orders/Pagination";
 import { CreateProduct } from "@/components/ui/products/Buttons";

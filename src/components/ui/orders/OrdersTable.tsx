@@ -1,4 +1,4 @@
-import { UpdateOrder } from "../orders/Buttons"
+import { UpdateOrder } from "./Buttons"
 
 
 export const OrdersTable = () => {

@@ -2,7 +2,7 @@ import { Search } from "@/components/ui/Search";
 import Card from "@/components/ui/dashboard/Cards";
 import { CreateOrder } from "@/components/ui/orders/Buttons";
 import { Pagination } from "@/components/ui/orders/Pagination";
-import { OrdersTable } from "@/components/ui/tables/OrdersTable";
+import { OrdersTable } from "@/components/ui/orders/OrdersTable";
 import { LuClipboardCheck, LuClipboardList } from "react-icons/lu";
 import { MdPendingActions } from "react-icons/md";
 

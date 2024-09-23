@@ -1,10 +1,8 @@
 import { Search } from "@/components/ui/Search";
 import Card from "@/components/ui/dashboard/Cards";
-import { CreateOrder } from "@/components/ui/orders/Buttons";
 import { Pagination } from "@/components/ui/orders/Pagination";
 import { CreateProduct } from "@/components/ui/products/Buttons";
 import { ProductsTable } from "@/components/ui/products/ProductsTable";
-import { OrdersTable } from "@/components/ui/tables/OrdersTable";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { MdInventory, MdRemoveShoppingCart } from "react-icons/md";
 
@@ -24,7 +22,7 @@ export default function productPage() {
                 <div className=" py-4 grid gap-3">
                     <div>
                         <h2 className="text-2xl font-semibold text-gray-800">
-                            Lista de productos
+                            Inventario de productos
                         </h2>
                         <p className="text-sm text-gray-600">
                             Agrega productos, edita y más

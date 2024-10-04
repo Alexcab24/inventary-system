@@ -3,7 +3,6 @@ import { SuppliersTable } from "@/components/ui/suppliers/SuppliersTable";
 import Card from "@/components/ui/dashboard/Cards";
 import { Pagination } from "@/components/ui/orders/Pagination";
 import { CreateProduct } from "@/components/ui/products/Buttons";
-import { ProductsTable } from "@/components/ui/products/ProductsTable";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { MdInventory, MdRemoveShoppingCart } from "react-icons/md";
 

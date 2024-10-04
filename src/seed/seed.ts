@@ -26,17 +26,24 @@ export const initialData: SeedData = {
     users: [
         {
             name: 'Alex Cabral',
-            email: 'alex@google.com',
-            password: bcryptjs.hashSync('123456'),
+            email: 'acabral2442@google.com',
+            password: bcryptjs.hashSync('alex123'),
             role: 'admin',
+            companyId: 'subdomain'
+        },
+        {
+            name: 'Vielka Ami',
+            email: 'vielka@google.com',
+            password: bcryptjs.hashSync('vielka123'),
+            role: 'user',
             companyId: 'subdomain'
         },
         {
             name: 'Eduardo Cabral',
             email: 'eduardo@google.com',
             password: bcryptjs.hashSync('123456'),
-            role: 'user',
-            companyId: 'subdomain'
+            role: 'admin',
+            companyId: 'proyectomidas'
         }
     ],
 
@@ -49,10 +56,10 @@ export const initialData: SeedData = {
             // createdAt: new Date()
         },
         {
-            id_tenant: 'subdomain2',
-            name: 'Subdomain Company2',
+            id_tenant: 'proyectomidas',
+            name: 'Proyecto Midas',
             phone: '8091231234',
-            email: 'subdomain2@google.com',
+            email: 'proyectomidas@google.com',
             // createdAt: new Date()
         }
     ]

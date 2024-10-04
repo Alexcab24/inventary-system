@@ -15,18 +15,15 @@ export const SideBarItems = ({ icon, title, path }: Props) => {
 
     const pathName = usePathname();
     
-    console.log(pathName)
+    const baseClass = "transition-all duration-500 flex items-center gap-x-3.5 py-3 px-2.5 bg-white text-lg text-gray-800 rounded-lg hover:bg-gray-100";
+    const activeClass = path === pathName ? 'text-white bg-gradient-to-r from-sky-600 to-cyan-400' : '';
+    
     return (
-
-
         <li>
-            <Link href={path} className={`transition-all duration-500 flex items-center gap-x-3.5 py-3 px-2.5 bg-white text-lg text-gray-800 rounded-lg hover:bg-gray-100   
-                    ${path == pathName ? 'text-white bg-gradient-to-r from-sky-600 to-cyan-400 ' : ''}`} >
+            <Link href={path} className={`${baseClass} ${activeClass}`}>
                 {icon}
-                <span className="">{title}</span>
+                <span>{title}</span>
             </Link>
         </li>
-
-
-    )
+    );
 }

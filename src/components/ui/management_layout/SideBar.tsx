@@ -1,9 +1,11 @@
 import React from 'react'
-import { FaBoxOpen, FaReceipt, FaTruck, FaUsers } from 'react-icons/fa'
-import { SideBarItems } from './SideBarItems'
-import { ViewRoute } from './ViewRoute'
+import { AiOutlineUser } from 'react-icons/ai'
+import { ViewRoute } from '../main_layout/ViewRoute'
+import { SideBarItems } from '../main_layout/SideBarItems'
+import { PiBuilding } from 'react-icons/pi'
+import { HiOutlineDocumentReport } from 'react-icons/hi'
+import { TfiSettings } from 'react-icons/tfi'
 import { IoAppsSharp } from 'react-icons/io5'
-import { AiFillProduct } from 'react-icons/ai'
 
 
 
@@ -17,33 +19,27 @@ const menuItems = [
 
     },
     {
-        icon: <FaBoxOpen />,
-        title: 'Órdenes',
-        path: '/dashboard/ordenes'
+        icon: <PiBuilding />,
+        title: 'Empresa',
+        path: '/management/company'
 
     },
     {
-        icon: <AiFillProduct />,
-        title: 'Productos',
-        path: '/dashboard/productos'
+        icon: <AiOutlineUser />,
+        title: 'Usuarios',
+        path: '/management/users'
 
     },
     {
-        icon: <FaUsers />,
-        title: 'Clientes',
-        path: '/dashboard/clientes'
+        icon: <HiOutlineDocumentReport />,
+        title: 'Historial de facturas',
+        path: '/management/invoice_history'
 
     },
     {
-        icon: <FaTruck />,
-        title: 'Proveedores',
-        path: '/dashboard/proveedores'
-
-    },
-    {
-        icon: <FaReceipt />,
-        title: 'Facturación',
-        path: '/dashboard/facturacion'
+        icon: <TfiSettings />,
+        title: 'Editar perfíl',
+        path: '/management/profile'
 
     },
 ]

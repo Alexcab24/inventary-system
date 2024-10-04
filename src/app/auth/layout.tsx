@@ -24,17 +24,18 @@ export default async function RootLayout({
 }>) {
 
 
-const session = await auth();
-if(session?.user){
-    redirect('/dashboard')
-}
-console.log({session})
+    const session = await auth();
+    
+    if (session?.user) {
+        redirect('/dashboard')
+    }
+
 
     return (
         <html lang="es">
             <body className={inter.className}>
                 <main className="bg-gray-100 grid grid-cols-2 ">
-                {children}
+                    {children}
                 </main>
             </body>
         </html>

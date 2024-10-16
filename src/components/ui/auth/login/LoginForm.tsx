@@ -1,11 +1,12 @@
 'use client';
 
-import { authenticate } from "@/actions";
+
 import clsx from "clsx";
 import { useFormStatus } from "react-dom";
 import { useFormState } from "react-dom";
 import { IoInformationOutline } from "react-icons/io5";
 import { Spinner } from "../../Spinner";
+import { authenticate } from "@/actions/auth/login";
 
 
 

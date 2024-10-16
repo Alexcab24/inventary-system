@@ -5,8 +5,6 @@ import { z } from 'zod';
 
 import prisma from './lib/prisma';
 import { getSubdomain } from './lib/subdomain';
-import { NextResponse } from 'next/server';
-import { adminRoutes } from './utils/protected-routes';
 
 
 export const authConfig: NextAuthConfig = {
@@ -17,19 +15,6 @@ export const authConfig: NextAuthConfig = {
 
   callbacks: {
 
-    authorized({ auth, request: { nextUrl } }) {
-      const { pathname } = nextUrl;
-
-      //protección rutas admin
-      if (adminRoutes.some((route) => pathname.startsWith(route))) {
-        if (auth?.user.role !== 'admin') {
-          return NextResponse.redirect(new URL('/dashboard', nextUrl));
-        }
-      }
-
-
-      return true;
-    },
 
     jwt({ token, user }) {
       if (user) {
@@ -67,21 +52,26 @@ export const authConfig: NextAuthConfig = {
 
         const user = await prisma.user.findUnique({ where: { email: email.toLocaleLowerCase() } });
         if (!user) return null;
-
         // Comprobación del tenant
         const company = await prisma.company.findUnique({ where: { id_tenant: user.companyId } });
         if (!company || company.id_tenant !== subdomain) {
           return null;
         }
 
+        //Comprobación de habilitación
+        if (user.disabled) {
+          return null;
+        }
+
+
         if (!bcryptjs.compareSync(password, user.password)) return null;
 
-        // Incluimos el rol del usuario en la respuesta
+
         const { password: _, ...rest } = user;
 
         return {
           ...rest,
-          role: user.role, // Agregar rol aquí
+          role: user.role,
         };
       },
     }),

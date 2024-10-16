@@ -3,6 +3,21 @@
 @tailwind utilities;
 
 
+@keyframes slide-in-top {
+  0% {
+      transform: translateY(-15%);
+      opacity: 0;
+  }
+  100% {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+.animate-slide-in-top {
+  animation: slide-in-top 0.5s ease-out forwards;
+}
+
 .loader {
     width: 28px; /* Más pequeño */
     aspect-ratio: 1;

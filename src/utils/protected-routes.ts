@@ -2,6 +2,6 @@
 
 
 export const adminRoutes = [
-    '/dashboard/user',
+    '/management/users',
 
 ]

@@ -4,13 +4,14 @@ import Image from 'next/image'
 import React from 'react'
 import { ViewRoute } from './ViewRoute'
 import { IoExitOutline, IoSettingsOutline } from 'react-icons/io5'
-import { logout } from '@/actions';
+
 import { PiBuilding } from "react-icons/pi";
 import { TfiSettings } from 'react-icons/tfi';
 import { HiOutlineDocumentReport } from 'react-icons/hi';
 import { AiOutlineUser } from 'react-icons/ai';
 import type { User } from '@/interfaces';
 import Link from 'next/link';
+import { logout } from '@/actions/auth/logout';
 
 
 

@@ -5,14 +5,25 @@ import { AiOutlineUser } from "react-icons/ai";
 import { MdCheckCircleOutline, MdPendingActions } from "react-icons/md";
 import { UsersTable } from '../../../components/ui/users/UsersTable';
 import { CreateUser } from "@/components/ui/users/Buttons";
+import { getUserByCompany } from "@/actions/users/get-user-by-company";
 
-export default function UserPage() {
+
+
+export default async function UserPage() {
+
+  const {users} = await getUserByCompany();
+  
+  const totalUsers = users?.length || 0;
+  const totalAdmins = users?.filter(user => user.role === 'admin').length || 0;
+  const totalNormalUsers = users?.filter(user => user.role === 'user').length || 0;
+  
+  
     return (
       <>
         <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 p-4">
-                <Card title="Usuarios" value={1234} icon={MdCheckCircleOutline} />
-                <Card title="Administradores" value={'1234'} icon={MdPendingActions} />
-                <Card title="Total de usuarios" value={1234} icon={AiOutlineUser} />
+                <Card title="Usuarios" value={totalNormalUsers} icon={MdCheckCircleOutline} />
+                <Card title="Administradores" value={totalAdmins} icon={MdPendingActions} />
+                <Card title="Total de usuarios" value={totalUsers} icon={AiOutlineUser} />
             </section>
 
             <section className="my-8">

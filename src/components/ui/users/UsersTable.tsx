@@ -1,8 +1,9 @@
-'use client';
+import { getUserByCompany } from '@/actions/users/get-user-by-company';
+import { DeleteUser, EnableDisableUser, UpdateUser } from './Buttons';
+export const UsersTable = async () => {
 
+    const { users = [] } = await getUserByCompany();
 
-import { UpdateOrder } from '../orders/Buttons'
-export const UsersTable = () => {
     return (
         <>
             {/* <!-- Table Section --> */}
@@ -21,7 +22,9 @@ export const UsersTable = () => {
                                     <thead className="bg-gray-50">
                                         <tr>
                                             <th scope="col" className="ps-6 py-3 text-start">
-
+                                                <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
+                                                    #Id
+                                                </span>
                                             </th>
 
                                             <th scope="col" className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3 text-start">
@@ -68,49 +71,56 @@ export const UsersTable = () => {
 
                                     <tbody className="divide-y divide-gray-200">
                                         {/* fila */}
-                                        <tr>
-                                            <td className="size-px whitespace-nowrap">
-                                                <div className="ps-6 py-3">
-                                                    <label className="flex">
 
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td className="size-px whitespace-nowrap">
-                                                <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
-                                                    <div className="flex items-center gap-x-3">
-                                                        <img className="inline-block size-[38px] rounded-full" src="https://images.unsplash.com/photo-1670272505340-d906d8d77d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar" />
-                                                        <div className="grow">
-                                                            <span className="block text-sm font-semibold text-gray-800">Jessica Williams</span>
+                                        {
+                                            users?.map(users => (
+                                                <tr key={users.id}>
+                                                    <td className="size-px whitespace-nowrap">
+                                                        <div className="ps-6 py-3">
+                                                            <label className="flex">
+                                                                <span className='block text-sm text-gray-500'> {users.id.split('-').at(-1)}</span>
+                                                            </label>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className="h-px w-72 whitespace-nowrap">
-                                                <div className="px-6 py-3">
-                                                    <span className="block text-sm text-gray-500">correo@google.com</span>
-                                                </div>
-                                            </td>
-                                            <td className="size-px whitespace-nowrap">
-                                                <div className="px-6 py-3">
-                                                    <span className="block text-sm text-gray-500">Administrador</span>
-                                                </div>
-                                            </td>
-                                            <td className="size-px whitespace-nowrap">
-                                                <div className="px-6 py-3">
-                                                    <span className="block text-sm text-gray-500">En línea</span>
-                                                </div>
-                                            </td>
+                                                    </td>
+                                                    <td className="size-px whitespace-nowrap">
+                                                        <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                                                            <div className="flex items-center gap-x-3">
+                                                                <img className="inline-block size-[38px] rounded-full" src="https://images.unsplash.com/photo-1670272505340-d906d8d77d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar" />
+                                                                <div className="grow">
+                                                                    <span className="block text-sm font-semibold text-gray-800">{users.name}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td className="h-px w-72 whitespace-nowrap">
+                                                        <div className="px-6 py-3">
+                                                            <span className="block text-sm text-gray-500">{users.email}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td className="size-px whitespace-nowrap">
+                                                        <div className="px-6 py-3">
+                                                            <span className="block text-sm text-gray-500">{users.role}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td className="size-px whitespace-nowrap">
+                                                        <div className="px-6 py-3">
+                                                            <span className="block text-sm text-gray-500">En línea</span>
+                                                        </div>
+                                                    </td>
 
 
-                                            <td className="size-px whitespace-nowrap">
-                                                <div className="px-6 py-1.5">
+                                                    <td className="size-px whitespace-nowrap">
+                                                        <div className="flex gap-x-2 px-6 py-1.5">
 
-                                                    <UpdateOrder id="1" />
+                                                            <UpdateUser id={users.id} />
+                                                            <EnableDisableUser/>
+                                                            <DeleteUser id={users.id}/>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        }
 
-                                                </div>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                                 {/* <!-- End Table -->

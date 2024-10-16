@@ -52,7 +52,7 @@ export const SideBar = () => {
     return (
         <>
 
-            <div className="absolute top-14 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 lg:px-8 lg:hidden">
+            <div className="absolute top-14 inset-x-0  bg-white border-y px-4 sm:px-6 lg:px-8 lg:hidden">
                 <div className="flex items-center py-2">
 
                     <button type="button" className="size-8 flex justify-center items-center gap-x-2 border border-gray-200 text-gray-800 hover:text-gray-500 rounded-lg focus:outline-none focus:text-gray-500 disabled:opacity-50 disabled:pointer-events-none" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-application-sidebar" aria-label="Toggle navigation" data-hs-overlay="#hs-application-sidebar">
@@ -70,7 +70,7 @@ export const SideBar = () => {
                 -translate-x-full transition-all duration-300 transform
                 w-[260px] h-full
                 hidden
-                fixed inset-y-0 start-0 z-[60]
+                fixed inset-y-0 start-0 z-50
                  bg-white border-e border-gray-200
                 lg:block lg:translate-x-0 lg:end-auto lg:bottom-0
                 " role="dialog" aria-label="Sidebar">

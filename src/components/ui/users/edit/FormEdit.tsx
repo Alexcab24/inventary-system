@@ -1,14 +1,16 @@
 'use client';
 
 
-import { User } from "@/interfaces";
+import { User, UserById } from "@/interfaces";
 import clsx from "clsx";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { errorNotification, successNotification } from "../notification/notifications";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { registerUser } from "@/actions/auth/register";
+import { errorNotification, successNotification } from "../../notification/notifications";
+import { ChangeUserRole } from "@/actions/users/change-user-role";
+
 
 
 interface FormInputs {
@@ -19,30 +21,34 @@ interface FormInputs {
 }
 
 type Props = {
-    user?: User;
+    userSession?: User;
+    userById: UserById;
+    userId: string;
 }
 
-export const Form = ({ user }: Props) => {
+export const FormEdit = ({ userSession, userById, userId }: Props) => {
   
 
     const [errorMessage, setErrorMessage] = useState('');
     const router = useRouter();
 
-    const companyId = user?.companyId;
+    const companyId = userSession?.companyId;
 
-    const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
+    const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>({
+        defaultValues: {
+            ...userById
+        }
+    });
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-        const { name, email, password, role } = data;
+        const { role } = data;
 
         if (!companyId) {
             return;
         }
 
-
-
-        // server action
-        const resp = await registerUser(name, email, password, role, companyId);
+              // server action
+        const resp = await ChangeUserRole(userId, role)
 
         if (resp.ok) {
             successNotification(resp.message);
@@ -59,6 +65,7 @@ export const Form = ({ user }: Props) => {
 
     return (
         <>
+
             <div className='bg-gray-50 rounded-xl shadow-sm overflow-hidden p-8 min-w-full'>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
@@ -68,6 +75,7 @@ export const Form = ({ user }: Props) => {
                         <input
                             type="text"
                             id="name"
+                            disabled
                             {...register('name', { required: "El nombre es requerido" })}
                             className={clsx(
                                 "mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm sm:text-sm",
@@ -85,6 +93,7 @@ export const Form = ({ user }: Props) => {
                         <input
                             type="email"
                             id="email"
+                            disabled
                             {...register('email', {
                                 required: "El correo es requerido",
                                 pattern: {
@@ -101,31 +110,6 @@ export const Form = ({ user }: Props) => {
                             <span className="text-sm text-red-500">{errors.email.message}</span>
                         )}
                     </div>
-
-                    {/* Contraseña */}
-
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Contraseña</label>
-                        <input
-                            type="password"
-                            id="password"
-                            {...register('password', {
-                                required: "La contraseña es requerida",
-                                minLength: {
-                                    value: 6,
-                                    message: "La contraseña debe tener al menos 6 caracteres"
-                                }
-                            })}
-                            className={clsx(
-                                "mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm sm:text-sm",
-                                { 'border-red-500': errors.password }
-                            )}
-                        />
-                        {errors.password && (
-                            <span className="text-sm text-red-500">{errors.password.message}</span>
-                        )}
-                    </div>
-
 
 
                     {/* Rol */}
@@ -154,7 +138,7 @@ export const Form = ({ user }: Props) => {
                             Cancelar
                         </Link>
                         <button type="submit" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                            Agregar usuario
+                            Actualizar usuario
                         </button>
                     </div>
 

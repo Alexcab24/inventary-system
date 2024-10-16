@@ -1,21 +1,33 @@
 import NextAuth from 'next-auth';
-import { authConfig } from './auth.config';
+import { auth, authConfig } from './auth.config';
 import { NextResponse } from 'next/server';
- 
+import { adminRoutes } from './utils/protected-routes';
+
+
+
 export default NextAuth(authConfig).auth;
- 
+
+
+
+
 export const config = {
   // https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
+
   matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
 };
 
 
-export function middleware(req: any) {
-  const host = req.headers.get('host'); 
-  const subdomain = host.split('.')[0]; 
+export async function middleware(req: any) {
 
-  req.headers.set('x-company-id', subdomain);
+  const session = await auth();
+  const pathName = req.nextUrl.pathname
 
+  if (adminRoutes.some((route) => pathName.startsWith(route))) {
+    if (!auth || session?.user.role !== 'admin') {
+    
+      return NextResponse.redirect(new URL('/dashboard', req.nextUrl));
+      
+    }
+  }
 
-  return NextResponse.next();
 }

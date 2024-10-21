@@ -27,9 +27,9 @@ export const ConfirmModal = ({ isOpen, onConfirm, onCancel, message }: Props) =>
                         </button>
                         <button
                             onClick={onConfirm}
-                            className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-5 py-2 rounded-md shadow-lg transition duration-300 transform hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-red-300"
+                            className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-md shadow-lg transition duration-150 transform  hover:shadow-md focus:outline-none focus:ring-2 focus:ring-red-300"
                         >
-                            Aceptar
+                            Eliminar
                         </button>
                     </div>
                 </div>

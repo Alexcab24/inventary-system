@@ -36,7 +36,7 @@ export default function productPage() {
                 </div>
                 <ProductsTable />
                 <div className="mt-5 flex w-full justify-center">
-                    <Pagination />
+                    {/* <Pagination  /> */}
                 </div>
             </section>
         </>

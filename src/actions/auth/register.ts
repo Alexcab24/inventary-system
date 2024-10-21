@@ -13,7 +13,6 @@ export const registerUser = async (name: string, email: string, password: string
                 message: 'No se encontró el companyId en el header'
             };
         }
-
         const user = await prisma.user.create({
             data: {
                 name: name,

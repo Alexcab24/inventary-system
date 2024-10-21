@@ -20,4 +20,13 @@ export enum Role {
      email: string;
      role: Role;
  }
+
+
+
+export interface PaginatedUsersProps {
+    page?: number;
+    take?: number;
+    query: string
+ }
+ 
  

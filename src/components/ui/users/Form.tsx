@@ -9,6 +9,7 @@ import { errorNotification, successNotification } from "../notification/notifica
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { registerUser } from "@/actions/auth/register";
+import { sleep } from "@/utils/sleep";
 
 
 interface FormInputs {

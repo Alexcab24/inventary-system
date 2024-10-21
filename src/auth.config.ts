@@ -13,6 +13,7 @@ export const authConfig: NextAuthConfig = {
     newUser: '/auth/new-account',
   },
 
+  trustHost: true,
   callbacks: {
 
 

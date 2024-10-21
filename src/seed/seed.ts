@@ -39,6 +39,69 @@ export const initialData: SeedData = {
             companyId: 'subdomain'
         },
         {
+            name: 'María Gómez',
+            email: 'maria.gomez@google.com',
+            password: bcryptjs.hashSync('maria456'),
+            role: 'user',
+            companyId: 'subdomain'
+        },
+        {
+            name: 'Juan Pérez',
+            email: 'juan.perez@google.com',
+            password: bcryptjs.hashSync('juan789'),
+            role: 'user',
+            companyId: 'subdomain'
+        },
+        {
+            name: 'Laura Sánchez',
+            email: 'laura.sanchez@google.com',
+            password: bcryptjs.hashSync('laura101'),
+            role: 'admin',
+            companyId: 'subdomain'
+        },
+        {
+            name: 'Carlos Medina',
+            email: 'carlos.medina@google.com',
+            password: bcryptjs.hashSync('carlos202'),
+            role: 'user',
+            companyId: 'subdomain'
+        },
+        {
+            name: 'Ana López',
+            email: 'ana.lopez@google.com',
+            password: bcryptjs.hashSync('ana303'),
+            role: 'user',
+            companyId: 'subdomain'
+        },
+        {
+            name: 'Pedro Martínez',
+            email: 'pedro.martinez@google.com',
+            password: bcryptjs.hashSync('pedro404'),
+            role: 'user',
+            companyId: 'subdomain'
+        },
+        {
+            name: 'Sofía Hernández',
+            email: 'sofia.hernandez@google.com',
+            password: bcryptjs.hashSync('sofia505'),
+            role: 'user',
+            companyId: 'subdomain'
+        },
+        {
+            name: 'Luis Fernández',
+            email: 'luis.fernandez@google.com',
+            password: bcryptjs.hashSync('luis606'),
+            role: 'user',
+            companyId: 'subdomain'
+        },
+        {
+            name: 'Elena Torres',
+            email: 'elena.torres@google.com',
+            password: bcryptjs.hashSync('elena707'),
+            role: 'admin',
+            companyId: 'subdomain'
+        },
+        {
             name: 'Eduardo Cabral',
             email: 'eduardo@google.com',
             password: bcryptjs.hashSync('123456'),

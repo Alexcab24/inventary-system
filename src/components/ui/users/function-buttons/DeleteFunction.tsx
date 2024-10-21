@@ -1,9 +1,9 @@
 'use client'
 
 import { DeleteUserById } from "@/actions/users/delete-user-by-id"
-import { errorNotification, successNotification } from "../notification/notifications"
+import { errorNotification, successNotification } from "../../notification/notifications"
 import { useState } from "react"
-import { ConfirmModal } from "../ConfirmModal"
+import { ConfirmModal } from "../../ConfirmModal"
 import { FaRegTrashCan } from "react-icons/fa6"
 
 
@@ -26,6 +26,9 @@ export const DeleteFunction = ({ id }: { id: string }) => {
             return;
         }
     }
+
+
+    
     return (
 
         <>
@@ -44,6 +47,6 @@ export const DeleteFunction = ({ id }: { id: string }) => {
             />
 
         </>
-      
+
     )
 }

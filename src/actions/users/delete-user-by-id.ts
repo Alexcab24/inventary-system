@@ -16,6 +16,13 @@ export const DeleteUserById = async (userId: string) => {
         }
     }
 
+    if (session?.user.id === userId) {
+        return {
+            ok: false,
+            message: 'Acción no permitida: no puedes eliminar tu propio usuario.'
+        }
+    }
+
 
     try {
         await prisma.user.delete({

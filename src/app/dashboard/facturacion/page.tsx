@@ -34,7 +34,7 @@ export default function invoicePage() {
                 </div>
                 <InvoicesTable />
                 <div className="mt-5 flex w-full justify-center">
-                    <Pagination />
+                    {/* <Pagination /> */}
                 </div>
             </section>
         </>

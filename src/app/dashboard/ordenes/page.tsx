@@ -38,7 +38,7 @@ export default async function ordersPage() {
                 </div>
                 <OrdersTable />
                 <div className="mt-5 flex w-full justify-center">
-                    <Pagination />
+                    {/* <Pagination /> */}
                 </div>
             </section>
 

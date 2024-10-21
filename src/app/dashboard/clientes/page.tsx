@@ -33,7 +33,7 @@ export default function clientPage() {
                 </div>
                 <ClientsTable />
                 <div className="mt-5 flex w-full justify-center">
-                    <Pagination />
+                    {/* <Pagination /> */}
                 </div>
             </section>
 

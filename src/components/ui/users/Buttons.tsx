@@ -6,7 +6,7 @@ import { GoPlus } from "react-icons/go";
 
 import { FiUnlock } from 'react-icons/fi'; // Para habilitar
 import { FiLock } from 'react-icons/fi'; // Para deshabilitar
-import { DeleteFunction } from "./DeleteFunction";
+import { DeleteFunction } from "./function-buttons/DeleteFunction";
 
 
 
@@ -36,31 +36,10 @@ export function UpdateUser({ id }: { id: string }) {
 }
 
 
-export function EnableDisableUser({ isEnabled, onClick }: any) {
-  return (
-    <button onClick={onClick} className="inline-flex items-center gap-x-1 text-sm decoration-2 hover:underline focus:outline-none focus:underline border border-gray-200 p-2 rounded-md hover:bg-gray-50 text-gray-800 ">
-      {isEnabled ? (
-        <>
-          <FiLock size={22} />
-        </>
-      ) : (
-        <>
-          <FiUnlock size={22} />
-        </>
-      )}
-    </button>
-  );
-}
 
-export async function DeleteUser({ id }: { id: string }) {
- 
+// export function EnableDisableUser() {
+//   return (
 
+//   );
+// }
 
-
-  return (
-    <div>
-          <DeleteFunction id={id} />
-    </div>
-
-  )
-}

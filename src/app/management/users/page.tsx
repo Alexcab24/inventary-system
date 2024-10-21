@@ -1,26 +1,45 @@
+
+
+
 import { Search } from "@/components/ui/Search";
 import Card from "@/components/ui/dashboard/Cards";
-import { Pagination } from "@/components/ui/orders/Pagination";
 import { AiOutlineUser } from "react-icons/ai";
 import { MdCheckCircleOutline, MdPendingActions } from "react-icons/md";
 import { UsersTable } from '../../../components/ui/users/UsersTable';
 import { CreateUser } from "@/components/ui/users/Buttons";
-import { getUserByCompany } from "@/actions/users/get-user-by-company";
+import { fetchUserByCompany } from "@/actions/users/get-user-by-company";
+import { Suspense } from "react";
+import { TableSkeleton } from "@/components/ui/users/Skeletons/TableSkeleton";
 
 
 
-export default async function UserPage() {
+export default async function UserPage({
+    searchParams }:
+    {
+        searchParams?: {
+            query?: string;
+            page?: string;
+        };
+    }) {
 
-  const {users} = await getUserByCompany();
-  
-  const totalUsers = users?.length || 0;
-  const totalAdmins = users?.filter(user => user.role === 'admin').length || 0;
-  const totalNormalUsers = users?.filter(user => user.role === 'user').length || 0;
-  
-  
+
+
+
+    const query = searchParams?.query || '';
+    const page = searchParams?.page ? parseInt(searchParams?.page) : 1;
+
+
+    //Cards fetch
+    const { users } = await fetchUserByCompany();
+
+    const totalUsers = users?.length || 0;
+    const totalAdmins = users?.filter(user => user.role === 'admin').length || 0;
+    const totalNormalUsers = users?.filter(user => user.role === 'user').length || 0;
+
+
     return (
-      <>
-        <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 p-4">
+        <>
+            <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 p-4">
                 <Card title="Usuarios" value={totalNormalUsers} icon={MdCheckCircleOutline} />
                 <Card title="Administradores" value={totalAdmins} icon={MdPendingActions} />
                 <Card title="Total de usuarios" value={totalUsers} icon={AiOutlineUser} />
@@ -42,12 +61,12 @@ export default async function UserPage() {
                         <CreateUser />
                     </div>
                 </div>
-                <UsersTable />
-                <div className="mt-5 flex w-full justify-center">
-                    <Pagination />
-                </div>
+                <Suspense key={query} fallback={<TableSkeleton />}>
+                    <UsersTable query={query} page={page} />
+                </Suspense>
+
             </section>
 
-      </>
+        </>
     )
 }

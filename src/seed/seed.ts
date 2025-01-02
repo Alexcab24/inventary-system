@@ -8,6 +8,21 @@ interface SeedUsers {
     companyId: string;
 };
 
+interface SeedProducts {
+    name: string;
+    image: string;
+    description: string;
+    price: number;
+    stock: number;
+    companyId: string;
+}
+interface SeedSupplier {
+    name: string;
+    contact: string;
+    phone: string;
+    address: string;
+    companyId: string;
+}
 interface SeedCompany {
     id_tenant: string;
     name: string;
@@ -18,7 +33,9 @@ interface SeedCompany {
 
 interface SeedData {
     users: SeedUsers[];
-    companies: SeedCompany[]
+    companies: SeedCompany[];
+    products: SeedProducts[];
+    suppliers: SeedSupplier[];
 };
 
 
@@ -110,6 +127,61 @@ export const initialData: SeedData = {
         }
     ],
 
+
+    suppliers: [
+        {
+            name: "Proveedor A",
+            contact: "Juan Pérez",
+            phone: "8091234567",
+            address: "Calle Principal #1",
+            companyId: 'subdomain'
+        },
+        {
+            name: "Proveedor B",
+            contact: "Juan Pérez",
+            phone: "8091234567",
+            address: "Calle Principal #2",
+            companyId: 'subdomain'
+        },
+        {
+            name: "Proveedor C",
+            contact: "Juan Pérez",
+            phone: "8091234567",
+            address: "Calle Principal #3",
+            companyId: 'subdomain'
+        },
+    ],
+
+
+    products: [
+        {
+            name: "Producto 1",
+            image: "url/to/image1.jpg",
+            description: "Descripción del producto 1",
+            price: 10.99,
+            stock: 100,
+            companyId: 'subdomain'
+        },
+        {
+            name: "Producto 2",
+            image: "url/to/image2.jpg",
+            description: "Descripción del producto 2",
+            price: 10.99,
+            stock: 100,
+            companyId: 'subdomain'
+        },
+        {
+            name: "Producto 3",
+            image: "url/to/image3.jpg",
+            description: "Descripción del producto 3",
+            price: 10.99,
+            stock: 100,
+            companyId: 'subdomain'
+        },
+
+    ],
+
+
     companies: [
         {
             id_tenant: 'subdomain',
@@ -126,4 +198,6 @@ export const initialData: SeedData = {
             // createdAt: new Date()
         }
     ]
+
+
 }

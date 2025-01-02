@@ -44,7 +44,7 @@ export const LoginForm = () => {
                     <div>
                         <div className="flex justify-between items-center">
                             <label className="block text-sm mb-2">Contraseña</label>
-                            <a className="inline-flex items-center gap-x-1 text-sm text-midas decoration-2 hover:underline focus:outline-none focus:underline font-medium" href="#">¿Olvidaste tu contraseña?</a>
+                            <a className="inline-flex items-center gap-x-1 text-sm text-demo decoration-2 hover:underline focus:outline-none focus:underline font-medium" href="#">¿Olvidaste tu contraseña?</a>
                         </div>
                         <div className="relative">
                             <input
@@ -94,7 +94,7 @@ function LoginButton() {
         <button
             type="submit"
             className={clsx({
-                "w-full py-3 px-4 inline-flex justify-center items-center gap-x-2  font-medium rounded-lg border border-transparent bg-midas text-lg text-white hover:bg-midasHover focus:outline-none focus:bg-midas disabled:opacity-50 disabled:pointer-events-none transition-all": !pending,
+                "w-full py-3 px-4 inline-flex justify-center items-center gap-x-2  font-medium rounded-lg border border-transparent bg-demo text-lg text-white hover:bg-demoHover focus:outline-none focus:bg-demo disabled:opacity-50 disabled:pointer-events-none transition-all": !pending,
                 "w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-gray-200 text-white focus:outline-none focus:bg-gray-700  disabled:pointer-events-none transition-all": pending
             })}
             disabled={pending}

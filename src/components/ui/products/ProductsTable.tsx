@@ -53,6 +53,14 @@ export const ProductsTable = () => {
                             </span>
                           </div>
                         </th>
+
+                        <th scope="col" className="px-6 py-3 text-start">
+                          <div className="flex items-center gap-x-2">
+                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
+                              stock
+                            </span>
+                          </div>
+                        </th>
   
                         <th scope="col" className="px-6 py-3 text-start">
                           <div className="flex items-center gap-x-2">
@@ -94,6 +102,15 @@ export const ProductsTable = () => {
                             <div className="flex items-center gap-x-3">
                               <span className="text-sm text-gray-500">
                               $500
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="size-px whitespace-nowrap">
+                          <div className="px-6 py-3">
+                            <div className="flex items-center gap-x-3">
+                              <span className="text-sm text-gray-500">
+                              10
                               </span>
                             </div>
                           </div>

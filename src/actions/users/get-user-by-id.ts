@@ -1,7 +1,7 @@
 'use server';
 
 import prisma from "@/lib/prisma";
-import { UserById } from "@/interfaces"; 
+import { UserById } from "@/interfaces";
 import { Role, User } from '../../interfaces/user.interfaces';
 
 export const getUserById = async (id: string): Promise<UserById | null> => {
@@ -17,18 +17,18 @@ export const getUserById = async (id: string): Promise<UserById | null> => {
             }
         });
 
-     
+
         if (!user) {
             return null;
         }
 
         return {
-           name: user.name,
-           email: user.email,
-           role: user.role as Role
+            name: user.name,
+            email: user.email,
+            role: user.role as Role
         };
     } catch (error) {
         console.error(error);
-        return null; 
+        return null;
     }
 };

@@ -8,8 +8,8 @@ import { redirect } from "next/navigation";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Midas App",
-    description: "Midas App project",
+    title: "Inventary App",
+    description: "Inventary App project",
 };
 
 

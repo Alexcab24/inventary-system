@@ -10,7 +10,7 @@ export default function loginPage() {
                 <div className="p-4 sm:p-7">
                     <div className="text-start">
                         <h1 className="block text-4xl font-medium text-gray-800">Bienvenido/a</h1>
-                        <h2>Gestiona tu facturación con eficiencia y simplicidad</h2>
+                        <h2>Gestiona tu inventario con eficiencia y simplicidad</h2>
 
                     </div>
 

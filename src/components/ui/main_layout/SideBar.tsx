@@ -17,21 +17,9 @@ const menuItems = [
 
     },
     {
-        icon: <FaBoxOpen />,
-        title: 'Órdenes',
-        path: '/dashboard/ordenes'
-
-    },
-    {
         icon: <AiFillProduct />,
-        title: 'Productos',
-        path: '/dashboard/productos'
-
-    },
-    {
-        icon: <FaUsers />,
-        title: 'Clientes',
-        path: '/dashboard/clientes'
+        title: 'Inventario',
+        path: '/dashboard/inventory'
 
     },
     {
@@ -42,8 +30,8 @@ const menuItems = [
     },
     {
         icon: <FaReceipt />,
-        title: 'Facturación',
-        path: '/dashboard/facturacion'
+        title: 'Reportes',
+        path: '/dashboard/reports'
 
     },
 ]
@@ -83,7 +71,7 @@ export const SideBar = () => {
                     <div className="px-6 pt-4">
 
                         <a className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80" href="#" aria-label="Preline">
-                            <span>MidasSystem</span>
+                            <span>InventarySystem</span>
                         </a>
 
                     </div>

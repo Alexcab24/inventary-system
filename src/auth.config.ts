@@ -49,7 +49,6 @@ export const authConfig: NextAuthConfig = {
         const { email, password } = parsedCredentials.data;
 
         const subdomain = getSubdomain(req);
-        console.log(subdomain);
 
         const user = await prisma.user.findUnique({ where: { email: email.toLocaleLowerCase() } });
         if (!user) return null;

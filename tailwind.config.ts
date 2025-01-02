@@ -10,8 +10,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "midas": "#F9A827",
-        "midasHover": "#D0801D"
+        "demo": "#5dade2",
+        "demoHover": "#2e86c1"
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

@@ -14,6 +14,9 @@ interface SeedProducts {
     description: string;
     price: number;
     stock: number;
+    // supplierId: {
+    //     name: string;
+    // };
     companyId: string;
 }
 interface SeedSupplier {
@@ -159,25 +162,34 @@ export const initialData: SeedData = {
             image: "url/to/image1.jpg",
             description: "Descripción del producto 1",
             price: 10.99,
-            stock: 100,
+            stock: 0,
+            // supplierId: {
+            //     name: 'Proveedor A'
+            // },
             companyId: 'subdomain'
         },
-        {
-            name: "Producto 2",
-            image: "url/to/image2.jpg",
-            description: "Descripción del producto 2",
-            price: 10.99,
-            stock: 100,
-            companyId: 'subdomain'
-        },
-        {
-            name: "Producto 3",
-            image: "url/to/image3.jpg",
-            description: "Descripción del producto 3",
-            price: 10.99,
-            stock: 100,
-            companyId: 'subdomain'
-        },
+        // {
+        //     name: "Producto 2",
+        //     image: "url/to/image2.jpg",
+        //     description: "Descripción del producto 2",
+        //     price: 10.99,
+        //     stock: 100,
+        //     supplierId: {
+        //         name: 'Proveedor A'
+        //     },
+        //     companyId: 'subdomain'
+        // },
+        // {
+        //     name: "Producto 3",
+        //     image: "url/to/image3.jpg",
+        //     description: "Descripción del producto 3",
+        //     price: 10.99,
+        //     stock: 100,
+        //     supplierId: {
+        //         name: 'Proveedor A'
+        //     },
+        //     companyId: 'subdomain'
+        // },
 
     ],
 

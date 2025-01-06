@@ -3,6 +3,7 @@ import { UpdateUser } from './Buttons';
 import { DeleteFunction } from './function-buttons/DeleteFunction';
 import { Pagination } from '../orders/Pagination';
 import { DisabledFunctionButton } from './function-buttons/DisabledFunctionButton';
+import Image from 'next/image';
 
 interface Props {
     query: string;
@@ -82,10 +83,12 @@ export const UsersTable = async ({ query, page }: Props) => {
                                                     <td className="size-px whitespace-nowrap">
                                                         <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
                                                             <div className="flex items-center gap-x-3">
-                                                                <img
+                                                                <Image
                                                                     className={`inline-block size-[38px] rounded-full ${user.disabled ? 'opacity-50' : ''}`}
                                                                     src="https://images.unsplash.com/photo-1670272505340-d906d8d77d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
                                                                     alt={`Avatar de ${user.name}`}
+                                                                    width={50}
+                                                                    height={50}
                                                                 />
                                                                 <div className="grow">
                                                                     <span className={`block text-sm font-semibold ${user.disabled ? 'text-gray-400' : 'text-gray-800'}`}>{user.name}</span>

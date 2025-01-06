@@ -34,27 +34,27 @@ export const fetchPaginatedUsers = async ({
          take: take,
          skip: (page - 1) * take,
          where: {
-             companyId: session.user.companyId,
-             OR: [
-                 {
-                     name: {
-                         contains: query.trim(),  // Asegúrate de eliminar espacios
-                         mode: 'insensitive',
-                     },
-                 },
-                 {
-                     email: {
-                         contains: query.trim(),  // Asegúrate de eliminar espacios
-                         mode: 'insensitive',
-                     },
-                 },
-             ],
+            companyId: session.user.companyId,
+            OR: [
+               {
+                  name: {
+                     contains: query.trim(),  // Asegúrate de eliminar espacios
+                     mode: 'insensitive',
+                  },
+               },
+               {
+                  email: {
+                     contains: query.trim(),  // Asegúrate de eliminar espacios
+                     mode: 'insensitive',
+                  },
+               },
+            ],
          },
          orderBy: {
-             name: 'asc',
+            name: 'asc',
          },
-     });
-     
+      });
+
 
       //Obtener total de páginas
 
@@ -72,6 +72,8 @@ export const fetchPaginatedUsers = async ({
          totalPages: totalPages,
          users
       };
+
+      
    } catch (error) {
       console.error("Error al obtener los usuarios:", error);
       return {

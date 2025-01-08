@@ -33,6 +33,12 @@ export const getProductsByCompany = async ({
                 companyId: session.user.companyId,
                 OR: [
                     {
+                        id: {
+                            contains: query.trim(),
+                            mode: 'insensitive'
+                        }
+                    },
+                    {
                         name: {
                             contains: query.trim(),
                             mode: 'insensitive',

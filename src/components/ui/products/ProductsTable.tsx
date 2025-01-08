@@ -1,6 +1,8 @@
 import Image from "next/image"
 import { UpdateProduct } from "./Buttons"
 import { getProductsByCompany } from "@/actions/products/get-products-by-company";
+import { Pagination } from "../orders/Pagination";
+
 
 
 
@@ -20,6 +22,7 @@ export const ProductsTable = async ({ query, page }: Props) => {
 
   const totalUsers = products?.length || 0;
 
+ 
 
 
   return (
@@ -102,7 +105,7 @@ export const ProductsTable = async ({ query, page }: Props) => {
                           </td>
                           <td className="size-px whitespace-nowrap">
                             <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
-                            <span className="text-sm text-gray-500">{product.id}</span>
+                              <span className="text-sm text-gray-500">{product.id.split('-').at(-1)}</span>
                               {/* <span className="text-sm text-gray-500">EMP-2024-00001</span> */}
                             </div>
                           </td>
@@ -158,18 +161,17 @@ export const ProductsTable = async ({ query, page }: Props) => {
 
                   </tbody>
                 </table>
-                {/* <!-- End Table -->
-  
-            <!-- Footer --> */}
 
-                {/* <!-- End Footer --> */}
               </div>
             </div>
           </div>
         </div>
-        {/* <!-- End Card --> */}
+
       </div>
-      {/* <!-- End Table Section --> */}
+
+      <div className="mt-5 flex w-full justify-center">
+        <Pagination totalUsers={totalUsers} totalPages={totalPages} />
+      </div>
     </>
   )
 }

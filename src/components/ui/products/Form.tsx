@@ -1,17 +1,83 @@
-import Image from 'next/image'
+'use client';
+
+import { addProduct } from '@/actions/products/add-product';
+import { User } from '@/interfaces';
 import Link from 'next/link'
 import React from 'react'
-import { BsBox2 } from 'react-icons/bs'
-import { CiClock2, CiUser } from 'react-icons/ci'
-import { FaTruck } from 'react-icons/fa'
-import { HiOutlineReceiptTax } from 'react-icons/hi'
-import { IoCheckmarkOutline } from 'react-icons/io5'
-import { MdInventory } from 'react-icons/md'
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { errorNotification, successNotification } from '../notification/notifications';
+import { useRouter } from 'next/navigation';
+import { Supplier } from '@/interfaces/supplier.interface';
 
-export const Form = () => {
+
+
+
+
+interface FormInputs {
+    name: string;
+    price: string;
+    image: string;
+    stock: string;
+    supplierId: string;
+    description: string;
+}
+
+
+
+interface Props {
+    user?: User;
+    suppliers: Supplier[];
+}
+
+
+export const Form = ({ user, suppliers }: Props) => {
+
+
+    const router = useRouter();
+
+    const companyId = user?.companyId;
+
+    const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
+
+    if (!companyId) return;
+
+    const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+        const { name, price, stock, supplierId, description } = data;
+
+        const parsedStock = parseInt(stock, 10);
+        const parsedPrice = parseFloat(price);
+
+        if (isNaN(parsedStock) || isNaN(parsedPrice)) {
+            errorNotification('El precio y el stock deben ser números válidos.');
+            return;
+        }
+
+        console.log(typeof data.stock)
+
+
+        if (!companyId) {
+            return;
+        }
+        // server action
+        const resp = await addProduct(name, parsedPrice, parsedStock, supplierId, description, companyId)
+
+        if (resp.ok) {
+            successNotification('');
+            router.push('/dashboard/inventory');
+            return;
+        } else {
+            // setErrorMessage(resp.message);
+            errorNotification('');
+            return;
+        }
+
+
+    };
+
+
     return (
         <div className='bg-gray-50 rounded-xl shadow-sm overflow-hidden p-8'>
-            <form action="/agregar-orden" method="POST" className="space-y-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
                 {/* Nombre del Producto */}
                 <section className='flex flex-col md:flex-row gap-x-8'>
@@ -20,7 +86,8 @@ export const Form = () => {
                             <label className="block text-sm font-medium text-gray-700 mb-3">Nombre del Producto</label>
                             <input
                                 type="text"
-                                name="productName"
+                                id='name'
+                                {...register("name", { required: "El nombre del producto es obligatorio" })}
                                 placeholder='Nombre descriptivo del producto'
                                 className="block w-full rounded-md border border-gray-300 py-2 px-3 text-sm text-gray-500 placeholder:text-gray-500"
                                 required
@@ -31,7 +98,8 @@ export const Form = () => {
                             <label className="block text-sm font-medium text-gray-700 mb-3">Precio Unitario</label>
                             <input
                                 type="number"
-                                name="productPrice"
+                                id='price'
+                                {...register("price", { required: "El precio del producto es obligatorio" })}
                                 placeholder='Precio del producto'
                                 className="block w-full rounded-md border border-gray-300 py-2 px-3 text-sm text-gray-500 placeholder:text-gray-500"
                                 step="0.01"
@@ -43,7 +111,8 @@ export const Form = () => {
                             <label className="block text-sm font-medium text-gray-700 mb-3">Cantidad en Inventario</label>
                             <input
                                 type="number"
-                                name="productQuantity"
+                                id='stock'
+                                {...register("stock", { required: "El nombre del producto es obligatorio" })}
                                 placeholder='Cantidad disponible en stock'
                                 className="block w-full rounded-md border border-gray-300 py-2 px-3 text-sm text-gray-500 placeholder:text-gray-500"
                                 required
@@ -86,18 +155,24 @@ export const Form = () => {
                 <div className="w-full mb-4">
                     <label className="block text-sm font-medium text-gray-700 mb-3">Proveedor</label>
                     <select
-                        id="provider"
-                        name="providerId"
+                        id="supplierId"
+                        {...register("supplierId", { required: "Seleccionar un proveedor es obligatorio" })}
                         className="block w-full cursor-pointer rounded-md border border-gray-300 py-2 pl-3 pr-10 text-sm text-gray-500 placeholder:text-gray-500"
                         defaultValue=""
                         required
                     >
                         <option value="" disabled>Seleccionar un proveedor</option>
-                        <option value="provider1">Proveedor 1</option>
-                        <option value="provider2">Proveedor 2</option>
-                        <option value="provider3">Proveedor 3</option>
+                        {
+                            suppliers.map(supplier => (
+                                <option key={supplier.id} value={supplier.id}>{supplier.name}</option>
+
+                            ))
+                        }
                     </select>
                 </div>
+
+
+
                 <div className='flex gap-x-4'>
 
                     {/* Categoría del Producto */}
@@ -142,7 +217,8 @@ export const Form = () => {
                 <div className="w-full mb-4">
                     <label className="block text-sm font-medium text-gray-700 mb-3">Descripción del Producto</label>
                     <textarea
-                        name="productDescription"
+                        id='description'
+                        {...register("description", { required: "Seleccionar un proveedor es obligatorio" })}
                         placeholder='Descripción detallada del producto'
                         className="block w-full h-36 rounded-md border border-gray-300 py-2 px-3 text-sm text-gray-500 placeholder:text-gray-500"
                     />

@@ -1,9 +1,9 @@
 import { fetchPaginatedUsers } from '@/actions/users/get-user-by-company';
-import { UpdateUser } from './Buttons';
 import { DeleteFunction } from './function-buttons/DeleteFunction';
 import { Pagination } from '../orders/Pagination';
 import { DisabledFunctionButton } from './function-buttons/DisabledFunctionButton';
 import Image from 'next/image';
+import { UpdateButton } from '../Buttons';
 
 interface Props {
     query: string;
@@ -113,7 +113,11 @@ export const UsersTable = async ({ query, page }: Props) => {
                                                     </td> */}
                                                     <td className="size-px whitespace-nowrap">
                                                         <div className="flex gap-x-2 px-6 py-1.5">
-                                                            <UpdateUser id={user.id} aria-label={`Actualizar usuario ${user.name}`} />
+                                                            <UpdateButton
+                                                                id={user.id}
+                                                                url='/management/users'
+                                                                aria-label={`Actualizar usuario ${user.name}`}
+                                                            />
                                                             <DisabledFunctionButton id={user.id} enabled={user.disabled} aria-label={user.disabled ? `Habilitar usuario ${user.name}` : `Deshabilitar usuario ${user.name}`} />
                                                             <DeleteFunction id={user.id} aria-label={`Eliminar usuario ${user.name}`} />
                                                         </div>

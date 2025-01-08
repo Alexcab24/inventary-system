@@ -10,13 +10,11 @@ interface SeedUsers {
 
 interface SeedProducts {
     name: string;
-    image: string;
+    // image: string;
     description: string;
     price: number;
     stock: number;
-    // supplierId: {
-    //     name: string;
-    // };
+    // supplierId: string;
     companyId: string;
 }
 interface SeedSupplier {
@@ -137,6 +135,7 @@ export const initialData: SeedData = {
             contact: "Juan Pérez",
             phone: "8091234567",
             address: "Calle Principal #1",
+          
             companyId: 'subdomain'
         },
         {
@@ -159,37 +158,28 @@ export const initialData: SeedData = {
     products: [
         {
             name: "Producto 1",
-            image: "url/to/image1.jpg",
             description: "Descripción del producto 1",
             price: 10.99,
             stock: 0,
-            // supplierId: {
-            //     name: 'Proveedor A'
-            // },
+            // supplier: "Proveedor A",
             companyId: 'subdomain'
         },
-        // {
-        //     name: "Producto 2",
-        //     image: "url/to/image2.jpg",
-        //     description: "Descripción del producto 2",
-        //     price: 10.99,
-        //     stock: 100,
-        //     supplierId: {
-        //         name: 'Proveedor A'
-        //     },
-        //     companyId: 'subdomain'
-        // },
-        // {
-        //     name: "Producto 3",
-        //     image: "url/to/image3.jpg",
-        //     description: "Descripción del producto 3",
-        //     price: 10.99,
-        //     stock: 100,
-        //     supplierId: {
-        //         name: 'Proveedor A'
-        //     },
-        //     companyId: 'subdomain'
-        // },
+        {
+            name: "Producto 2",
+            description: "Descripción del producto 2",
+            price: 10.99,
+            stock: 100,
+            // supplierName: "Proveedor B",
+            companyId: 'subdomain'
+        },
+        {
+            name: "Producto 3",
+            description: "Descripción del producto 3",
+            price: 10.99,
+            stock: 100,
+            // supplierName: "Proveedor C",
+            companyId: 'subdomain'
+        },
 
     ],
 

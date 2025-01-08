@@ -6,10 +6,10 @@ import Card from "@/components/ui/dashboard/Cards";
 import { AiOutlineUser } from "react-icons/ai";
 import { MdCheckCircleOutline, MdPendingActions } from "react-icons/md";
 import { UsersTable } from '../../../components/ui/users/UsersTable';
-import { CreateUser } from "@/components/ui/users/Buttons";
 import { fetchUserByCompany } from "@/actions/users/get-user-by-company";
 import { Suspense } from "react";
 import { TableSkeleton } from "@/components/ui/users/Skeletons/TableSkeleton";
+import { CreateButton } from "@/components/ui/Buttons";
 
 
 
@@ -58,7 +58,7 @@ export default async function UserPage({
 
                     <div className="flex justify-between items-center gap-3 w-full mt-4">
                         <Search placeholder="Buscar clientes..." />
-                        <CreateUser />
+                        <CreateButton label='Agregar usuario' url='/management/users/add' />
                     </div>
                 </div>
                 <Suspense key={query} fallback={<TableSkeleton />}>

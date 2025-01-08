@@ -9,7 +9,7 @@ import { errorNotification, successNotification } from "../notification/notifica
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { registerUser } from "@/actions/auth/register";
-import { sleep } from "@/utils/sleep";
+
 
 
 interface FormInputs {
@@ -24,7 +24,7 @@ type Props = {
 }
 
 export const Form = ({ user }: Props) => {
-  
+
 
     const [errorMessage, setErrorMessage] = useState('');
     const router = useRouter();
@@ -39,9 +39,6 @@ export const Form = ({ user }: Props) => {
         if (!companyId) {
             return;
         }
-
-
-
         // server action
         const resp = await registerUser(name, email, password, role, companyId);
 

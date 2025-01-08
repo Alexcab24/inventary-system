@@ -15,6 +15,5 @@ export interface PaginatedProductsProps {
     page?: number;
     take?: number;
     query: string
- }
- 
- 
+}
+

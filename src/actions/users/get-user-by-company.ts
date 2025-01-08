@@ -73,7 +73,7 @@ export const fetchPaginatedUsers = async ({
          users
       };
 
-      
+
    } catch (error) {
       console.error("Error al obtener los usuarios:", error);
       return {

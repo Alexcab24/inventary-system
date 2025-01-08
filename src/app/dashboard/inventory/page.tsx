@@ -1,7 +1,6 @@
 import { fetchProductByCompany } from "@/actions/products/get-products-by-company";
 import { Search } from "@/components/ui/Search";
 import Card from "@/components/ui/dashboard/Cards";
-import { Pagination } from "@/components/ui/orders/Pagination";
 import { CreateProduct } from "@/components/ui/products/Buttons";
 import { ProductsTable } from "@/components/ui/products/ProductsTable";
 import { TableSkeleton } from "@/components/ui/users/Skeletons/TableSkeleton";
@@ -21,9 +20,11 @@ export default async function productPage({
     }) {
 
 
+
+
     const query = searchParams?.query || '';
     const page = searchParams?.page ? parseInt(searchParams?.page) : 1;
-
+    console.log('Query: ', query)
 
     const { products } = await fetchProductByCompany()
 
@@ -57,13 +58,12 @@ export default async function productPage({
                         <CreateProduct />
                     </div>
                 </div>
+
                 <Suspense key={query} fallback={<TableSkeleton />}>
-                    <ProductsTable query="" page={page} />
+                    <ProductsTable query={query} page={page} />
                 </Suspense>
 
-                <div className="mt-5 flex w-full justify-center">
-                    {/* <Pagination  /> */}
-                </div>
+               
             </section>
         </>
 

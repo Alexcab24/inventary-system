@@ -4,22 +4,29 @@ import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 
-export const addProduct = async (name: string, price: number, stock: number, supplierId: string, description: string, companyId: string) => {
+export const addProduct = async (
+    name: string,
+    price: number,
+    stock: number,
+    supplierId: string,
+    description: string,
+    companyId: string
+) => {
 
+    if (!companyId) {
+        return {
+            ok: false,
+        };
+    }
 
 
     try {
-        if (!companyId) {
-            return {
-                ok: false,
-            };
-        }
 
         const product = await prisma.products.create({
             data: {
                 name,
                 price,
-                stock: stock,
+                stock,
                 description,
                 supplierId,
                 companyId
@@ -35,12 +42,13 @@ export const addProduct = async (name: string, price: number, stock: number, sup
 
         return {
             ok: true,
-            product,
             message: 'Producto creado con éxito',
+            product
+
         }
 
     } catch (error) {
-        console.log(error);
+
         return {
             ok: false,
             message: 'Error a crear producto'

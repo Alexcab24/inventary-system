@@ -46,8 +46,8 @@ model User {
 model Products {
   id          String  @id @default(uuid())
   name        String
-  // image       String
-  description String
+  // image       String?
+  description String?
   price       Decimal
   stock       Int
 
@@ -62,7 +62,7 @@ model Products {
 
 model Supplier {
   id      String @id @default(uuid())
-  name    String 
+  name    String
   contact String
   phone   String
   address String

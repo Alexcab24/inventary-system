@@ -11,7 +11,7 @@ interface SeedUsers {
 interface SeedProducts {
     name: string;
     // image: string;
-    description: string;
+    description?: string;
     price: number;
     stock: number;
     // supplierId: string;
@@ -135,7 +135,7 @@ export const initialData: SeedData = {
             contact: "Juan Pérez",
             phone: "8091234567",
             address: "Calle Principal #1",
-          
+
             companyId: 'subdomain'
         },
         {

@@ -14,9 +14,6 @@ export default async function CreateProductPage() {
 
 
     const session = await auth();
-
-
-
     const suppliers = await fetchSupplierByCompany();
 
 

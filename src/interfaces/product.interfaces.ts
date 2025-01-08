@@ -1,10 +1,11 @@
 export interface Product {
     id: string;
     name: string;
-    image?: string;
     description?: string;
     price: number;
-    stock: number
+    stock: number;
+    supplierId: string;
+    companyId: string;
 }
 
 

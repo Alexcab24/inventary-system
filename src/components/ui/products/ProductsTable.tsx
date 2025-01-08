@@ -22,7 +22,7 @@ export const ProductsTable = async ({ query, page }: Props) => {
 
   const totalUsers = products?.length || 0;
 
- 
+
 
 
   return (

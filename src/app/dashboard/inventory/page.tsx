@@ -24,7 +24,6 @@ export default async function productPage({
 
     const query = searchParams?.query || '';
     const page = searchParams?.page ? parseInt(searchParams?.page) : 1;
-    console.log('Query: ', query)
 
     const { products } = await fetchProductByCompany()
 

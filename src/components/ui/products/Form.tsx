@@ -1,6 +1,6 @@
 'use client';
 
-import { addProduct } from '@/actions/products/add-product';
+import { addProduct } from '@/actions/products/create-product';
 import { User } from '@/interfaces';
 import Link from 'next/link'
 import React from 'react'
@@ -52,22 +52,19 @@ export const Form = ({ user, suppliers }: Props) => {
             return;
         }
 
-        console.log(typeof data.stock)
-
-
         if (!companyId) {
             return;
         }
         // server action
-        const resp = await addProduct(name, parsedPrice, parsedStock, supplierId, description, companyId)
+        const resp = await addProduct(name, parsedPrice, parsedStock, supplierId, description, companyId);
 
         if (resp.ok) {
-            successNotification('');
+            successNotification(resp.message || '');
             router.push('/dashboard/inventory');
             return;
         } else {
             // setErrorMessage(resp.message);
-            errorNotification('');
+            errorNotification(resp.message || '');
             return;
         }
 
@@ -151,25 +148,7 @@ export const Form = ({ user, suppliers }: Props) => {
 
 
 
-                {/* Proveedor */}
-                <div className="w-full mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-3">Proveedor</label>
-                    <select
-                        id="supplierId"
-                        {...register("supplierId", { required: "Seleccionar un proveedor es obligatorio" })}
-                        className="block w-full cursor-pointer rounded-md border border-gray-300 py-2 pl-3 pr-10 text-sm text-gray-500 placeholder:text-gray-500"
-                        defaultValue=""
-                        required
-                    >
-                        <option value="" disabled>Seleccionar un proveedor</option>
-                        {
-                            suppliers.map(supplier => (
-                                <option key={supplier.id} value={supplier.id}>{supplier.name}</option>
 
-                            ))
-                        }
-                    </select>
-                </div>
 
 
 
@@ -199,17 +178,27 @@ export const Form = ({ user, suppliers }: Props) => {
                         </div>
                     </div>
 
-                    {/* Impuesto Aplicable */}
+                    {/* Proveedor */}
                     <div className="w-full mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-3">Impuesto Aplicable</label>
-                        <input
-                            type="text"
-                            name="taxApplied"
-                            value="100% - ITBIS"
-                            className="block w-full rounded-md border border-gray-300 py-2 px-3 text-sm text-gray-500"
-                            readOnly
-                        />
+                        <label className="block text-sm font-medium text-gray-700 mb-3">Proveedor</label>
+                        <select
+                            id="supplierId"
+                            {...register("supplierId", { required: "Seleccionar un proveedor es obligatorio" })}
+                            className="block w-full cursor-pointer rounded-md border border-gray-300 py-2 pl-3 pr-10 text-sm text-gray-500 placeholder:text-gray-500"
+                            defaultValue=""
+                            required
+                        >
+                            <option value="" disabled>Seleccionar un proveedor</option>
+                            {
+                                suppliers.map(supplier => (
+                                    <option key={supplier.id} value={supplier.id}>{supplier.name}</option>
+
+                                ))
+                            }
+                        </select>
                     </div>
+
+
                 </div>
 
 
@@ -218,7 +207,7 @@ export const Form = ({ user, suppliers }: Props) => {
                     <label className="block text-sm font-medium text-gray-700 mb-3">Descripción del Producto</label>
                     <textarea
                         id='description'
-                        {...register("description", { required: "Seleccionar un proveedor es obligatorio" })}
+                        {...register("description")}
                         placeholder='Descripción detallada del producto'
                         className="block w-full h-36 rounded-md border border-gray-300 py-2 px-3 text-sm text-gray-500 placeholder:text-gray-500"
                     />

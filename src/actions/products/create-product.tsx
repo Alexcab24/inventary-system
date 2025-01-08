@@ -1,6 +1,8 @@
 'use server';
 
+import { Product } from "@/interfaces";
 import prisma from "@/lib/prisma";
+import { validateProduct } from "@/schemas/validation/productValidation";
 import { revalidatePath } from "next/cache";
 
 
@@ -19,10 +21,32 @@ export const addProduct = async (
         };
     }
 
+    const product: Product = {
+        name,
+        price,
+        stock,
+        supplierId,
+        description,
+        companyId,
+    };
+
+
+    const result = validateProduct(product);
+
+    if (!result.success) {
+        return {
+            ok: false,
+            message: "Validation error",
+            errors: result.error.errors
+        };
+    }
+
+
+
 
     try {
 
-        const product = await prisma.products.create({
+        const newProduct = await prisma.products.create({
             data: {
                 name,
                 price,
@@ -43,7 +67,7 @@ export const addProduct = async (
         return {
             ok: true,
             message: 'Producto creado con éxito',
-            product
+            newProduct
 
         }
 

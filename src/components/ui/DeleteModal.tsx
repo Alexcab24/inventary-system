@@ -9,7 +9,7 @@ type Props = {
     message: string;
 };
 
-export const ConfirmModal = ({ isOpen, onConfirm, onCancel, message }: Props) => {
+export const DeleteModal = ({ isOpen, onConfirm, onCancel, message }: Props) => {
 
     if (!isOpen) return null;
 

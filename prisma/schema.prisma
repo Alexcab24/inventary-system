@@ -27,6 +27,7 @@ model Company {
   //relaciones
   user     User[]
   products Products[]
+  category Category[]
   supplier Supplier[]
 }
 
@@ -58,6 +59,21 @@ model Products {
 
   supplier   Supplier @relation(fields: [supplierId], references: [id])
   supplierId String
+
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+}
+
+model Category {
+  id       String     @id @default(uuid())
+  name     String
+
+
+  //relaciones
+  company   Company @relation(fields: [companyId], references: [id_tenant])
+  companyId String 
+  
+  Products Products[]
 }
 
 model Supplier {
@@ -69,7 +85,9 @@ model Supplier {
 
   //relaciones
   company   Company @relation(fields: [companyId], references: [id_tenant])
-  companyId String
+  companyId String 
 
   products Products[]
 }
+
+

@@ -11,6 +11,7 @@ export const addProduct = async (
     price: number,
     stock: number,
     supplierId: string,
+    categoryId: string,
     description: string,
     companyId: string
 ) => {
@@ -26,9 +27,12 @@ export const addProduct = async (
         price,
         stock,
         supplierId,
+        categoryId,
         description,
         companyId,
     };
+
+    console.log('este es el id de categoria', categoryId)
 
 
     const result = validateProduct(product);
@@ -52,6 +56,7 @@ export const addProduct = async (
                 price,
                 stock,
                 description,
+                categoryId,
                 supplierId,
                 companyId
 
@@ -72,7 +77,7 @@ export const addProduct = async (
         }
 
     } catch (error) {
-
+        console.log(error)
         return {
             ok: false,
             message: 'Error a crear producto'

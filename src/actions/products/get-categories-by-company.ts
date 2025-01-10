@@ -1,12 +1,14 @@
 import { auth } from "@/auth.config"
 import prisma from "@/lib/prisma"
 
-export const fetchSupplierByCompany = async () => {
+
+export const fetchCategoriesByCompany = async () => {
     const session = await auth();
     const companyId = session?.user.companyId
 
+
     try {
-        const suppliers = await prisma.supplier.findMany({
+        const categories = await prisma.category.findMany({
             orderBy: {
                 name: 'asc'
             },
@@ -15,13 +17,12 @@ export const fetchSupplierByCompany = async () => {
             }
         })
 
-        return suppliers
+        return categories
 
     } catch (error) {
-        console.log(error);
-        return [];
+        console.log('error', error)
+        return []
     }
-
 
 
 }

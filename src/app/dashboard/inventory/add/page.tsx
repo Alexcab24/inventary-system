@@ -1,3 +1,4 @@
+import { fetchCategoriesByCompany } from "@/actions/products/get-categories-by-company";
 import { fetchSupplierByCompany } from "@/actions/supplier/get-supplier";
 import { auth } from "@/auth.config";
 import { Form } from "@/components/ui/products/Form";
@@ -15,7 +16,11 @@ export default async function CreateProductPage() {
 
     const session = await auth();
     const suppliers = await fetchSupplierByCompany();
+    const categories = await fetchCategoriesByCompany();
+    console.log(categories)
 
+
+    // if (!categories) return
 
     return (
         <>
@@ -31,7 +36,7 @@ export default async function CreateProductPage() {
                 </div>
 
                 <div className=" my-4">
-                    <Form user={session?.user} suppliers={suppliers} />
+                    <Form user={session?.user} suppliers={suppliers} categories={categories} />
                 </div>
             </div>
 

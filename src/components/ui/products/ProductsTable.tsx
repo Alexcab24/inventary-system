@@ -2,6 +2,7 @@ import Image from "next/image"
 import { UpdateProduct } from "./Buttons"
 import { getProductsByCompany } from "@/actions/products/get-products-by-company";
 import { Pagination } from "../orders/Pagination";
+import { DeleteProductFunction } from "../users/function-buttons/DeleteProductFunction";
 
 
 
@@ -81,6 +82,14 @@ export const ProductsTable = async ({ query, page }: Props) => {
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
+                            Categoría
+                          </span>
+                        </div>
+                      </th>
+
+                      <th scope="col" className="px-6 py-3 text-start">
+                        <div className="flex items-center gap-x-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
                             proveedor
                           </span>
                         </div>
@@ -137,6 +146,15 @@ export const ProductsTable = async ({ query, page }: Props) => {
                           </td>
                           <td className="size-px whitespace-nowrap">
                             <div className="px-6 py-3">
+                              <div className="flex items-center gap-x-3">
+                                <span className="text-sm text-gray-500">
+                                  {product.category.name}
+                                </span>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="size-px whitespace-nowrap">
+                            <div className="px-6 py-3">
                               <span className="text-sm text-gray-500">{product.supplier.name}</span>
                             </div>
                           </td>
@@ -144,6 +162,7 @@ export const ProductsTable = async ({ query, page }: Props) => {
                             <div className="px-6 py-1.5">
 
                               <UpdateProduct id="1" />
+                              <DeleteProductFunction id={product.id} aria-label={`Eliminar usuario ${product.name}`} />
 
                             </div>
                           </td>

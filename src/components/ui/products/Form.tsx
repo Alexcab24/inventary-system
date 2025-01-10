@@ -8,9 +8,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { errorNotification, successNotification } from '../notification/notifications';
 import { useRouter } from 'next/navigation';
 import { Supplier } from '@/interfaces/supplier.interface';
-
-
-
+import { Category } from '@/interfaces/category.interfaces';
 
 
 interface FormInputs {
@@ -18,6 +16,7 @@ interface FormInputs {
     price: string;
     image: string;
     stock: string;
+    categoryId: string;
     supplierId: string;
     description: string;
 }
@@ -27,10 +26,11 @@ interface FormInputs {
 interface Props {
     user?: User;
     suppliers: Supplier[];
+    categories: Category[];
 }
 
 
-export const Form = ({ user, suppliers }: Props) => {
+export const Form = ({ user, suppliers, categories }: Props) => {
 
 
     const router = useRouter();
@@ -42,7 +42,7 @@ export const Form = ({ user, suppliers }: Props) => {
     if (!companyId) return;
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-        const { name, price, stock, supplierId, description } = data;
+        const { name, price, stock, supplierId, description, categoryId } = data;
 
         const parsedStock = parseInt(stock, 10);
         const parsedPrice = parseFloat(price);
@@ -56,7 +56,7 @@ export const Form = ({ user, suppliers }: Props) => {
             return;
         }
         // server action
-        const resp = await addProduct(name, parsedPrice, parsedStock, supplierId, description, companyId);
+        const resp = await addProduct(name, parsedPrice, parsedStock, supplierId, categoryId, description, companyId);
 
         if (resp.ok) {
             successNotification(resp.message || '');
@@ -159,15 +159,18 @@ export const Form = ({ user, suppliers }: Props) => {
                         <label className="block text-sm font-medium text-gray-700 mb-3">Categoría del Producto</label>
                         <div className="flex gap-2">
                             <select
-                                id="category"
-                                name="categoryId"
+                                id="categoryId"
+                                {...register("categoryId", { required: "Seleccionar una categoría es obligatorio" })}
                                 className="block w-full cursor-pointer rounded-md border border-gray-300 py-2 pl-3 pr-10 text-sm text-gray-500 placeholder:text-gray-500"
                                 defaultValue=""
                             >
                                 <option value="" disabled>Seleccionar categoría</option>
-                                <option value="category1">Categoría 1</option>
-                                <option value="category2">Categoría 2</option>
-                                <option value="category3">Categoría 3</option>
+                                {
+                                    categories.map(category => (
+                                        <option key={category.id} value={category.id}>{category.name}</option>
+
+                                    ))
+                                }
                             </select>
                             <button
                                 type="button"

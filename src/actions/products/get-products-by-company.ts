@@ -27,7 +27,8 @@ export const getProductsByCompany = async ({
             take: take,
             skip: (page - 1) * take,
             include: {
-                supplier: true
+                supplier: true,
+                category: true
             },
             where: {
                 companyId: session.user.companyId,
@@ -44,6 +45,14 @@ export const getProductsByCompany = async ({
                             mode: 'insensitive',
                         },
                     },
+                    {
+                        category: {
+                            name: {
+                                contains: query.trim(),
+                                mode: 'insensitive'
+                            }
+                        }
+                    }
                 ],
             },
             orderBy: {

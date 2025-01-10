@@ -62,7 +62,7 @@ export default async function productPage({
                     <ProductsTable query={query} page={page} />
                 </Suspense>
 
-               
+
             </section>
         </>
 

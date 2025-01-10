@@ -3,11 +3,11 @@
 import { DeleteUserById } from "@/actions/users/delete-user-by-id"
 import { errorNotification, successNotification } from "../../notification/notifications"
 import { useState } from "react"
-import { ConfirmModal } from "../../ConfirmModal"
+import { DeleteModal } from "../../DeleteModal"
 import { FaRegTrashCan } from "react-icons/fa6"
 
 
-export const DeleteFunction = ({ id }: { id: string }) => {
+export const DeleteUserFunction = ({ id }: { id: string }) => {
 
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,7 +28,7 @@ export const DeleteFunction = ({ id }: { id: string }) => {
     }
 
 
-    
+
     return (
 
         <>
@@ -39,10 +39,10 @@ export const DeleteFunction = ({ id }: { id: string }) => {
                 <FaRegTrashCan className="text-white" size={22} />
             </button>
 
-            <ConfirmModal
+            <DeleteModal
                 isOpen={isModalOpen}
-                onConfirm={deleteUser} // Pasamos la función de eliminación al modal
-                onCancel={closeModal} // Cerramos el modal si se cancela
+                onConfirm={deleteUser}
+                onCancel={closeModal}
                 message="¿Seguro que desea eliminar este usuario?"
             />
 

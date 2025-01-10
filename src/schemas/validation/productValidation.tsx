@@ -23,9 +23,13 @@ const productSchema = z.object({
         required_error: 'SupplierId is required',
         invalid_type_error: "SupplierId must be a string"
     }),
+    categoryId: z.string({
+        required_error: 'CategoryId is required',
+        invalid_type_error: "CategoryId must be a string"
+    }),
     companyId: z.string({
-        required_error: 'companyId is required',
-        invalid_type_error: "companyId must be a string"
+        required_error: 'CompanyId is required',
+        invalid_type_error: "CompanyId must be a string"
     })
 })
 

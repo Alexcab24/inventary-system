@@ -8,13 +8,17 @@ interface SeedUsers {
     companyId: string;
 };
 
+interface SeedCategory {
+    name: string;
+    companyId: string;
+}
+
 interface SeedProducts {
     name: string;
     // image: string;
     description?: string;
     price: number;
     stock: number;
-    // supplierId: string;
     companyId: string;
 }
 interface SeedSupplier {
@@ -35,6 +39,7 @@ interface SeedCompany {
 interface SeedData {
     users: SeedUsers[];
     companies: SeedCompany[];
+    category: SeedCategory[];
     products: SeedProducts[];
     suppliers: SeedSupplier[];
 };
@@ -153,8 +158,16 @@ export const initialData: SeedData = {
             companyId: 'subdomain'
         },
     ],
-
-
+    category: [
+        {
+            name: 'Tecnología',
+            companyId: 'subdomain'
+        },
+        {
+            name: 'Cosméticos',
+            companyId: 'subdomain'
+        }
+    ],
     products: [
         {
             name: "Producto 1",

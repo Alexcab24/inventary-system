@@ -10,6 +10,7 @@ import { fetchUserByCompany } from "@/actions/users/get-user-by-company";
 import { Suspense } from "react";
 import { TableSkeleton } from "@/components/ui/users/Skeletons/TableSkeleton";
 import { CreateButton } from "@/components/ui/Buttons";
+import { DeleteUserById } from "@/actions/users/delete-user-by-id";
 
 
 
@@ -30,6 +31,7 @@ export default async function UserPage({
 
 
     //Cards fetch
+ 
     const { users } = await fetchUserByCompany();
 
     const totalUsers = users?.length || 0;

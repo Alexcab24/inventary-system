@@ -32,9 +32,6 @@ export const addProduct = async (
         companyId,
     };
 
-    console.log('este es el id de categoria', categoryId)
-
-
     const result = validateProduct(product);
 
     if (!result.success) {

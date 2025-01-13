@@ -159,7 +159,7 @@ export const ProductsTable = async ({ query, page }: Props) => {
                             </div>
                           </td>
                           <td className="size-px whitespace-nowrap">
-                            <div className="px-6 py-1.5">
+                            <div className="flex gap-x-2 px-6 py-1.5">
 
                               <UpdateProduct id="1" />
                               <DeleteProductFunction id={product.id} aria-label={`Eliminar usuario ${product.name}`} />

@@ -78,7 +78,7 @@ export const SideBar = () => {
                     <div className="px-6 pt-4">
 
                         <a className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80" href="#" aria-label="Preline">
-                            <span>MidasSystem</span>
+                            <span>InventorySystem</span>
                         </a>
 
                     </div>

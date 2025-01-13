@@ -3,12 +3,14 @@
 import { addProduct } from '@/actions/products/create-product';
 import { User } from '@/interfaces';
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { errorNotification, successNotification } from '../notification/notifications';
 import { useRouter } from 'next/navigation';
 import { Supplier } from '@/interfaces/supplier.interface';
 import { Category } from '@/interfaces/category.interfaces';
+import { AddCategory } from './AddCategory';
+import { CategoryModal } from './CategoryModal';
 
 
 interface FormInputs {
@@ -31,6 +33,11 @@ interface Props {
 
 
 export const Form = ({ user, suppliers, categories }: Props) => {
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleOpen = () => setIsOpen(true);
+    const handleClose = () => setIsOpen(false);
 
 
     const router = useRouter();
@@ -74,6 +81,12 @@ export const Form = ({ user, suppliers, categories }: Props) => {
 
     return (
         <div className='bg-gray-50 rounded-xl shadow-sm overflow-hidden p-8'>
+
+            {isOpen &&
+                <CategoryModal onClose={handleClose} />
+            }
+
+
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
                 {/* Nombre del Producto */}
@@ -175,9 +188,12 @@ export const Form = ({ user, suppliers, categories }: Props) => {
                             <button
                                 type="button"
                                 className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                                onClick={handleOpen}
                             >
                                 Añadir
                             </button>
+
+                            {/* <AddCategory /> */}
                         </div>
                     </div>
 

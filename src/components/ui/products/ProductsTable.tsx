@@ -3,6 +3,7 @@ import { UpdateProduct } from "./Buttons"
 import { getProductsByCompany } from "@/actions/products/get-products-by-company";
 import { Pagination } from "../orders/Pagination";
 import { DeleteProductFunction } from "../users/function-buttons/DeleteProductFunction";
+import { UpdateButton } from "../Buttons";
 
 
 
@@ -161,7 +162,11 @@ export const ProductsTable = async ({ query, page }: Props) => {
                           <td className="size-px whitespace-nowrap">
                             <div className="flex gap-x-2 px-6 py-1.5">
 
-                              <UpdateProduct id="1" />
+                              <UpdateButton
+                                id={product.id}
+                                url="/dashboard/inventory/"
+                                aria-label={`Actualizar producto ${product.name}`}
+                              />
                               <DeleteProductFunction id={product.id} aria-label={`Eliminar usuario ${product.name}`} />
 
                             </div>

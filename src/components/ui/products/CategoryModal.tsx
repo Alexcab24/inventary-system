@@ -16,13 +16,13 @@ interface Props {
     onClose: () => void;
 }
 
-export const CategoryModal = ({onClose}: Props) => {
+export const CategoryModal = ({ onClose }: Props) => {
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
 
 
     const onSubmitCategory: SubmitHandler<FormInputs> = async (data) => {
-        
+
         const { name } = data;
 
 
@@ -45,8 +45,8 @@ export const CategoryModal = ({onClose}: Props) => {
 
     return (
         <div>
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm z-50">
-                <div className="bg-white border border-gray-300 p-8 rounded-xl shadow-2xl max-w-md w-full animate-slide-in-top">
+            <div onClick={onClose} className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm z-50">
+                <div onClick={(e) => e.stopPropagation()} className="bg-white border border-gray-300 p-8 rounded-xl shadow-2xl max-w-md w-full animate-slide-in-top">
                     <div className="flex flex-row gap-x-2 items-center mb-6">
 
                         <TbCategoryPlus size={25} />
@@ -70,7 +70,6 @@ export const CategoryModal = ({onClose}: Props) => {
                     </form>
                 </div>
             </div>
-
         </div>
     )
 }

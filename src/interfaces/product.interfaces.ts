@@ -1,12 +1,22 @@
+
+
 export interface Product {
     // id: string;
     name: string;
     description?: string;
     price: number;
     stock: number;
-    supplierId: string;
-    categoryId: string;
-    companyId: string;
+    category: {
+        id: string;
+        name: string;
+    };
+    supplier: {
+        id: string
+        name: string;
+    };
+    // supplierId: string;
+    // categoryId: string;
+    // companyId: string;
 }
 
 

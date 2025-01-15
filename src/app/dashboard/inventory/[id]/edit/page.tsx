@@ -1,14 +1,38 @@
+import { fetchCategoriesByCompany } from "@/actions/products/get-categories-by-company";
+import { getProductById } from "@/actions/products/get-product-by-id";
+import { fetchSupplierByCompany } from "@/actions/supplier/get-supplier";
+import { auth } from "@/auth.config";
+import { FormEdit } from "@/components/ui/products/edit/FormEdit";
 import { CiEdit } from "react-icons/ci";
 
 
 
 
 
-export default async function EditProductPage() {
+export default async function EditProductPage({ params }: { params: { id: string } }) {
+
+
+    const id = params.id;
+
+    const [productById, categories, suppliers] = await Promise.all([
+        getProductById(id),
+        fetchCategoriesByCompany(),
+        fetchSupplierByCompany()
+    ])
+
+
+
+    if (!productById) {
+        return;
+    }
+
+
+
+    const session = await auth();
 
     return (
-     
-          <>
+
+        <>
             <div className="max-w-[950px] mx-auto my-10">
                 <div className="mb-5">
                     <div className="flex items-center gap-x-2 mb-2">
@@ -21,11 +45,17 @@ export default async function EditProductPage() {
                 </div>
 
                 <div className=" my-4">
-                    {/* <FormEdit userSession={session?.user} userById={userById} userId={id} /> */}
+                    <FormEdit
+                        userSession={session?.user}
+                        productById={productById}
+                        categories={categories}
+                        suppliers={suppliers}
+                    />
+
                 </div>
             </div>
         </>
-      
+
     )
 
 }

@@ -9,7 +9,6 @@ import { errorNotification, successNotification } from '../notification/notifica
 import { useRouter } from 'next/navigation';
 import { Supplier } from '@/interfaces/supplier.interface';
 import { Category } from '@/interfaces/category.interfaces';
-import { AddCategory } from './AddCategory';
 import { CategoryModal } from './CategoryModal';
 
 

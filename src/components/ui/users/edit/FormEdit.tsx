@@ -20,14 +20,14 @@ interface FormInputs {
     role: 'admin' | 'user' | 'contador';
 }
 
-type Props = {
+interface Props {
     userSession?: User;
     userById: UserById;
     userId: string;
 }
 
 export const FormEdit = ({ userSession, userById, userId }: Props) => {
-  
+
 
     const [errorMessage, setErrorMessage] = useState('');
     const router = useRouter();
@@ -47,7 +47,7 @@ export const FormEdit = ({ userSession, userById, userId }: Props) => {
             return;
         }
 
-              // server action
+        // server action
         const resp = await ChangeUserRole(userId, role)
 
         if (resp.ok) {

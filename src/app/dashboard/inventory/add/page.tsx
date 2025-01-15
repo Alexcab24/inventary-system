@@ -17,7 +17,6 @@ export default async function CreateProductPage() {
     const session = await auth();
     const suppliers = await fetchSupplierByCompany();
     const categories = await fetchCategoriesByCompany();
-    console.log(categories)
 
 
     // if (!categories) return

@@ -11,7 +11,6 @@ export default async function EditUserPage({ params }: { params: { id: string } 
 
     const id = params.id;
     const userById = await getUserById(id)
-    console.log(userById)
 
     if (!userById) {
         return;
@@ -20,9 +19,6 @@ export default async function EditUserPage({ params }: { params: { id: string } 
 
 
     const session = await auth();
-
-
-
 
     return (
         <>

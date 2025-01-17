@@ -30,7 +30,7 @@ export const ChangeUserRole = async (userId: string, role: 'admin' | 'user' | 'c
                 id: userId
             },
             data: {
-                role: role
+                 role
             }
         });
 

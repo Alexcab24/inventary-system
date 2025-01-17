@@ -23,10 +23,11 @@ interface FormInputs {
 interface Props {
     userSession?: User;
     userById: UserById;
-    userId: string;
 }
 
-export const FormEdit = ({ userSession, userById, userId }: Props) => {
+export const FormEdit = ({ userSession, userById }: Props) => {
+
+    const { id } = userById;
 
 
     const [errorMessage, setErrorMessage] = useState('');
@@ -48,7 +49,7 @@ export const FormEdit = ({ userSession, userById, userId }: Props) => {
         }
 
         // server action
-        const resp = await ChangeUserRole(userId, role)
+        const resp = await ChangeUserRole(id, role)
 
         if (resp.ok) {
             successNotification(resp.message);

@@ -8,6 +8,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { AddCategory } from "../AddCategory";
 import { useState } from "react";
 import { CategoryModal } from "../CategoryModal";
+import { updateProdut } from "@/actions/products/update-product";
+import { errorNotification, successNotification } from "../../notification/notifications";
+import { useRouter } from "next/navigation";
 
 
 
@@ -15,7 +18,7 @@ interface Props {
     userSession?: User;
     productById: Product;
     categories: Category[];
-    suppliers: Supplier[]
+    suppliers: Supplier[];
 }
 
 
@@ -32,6 +35,9 @@ interface FormInputs {
 
 export const FormEdit = ({ userSession, productById, categories, suppliers }: Props) => {
 
+    const { id } = productById;
+
+    console.log('Aqui la el id:  ', id);
 
 
     const [isOpen, setIsOpen] = useState(false);
@@ -39,6 +45,8 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
     const handleOpen = () => setIsOpen(true);
     const handleClose = () => setIsOpen(false);
 
+
+    const router = useRouter();
 
 
     const companyId = userSession?.companyId;
@@ -48,23 +56,36 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
             ...productById,
             price: productById.price.toString(),
             stock: productById.stock.toString()
-
         }
     });
 
 
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-        // const { role } = data;
+        const { name, price, stock, categoryId, supplierId, description } = data;
+
+        const parsedStock = parseInt(stock, 10);
+        const parsedPrice = parseFloat(price);
 
         if (!companyId) {
             return;
         }
 
+        //server action
+
+        const resp = await updateProdut(id, name, parsedPrice, parsedStock, supplierId, categoryId, description, companyId);
 
 
 
-
+        if (resp.ok) {
+            successNotification(resp.message);
+            router.push('/dashboard/inventory');
+            return;
+        } else {
+            // setErrorMessage(resp.message);
+            errorNotification(resp.message);
+            return;
+        }
 
     }
 
@@ -190,7 +211,7 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
                     <div className="w-full mb-4">
                         <label className="block text-sm font-medium text-gray-700 mb-3">Proveedor</label>
                         <select
-                            id="supplierId"
+                            id="supplierId  "
                             {...register("supplierId", { required: "Seleccionar un proveedor es obligatorio" })}
                             className="block w-full cursor-pointer rounded-md border border-gray-300 py-2 pl-3 pr-10 text-sm text-gray-500 placeholder:text-gray-500"
                             defaultValue={productById.supplier.id}

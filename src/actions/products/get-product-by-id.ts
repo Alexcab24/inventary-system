@@ -10,6 +10,7 @@ export const getProductById = async (id: string): Promise<Product | null> => {
                 id: id,
             },
             select: {
+                id: true,
                 name: true,
                 price: true,
                 stock: true,
@@ -35,8 +36,9 @@ export const getProductById = async (id: string): Promise<Product | null> => {
         }
 
         return {
+            id: product.id,
             name: product.name,
-            price: product.price,
+            price: product.price.toNumber(),
             stock: product.stock,
             category: product.category,
             supplier: product.supplier,

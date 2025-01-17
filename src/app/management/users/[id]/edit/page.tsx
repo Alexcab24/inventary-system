@@ -34,7 +34,7 @@ export default async function EditUserPage({ params }: { params: { id: string } 
                 </div>
 
                 <div className=" my-4">
-                    <FormEdit userSession={session?.user} userById={userById} userId={id} />
+                    <FormEdit userSession={session?.user} userById={userById} />
                 </div>
             </div>
         </>

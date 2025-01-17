@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/prisma";
 import { UserById } from "@/interfaces";
-import { Role, User } from '../../interfaces/user.interfaces';
+import { Role } from '../../interfaces/user.interfaces';
 
 export const getUserById = async (id: string): Promise<UserById | null> => {
     try {
@@ -11,6 +11,7 @@ export const getUserById = async (id: string): Promise<UserById | null> => {
                 id: id
             },
             select: {
+                id: true,
                 name: true,
                 email: true,
                 role: true
@@ -23,6 +24,7 @@ export const getUserById = async (id: string): Promise<UserById | null> => {
         }
 
         return {
+            id: user.id,
             name: user.name,
             email: user.email,
             role: user.role as Role

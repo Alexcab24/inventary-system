@@ -1,11 +1,11 @@
 import { auth } from "@/auth.config";
-import { PaginatedProductsProps } from "@/interfaces";
+import { PaginatedItemProps } from "@/interfaces/app.interfaces";
 import prisma from "@/lib/prisma";
 
 export const getProductsByCompany = async ({
     page = 1,
     take = 6,
-    query }: PaginatedProductsProps) => {
+    query }: PaginatedItemProps) => {
 
 
     //Validaciones de page
@@ -110,7 +110,7 @@ export const fetchProductByCompany = async () => {
     })
 
     return {
-        ok: true,
+        
         products
     }
 }

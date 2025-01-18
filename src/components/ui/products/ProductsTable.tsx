@@ -22,7 +22,7 @@ export const ProductsTable = async ({ query, page }: Props) => {
 
   const { products = [], totalPages = 1 } = await getProductsByCompany({ query, page });
 
-  const totalUsers = products?.length || 0;
+  const totalProducts = products?.length || 0;
 
   return (
     <>
@@ -191,7 +191,7 @@ export const ProductsTable = async ({ query, page }: Props) => {
       </div>
 
       <div className="mt-5 flex w-full justify-center">
-        <Pagination totalUsers={totalUsers} totalPages={totalPages} />
+        <Pagination totalUsers={totalProducts} totalPages={totalPages} />
       </div>
     </>
   )

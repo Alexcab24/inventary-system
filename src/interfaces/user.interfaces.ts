@@ -24,9 +24,3 @@ export interface UserById {
 
 
 
-export interface PaginatedUsersProps {
-    page?: number;
-    take?: number;
-    query: string
-}
-

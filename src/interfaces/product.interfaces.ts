@@ -23,9 +23,3 @@ export interface ProductWithRelations extends Product {
 }
 
 
-export interface PaginatedProductsProps {
-    page?: number;
-    take?: number;
-    query: string
-}
-

@@ -1,6 +1,6 @@
 
 import { auth } from "@/auth.config";
-import { PaginatedUsersProps } from "@/interfaces";
+import { PaginatedItemProps } from "@/interfaces/app.interfaces";
 import prisma from "@/lib/prisma";
 
 
@@ -11,7 +11,7 @@ export const fetchPaginatedUsers = async ({
    page = 1,
    take = 6,
    query
-}: PaginatedUsersProps) => {
+}: PaginatedItemProps) => {
 
    //Validaciones de page
    if (isNaN(Number(page))) page = 1;

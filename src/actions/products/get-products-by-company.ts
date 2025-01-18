@@ -113,7 +113,4 @@ export const fetchProductByCompany = async () => {
         ok: true,
         products
     }
-
-
-
 }

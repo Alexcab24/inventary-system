@@ -1,26 +1,26 @@
 
 
 export interface Product {
-    id?: string;
     name: string;
     description?: string;
     price: number;
     stock: number;
-    category?: {
-        id: string;
-        name: string;
-    };
-    supplier?: {
-        id: string
-        name: string;
-    };
     supplierId?: string;
     categoryId?: string;
     companyId?: string;
 }
 
-
-
+export interface ProductWithRelations extends Product {
+    id: string,
+    category: {
+        id: string;
+        name: string;
+    };
+    supplier: {
+        id: string;
+        name: string;
+    };
+}
 
 
 export interface PaginatedProductsProps {

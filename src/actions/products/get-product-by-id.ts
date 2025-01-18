@@ -1,9 +1,9 @@
 'use server';
 
 import prisma from "@/lib/prisma";
-import { Product } from "@/interfaces";
+import { ProductWithRelations } from "@/interfaces";
 
-export const getProductById = async (id: string): Promise<Product | null> => {
+export const getProductById = async (id: string): Promise<ProductWithRelations | null> => {
     try {
         const product = await prisma.products.findUnique({
             where: {

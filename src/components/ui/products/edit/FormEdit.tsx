@@ -1,6 +1,6 @@
 'use client';
 
-import { Product, User } from "@/interfaces";
+import { ProductWithRelations, User } from "@/interfaces";
 import { Category } from "@/interfaces/category.interfaces";
 import { Supplier } from "@/interfaces/supplier.interface";
 import Link from "next/link"
@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 
 interface Props {
     userSession?: User;
-    productById: Product;
+    productById: ProductWithRelations;
     categories: Category[];
     suppliers: Supplier[];
 }
@@ -185,7 +185,7 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
                                 id="categoryId"
                                 {...register("categoryId", { required: "Seleccionar una categoría es obligatorio" })}
                                 className="block w-full cursor-pointer rounded-md border border-gray-300 py-2 pl-3 pr-10 text-sm text-gray-500 placeholder:text-gray-500"
-                                defaultValue={productById.category.id}
+                                defaultValue={productById.category.id || ''}
                             >
                                 <option value="" disabled>Seleccionar categoría</option>
                                 {
@@ -214,7 +214,7 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
                             id="supplierId  "
                             {...register("supplierId", { required: "Seleccionar un proveedor es obligatorio" })}
                             className="block w-full cursor-pointer rounded-md border border-gray-300 py-2 pl-3 pr-10 text-sm text-gray-500 placeholder:text-gray-500"
-                            defaultValue={productById.supplier.id}
+                            defaultValue={productById.supplier.id || ''}
                             required
                         >
                             <option value="" disabled>Seleccionar un proveedor</option>

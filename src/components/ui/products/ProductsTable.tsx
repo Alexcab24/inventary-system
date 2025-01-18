@@ -1,9 +1,9 @@
 import Image from "next/image"
-import { UpdateProduct } from "./Buttons"
 import { getProductsByCompany } from "@/actions/products/get-products-by-company";
 import { Pagination } from "../orders/Pagination";
 import { DeleteProductFunction } from "../users/function-buttons/DeleteProductFunction";
 import { UpdateButton } from "../Buttons";
+
 
 
 
@@ -23,9 +23,6 @@ export const ProductsTable = async ({ query, page }: Props) => {
   const { products = [], totalPages = 1 } = await getProductsByCompany({ query, page });
 
   const totalUsers = products?.length || 0;
-
-
-
 
   return (
     <>

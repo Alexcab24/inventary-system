@@ -23,7 +23,7 @@ interface SeedProducts {
 }
 interface SeedSupplier {
     name: string;
-    contact: string;
+    email: string;
     phone: string;
     address: string;
     companyId: string;
@@ -137,7 +137,7 @@ export const initialData: SeedData = {
     suppliers: [
         {
             name: "Proveedor A",
-            contact: "Juan Pérez",
+            email: "proveedora@google.com",
             phone: "8091234567",
             address: "Calle Principal #1",
 
@@ -145,14 +145,14 @@ export const initialData: SeedData = {
         },
         {
             name: "Proveedor B",
-            contact: "Juan Pérez",
+            email: "proveedorb@google.com",
             phone: "8091234567",
             address: "Calle Principal #2",
             companyId: 'subdomain'
         },
         {
             name: "Proveedor C",
-            contact: "Juan Pérez",
+            email: "proveedorc@google.com",
             phone: "8091234567",
             address: "Calle Principal #3",
             companyId: 'subdomain'

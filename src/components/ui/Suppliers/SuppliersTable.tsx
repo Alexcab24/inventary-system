@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { UpdateProduct } from "../products/Buttons"
 import { getSupplierByCompany } from "@/actions/supplier/get-supplier"
+import { Pagination } from "../orders/Pagination";
 
 
 
@@ -16,6 +17,8 @@ export const SuppliersTable = async ({ query, page }: Props) => {
 
 
   const { suppliers = [], totalPages = 1 } = await getSupplierByCompany({ query, page });
+
+  const totalSuppliers = suppliers.length || 0;
 
 
 
@@ -153,6 +156,9 @@ export const SuppliersTable = async ({ query, page }: Props) => {
         {/* <!-- End Card --> */}
       </div>
       {/* <!-- End Table Section --> */}
+      <div className="mt-5 flex w-full justify-center">
+                <Pagination totalItems={totalSuppliers} totalPages={totalPages} />
+            </div>
     </>
   )
 }

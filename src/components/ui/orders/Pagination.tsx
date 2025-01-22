@@ -9,13 +9,13 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 
 
 interface Props {
-    totalUsers: number,
+    totalItems: number,
     totalPages: number,
 
 
 }
 
-export const Pagination = ({ totalUsers, totalPages }: Props) => {
+export const Pagination = ({ totalItems, totalPages }: Props) => {
 
 
     const pathname = usePathname();
@@ -60,7 +60,7 @@ export const Pagination = ({ totalUsers, totalPages }: Props) => {
             <div>
                 <p className="text-sm text-gray-600">
                     <span className="font-semibold text-gray-800">
-                        {`${totalUsers} resultado${totalUsers !== 1 ? 's' : ''}`}
+                        {`${totalItems} resultado${totalItems !== 1 ? 's' : ''}`}
                     </span>
                 </p>
             </div>

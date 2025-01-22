@@ -140,7 +140,7 @@ export const UsersTable = async ({ query, page }: Props) => {
             </div>
 
             <div className="mt-5 flex w-full justify-center">
-                <Pagination totalUsers={totalUsers} totalPages={totalPages} />
+                <Pagination totalItems={totalUsers} totalPages={totalPages} />
             </div>
         </>
     )

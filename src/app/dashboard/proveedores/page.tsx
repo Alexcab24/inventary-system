@@ -60,9 +60,7 @@ export default async function suppliersPage({
                 <Suspense key={query} fallback={<TableSkeleton />}>
                     <SuppliersTable query={query} page={page} />
                 </Suspense>
-                <div className="mt-5 flex w-full justify-center">
-                    {/* <Pagination /> */}
-                </div>
+                
             </section>
         </>
     )

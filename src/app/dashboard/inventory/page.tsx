@@ -1,4 +1,5 @@
 import { fetchProductByCompany } from "@/actions/products/get-products-by-company";
+import { CreateButton } from "@/components/ui/Buttons";
 import { Search } from "@/components/ui/Search";
 import Card from "@/components/ui/dashboard/Cards";
 import { CreateProduct } from "@/components/ui/products/Buttons";
@@ -54,7 +55,7 @@ export default async function productPage({
 
                     <div className="flex justify-between items-center gap-3 w-full mt-4">
                         <Search placeholder="Buscar productos..." />
-                        <CreateProduct />
+                        <CreateButton label="Agregar Articulo" url="/dashboard/inventory/create" />
                     </div>
                 </div>
 

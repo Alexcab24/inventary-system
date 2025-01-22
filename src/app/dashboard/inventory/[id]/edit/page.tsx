@@ -49,7 +49,7 @@ export default async function EditProductPage({ params }: { params: { id: string
                         userSession={session?.user}
                         productById={productById}
                         categories={categories}
-                        suppliers={suppliers}
+                        suppliers={suppliers.suppliers}
                     />
 
                 </div>

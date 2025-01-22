@@ -60,7 +60,7 @@ export default async function UserPage({
 
                     <div className="flex justify-between items-center gap-3 w-full mt-4">
                         <Search placeholder="Buscar clientes..." />
-                        <CreateButton label='Agregar usuario' url='/management/users/add' />
+                        <CreateButton label='Agregar usuario' url='/management/users/create' />
                     </div>
                 </div>
                 <Suspense key={query} fallback={<TableSkeleton />}>

@@ -1,13 +1,12 @@
 import { Search } from "@/components/ui/Search";
 import { SuppliersTable } from "@/components/ui/suppliers/SuppliersTable";
 import Card from "@/components/ui/dashboard/Cards";
-import { Pagination } from "@/components/ui/orders/Pagination";
-import { CreateProduct } from "@/components/ui/products/Buttons";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { MdInventory, MdRemoveShoppingCart } from "react-icons/md";
 import { fetchSupplierByCompany } from "@/actions/supplier/get-supplier";
 import { Suspense } from "react";
 import { TableSkeleton } from "@/components/ui/users/Skeletons/TableSkeleton";
+import { CreateButton } from "@/components/ui/Buttons";
 
 export default async function suppliersPage({
     searchParams }:
@@ -54,13 +53,13 @@ export default async function suppliersPage({
 
                     <div className="flex justify-between items-center gap-3 w-full mt-4">
                         <Search placeholder="Buscar proveedor..." />
-                        <CreateProduct />
+                        <CreateButton label="Crear proveedor" url="/dashboard/suppliers/create" />
                     </div>
                 </div>
                 <Suspense key={query} fallback={<TableSkeleton />}>
                     <SuppliersTable query={query} page={page} />
                 </Suspense>
-                
+
             </section>
         </>
     )

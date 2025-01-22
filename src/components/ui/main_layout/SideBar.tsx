@@ -25,7 +25,7 @@ const menuItems = [
     {
         icon: <FaTruck />,
         title: 'Proveedores',
-        path: '/dashboard/proveedores'
+        path: '/dashboard/suppliers'
 
     },
     {

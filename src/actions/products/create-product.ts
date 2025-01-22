@@ -64,7 +64,7 @@ export const addProduct = async (
             }
         });
 
-        revalidatePath('/dashboard/inventory')
+        revalidatePath('/dashboard/inventory');
 
         return {
             ok: true,

@@ -59,14 +59,13 @@ export const SuppliersTable = async ({ query, page }: Props) => {
                           </span>
                         </div>
                       </th>
-
-                      {/* <th scope="col" className="px-6 py-3 text-start">
-                          <div className="flex items-center gap-x-2">
-                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                              contacto
-                            </span>
-                          </div>
-                        </th> */}
+                      <th scope="col" className="px-6 py-3 text-start">
+                        <div className="flex items-center gap-x-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
+                            Email
+                          </span>
+                        </div>
+                      </th>
 
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
@@ -116,6 +115,11 @@ export const SuppliersTable = async ({ query, page }: Props) => {
                             <td className="h-px w-72 whitespace-nowrap">
                               <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
                                 <span className="text-sm text-gray-500">{supplier.name}</span>
+                              </div>
+                            </td>
+                            <td className="h-px w-72 whitespace-nowrap">
+                              <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                                <span className="text-sm text-gray-500">{supplier.email}</span>
                               </div>
                             </td>
                             <td className="size-px whitespace-nowrap">

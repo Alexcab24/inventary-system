@@ -37,9 +37,6 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
 
     const { id } = productById;
 
-    console.log('Aqui la el id:  ', id);
-
-
     const [isOpen, setIsOpen] = useState(false);
 
     const handleOpen = () => setIsOpen(true);

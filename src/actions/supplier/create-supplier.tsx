@@ -63,17 +63,11 @@ export const createSupplier = async (
             newSupplier
         }
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return {
             ok: false,
             message: 'Error a crear suplidor'
         }
     }
-
-
-
-
-
-
 
 }

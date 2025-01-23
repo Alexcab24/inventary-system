@@ -8,7 +8,7 @@ export const getUserById = async (id: string): Promise<UserById | null> => {
     try {
         const user = await prisma.user.findUnique({
             where: {
-                id: id
+              id
             },
             select: {
                 id: true,
@@ -19,9 +19,7 @@ export const getUserById = async (id: string): Promise<UserById | null> => {
         });
 
 
-        if (!user) {
-            return null;
-        }
+        if (!user) return null;
 
         return {
             id: user.id,
@@ -31,6 +29,6 @@ export const getUserById = async (id: string): Promise<UserById | null> => {
         };
     } catch (error) {
         console.error(error);
-        return null;
+        return null
     }
 };

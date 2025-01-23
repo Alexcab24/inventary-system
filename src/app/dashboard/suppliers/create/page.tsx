@@ -1,8 +1,12 @@
+import { auth } from "@/auth.config";
 import Form from "@/components/ui/suppliers/Form";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
 
-export default function createSupplierPage() {
+export default async function createSupplierPage() {
+
+    const session = await auth();
+
     return (
        <>
          <div className="max-w-[950px] mx-auto my-10">
@@ -17,7 +21,7 @@ export default function createSupplierPage() {
                 </div>
 
                 <div className=" my-4">
-                    <Form/>
+                    <Form user={session?.user} />
                     {/* <Form user={session?.user} suppliers={suppliers} categories={categories} /> */}
                 </div>
             </div>

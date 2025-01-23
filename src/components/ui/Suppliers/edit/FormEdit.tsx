@@ -1,13 +1,12 @@
-'use client';
+'use client'; 
 
-import { createSupplier } from '@/actions/supplier/create-supplier';
-import { User } from '@/interfaces';
-import clsx from 'clsx';
-import Link from 'next/link';
-import React from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { errorNotification, successNotification } from '../notification/notifications';
-import { useRouter } from 'next/navigation';
+import { User } from "@/interfaces";
+import { Supplier } from "@/interfaces/supplier.interface";
+import clsx from "clsx";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { SubmitHandler, useForm } from "react-hook-form";
+
 
 interface FormInputs {
     name: string;
@@ -16,40 +15,51 @@ interface FormInputs {
     address: string;
 }
 
-
 interface Props {
-    user?: User;
+    userSession?: User;
+    supplierById: Supplier;
 }
 
-const Form = ({ user }: Props) => {
+const FormEdit = ({ userSession, supplierById }: Props) => {
+    const { id } = supplierById;
 
     const router = useRouter();
-    const companyId = user?.companyId;
 
-    const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
+    const companyId = userSession?.companyId;
+
+    const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>({
+        defaultValues: {
+            ...supplierById
+        }
+    });
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
         const { name, email, phone, address } = data;
 
-        if (!companyId) return;
-
-        // server action
-
-        const resp = await createSupplier(name, phone, email, address, companyId);
-
-        if (resp.ok) {
-            successNotification(resp.message || '');
-            router.push('/dashboard/suppliers');
-            return;
-        } else {
-            // setErrorMessage(resp.message);
-            errorNotification(resp.message || '');
+        if (!companyId) {
             return;
         }
 
+        // server action
+        // const resp = await ChangeUserRole(id, role)
+
+        // if (resp.ok) {
+        //     successNotification(resp.message);
+        //     router.push('/management/users');
+        //     return;
+        // } else {
+        //     setErrorMessage(resp.message);
+        //     errorNotification(resp.message);
+        //     return;
+        // }
+
 
     }
-    return (
+    
+
+
+    return  ( 
+
         <div className='bg-gray-50 rounded-xl shadow-sm overflow-hidden p-8 min-w-full'>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
@@ -146,4 +156,4 @@ const Form = ({ user }: Props) => {
     )
 }
 
-export default Form
+export default FormEdit

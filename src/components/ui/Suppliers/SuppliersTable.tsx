@@ -1,7 +1,7 @@
 import Image from "next/image"
-import { UpdateProduct } from "../products/Buttons"
 import { getSupplierByCompany } from "@/actions/supplier/get-supplier"
 import { Pagination } from "../orders/Pagination";
+import { UpdateButton } from "../Buttons";
 
 
 
@@ -138,8 +138,11 @@ export const SuppliersTable = async ({ query, page }: Props) => {
                             </td>
                             <td className="size-px whitespace-nowrap">
                               <div className="px-6 py-1.5">
+                                <UpdateButton
+                                  url="/dashboard/suppliers/"
+                                  id={supplier.id}
+                                />
 
-                                <UpdateProduct id="1" />
 
                               </div>
                             </td>

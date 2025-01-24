@@ -1,7 +1,9 @@
 'use server'
 
 import { auth } from "@/auth.config";
+import { Category } from "@/interfaces/category.interfaces";
 import prisma from "@/lib/prisma";
+import { validateCategory } from "@/schemas/validation/categoryValidation";
 import { revalidatePath } from "next/cache";
 
 export const createCategory = async (name: string) => {
@@ -14,17 +16,29 @@ export const createCategory = async (name: string) => {
             ok: false,
         };
     }
-    console.log('funciona la vaina', name)
+
+
+    const category: Category = {
+        name,
+        companyId,
+    };
+
+    const result = validateCategory(category);
+
+    if (!result.success) {
+        return {
+            ok: false,
+            message: "Validation error",
+            errors: result.error.errors
+        };
+    }
 
     try {
         await prisma.category.create({
-            data: {
-                name,
-                companyId
-            }
+            data: result.data
         });
 
-        revalidatePath('/dashboard/inventory/add');
+        revalidatePath('/dashboard/inventory/create');
 
         return {
             ok: true,

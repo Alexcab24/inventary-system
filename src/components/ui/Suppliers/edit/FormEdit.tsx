@@ -1,11 +1,13 @@
-'use client'; 
+'use client';
 
+import { updateSupplier } from "@/actions/supplier/update-supplier";
 import { User } from "@/interfaces";
 import { Supplier } from "@/interfaces/supplier.interface";
 import clsx from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { errorNotification, successNotification } from "../../notification/notifications";
 
 
 interface FormInputs {
@@ -21,7 +23,7 @@ interface Props {
 }
 
 const FormEdit = ({ userSession, supplierById }: Props) => {
-    const { id } = supplierById;
+
 
     const router = useRouter();
 
@@ -33,6 +35,10 @@ const FormEdit = ({ userSession, supplierById }: Props) => {
         }
     });
 
+    const { id } = supplierById;
+
+    if (!id) return;
+
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
         const { name, email, phone, address } = data;
 
@@ -41,24 +47,25 @@ const FormEdit = ({ userSession, supplierById }: Props) => {
         }
 
         // server action
-        // const resp = await ChangeUserRole(id, role)
+        const resp = await updateSupplier(id, name, email, phone, address)
 
-        // if (resp.ok) {
-        //     successNotification(resp.message);
-        //     router.push('/management/users');
-        //     return;
-        // } else {
-        //     setErrorMessage(resp.message);
-        //     errorNotification(resp.message);
-        //     return;
-        // }
+
+        if (resp.ok) {
+            successNotification(resp.message);
+            router.push('/dashboard/suppliers');
+            return;
+        } else {
+            // setErrorMessage(resp.message);
+            errorNotification(resp.message);
+            return;
+        }
 
 
     }
-    
 
 
-    return  ( 
+
+    return (
 
         <div className='bg-gray-50 rounded-xl shadow-sm overflow-hidden p-8 min-w-full'>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -146,7 +153,7 @@ const FormEdit = ({ userSession, supplierById }: Props) => {
                         Cancelar
                     </Link>
                     <button type="submit" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                        Agregar suplidor
+                        Actualizar suplidor
                     </button>
                 </div>
 

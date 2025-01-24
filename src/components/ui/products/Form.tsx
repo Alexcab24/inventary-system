@@ -1,6 +1,6 @@
 'use client';
 
-import { addProduct } from '@/actions/products/create-product';
+import { createProduct } from '@/actions/products/create-product';
 import { User } from '@/interfaces';
 import Link from 'next/link'
 import React, { useState } from 'react'
@@ -62,7 +62,7 @@ export const Form = ({ user, suppliers, categories }: Props) => {
             return;
         }
         // server action
-        const resp = await addProduct(name, parsedPrice, parsedStock, supplierId, categoryId, description, companyId);
+        const resp = await createProduct(name, parsedPrice, parsedStock, supplierId, categoryId, description, companyId);
 
         if (resp.ok) {
             successNotification(resp.message || '');

@@ -6,7 +6,7 @@ import { validateProduct } from "@/schemas/validation/productValidation";
 import { revalidatePath } from "next/cache";
 
 
-export const addProduct = async (
+export const createProduct = async (
     name: string,
     price: number,
     stock: number,
@@ -43,21 +43,10 @@ export const addProduct = async (
     }
 
 
-
-
     try {
 
         const newProduct = await prisma.products.create({
-            data: {
-                name,
-                price,
-                stock,
-                description,
-                categoryId,
-                supplierId,
-                companyId
-
-            },
+            data: result.data,
             select: {
                 id: true,
                 name: true

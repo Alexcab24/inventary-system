@@ -110,7 +110,40 @@ export const fetchProductByCompany = async () => {
     })
 
     return {
-        
+
         products
     }
 }
+
+
+type ProductGroupResponse = {
+    ok: boolean;
+    message?: string;
+    data?: { month: string; count: number }[];
+};
+
+export const fetchProductsGroupedByMonth = async (): Promise<ProductGroupResponse> => {
+    const session = await auth();
+  
+    if (!session?.user) {
+      return { ok: false, message: "Debe estar autenticado" };
+    }
+  
+    try {
+      const groupedData = await prisma.$queryRaw<{ month: string; count: number }[]>`
+        SELECT 
+          TO_CHAR("createdAt", 'FMMonth') AS month,
+          COUNT(*)::int
+        FROM "Products"
+        WHERE "companyId" = ${session.user.companyId}
+        GROUP BY month
+        ORDER BY MIN(EXTRACT(MONTH FROM "createdAt"))`;
+  
+      return { ok: true, data: groupedData };
+    } catch (error) {
+      console.error(error);
+      return { ok: false, message: "Error al obtener los datos" };
+    }
+  };
+
+

@@ -4,10 +4,31 @@ import Card from "@/components/ui/dashboard/Cards";
 import { FaFileInvoiceDollar, FaUsers } from "react-icons/fa";
 import { MdAttachMoney } from "react-icons/md";
 import Chart from '@/components/ui/dashboard/Chart';
+import { fetchProductsGroupedByMonth } from "@/actions/products/get-products-by-company";
 
 
 export default async function DashboardPage() {
   const session = await auth();
+
+  const resp = await fetchProductsGroupedByMonth();
+
+
+
+  if (!resp.ok || !resp.data) {
+    return <div>Error fetching data</div>;
+  }
+
+
+  const chartData = resp.data.map((item) => ({
+    month: item.month,
+    desktop: item.count,
+  }));
+
+  const numberOfMonths = chartData.length
+
+
+
+
   return (
     <main>
       {/* <div>
@@ -19,7 +40,10 @@ export default async function DashboardPage() {
         <Card title="Productos con stock bajo" value={'1234'} icon={MdAttachMoney} />
       </section>
       <section className="grid gap-3 grid-cols-1 md:grid-cols-2 p-4 w-full">
-        <Chart/>
+        <Chart
+          chartData={chartData}
+          numberOfMonths={numberOfMonths}
+        />
         {/* <InventorySummary /> */}
       </section>
     </main>

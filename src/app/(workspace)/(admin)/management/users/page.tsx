@@ -5,12 +5,13 @@ import { Search } from "@/components/ui/Search";
 import Card from "@/components/ui/dashboard/Cards";
 import { AiOutlineUser } from "react-icons/ai";
 import { MdCheckCircleOutline, MdPendingActions } from "react-icons/md";
-import { UsersTable } from '../../../components/ui/users/UsersTable';
+
 import { fetchUserByCompany } from "@/actions/users/get-user-by-company";
 import { Suspense } from "react";
 import { TableSkeleton } from "@/components/ui/users/Skeletons/TableSkeleton";
 import { CreateButton } from "@/components/ui/Buttons";
 import { DeleteUserById } from "@/actions/users/delete-user-by-id";
+import { UsersTable } from "@/components/ui/users/UsersTable";
 
 
 

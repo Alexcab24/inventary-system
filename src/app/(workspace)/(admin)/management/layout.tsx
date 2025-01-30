@@ -13,23 +13,23 @@ const inter = Inter({ subsets: ["latin"] });
 
 
 export default async function ManagementLayout({
-    children
+  children
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
 
-    const session = await auth();
-    if (!session?.user) {
-        redirect('/auth/login')
-    }
-    return (
-        <html lang="es">
-           <body className={inter.className}>
+  const session = await auth();
+  if (!session?.user) {
+    redirect('/auth/login')
+  }
+  return (
+    <html lang="es">
+      <body className={inter.className}>
         <SideBar />
         {/* Main Layout content - Contenido principal del Layout */}
         <div className="ml-auto  mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%] min-h-screen">
 
-          <TopMenu user = {session.user}   />
+          <TopMenu user={session.user} />
 
 
           {/* TODO: Contenido en el Layout.tsx */}
@@ -41,6 +41,6 @@ export default async function ManagementLayout({
         </div>
         <PrelineScript />
       </body>
-        </html>
-    );
+    </html>
+  );
 }

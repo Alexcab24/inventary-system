@@ -53,7 +53,7 @@ export const createProduct = async (
             }
         });
 
-        revalidatePath('/dashboard/inventory');
+        revalidatePath('/inventory');
 
         return {
             ok: true,

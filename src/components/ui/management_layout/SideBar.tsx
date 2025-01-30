@@ -6,6 +6,7 @@ import { PiBuilding } from 'react-icons/pi'
 import { HiOutlineDocumentReport } from 'react-icons/hi'
 import { TfiSettings } from 'react-icons/tfi'
 import { IoAppsSharp } from 'react-icons/io5'
+import Link from 'next/link'
 
 
 
@@ -77,9 +78,9 @@ export const SideBar = () => {
                 <div className="relative flex flex-col h-full max-h-full">
                     <div className="px-6 pt-4">
 
-                        <a className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80" href="#" aria-label="Preline">
+                        <Link className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80" href="/dashboard" aria-label="Preline">
                             <span>InventorySystem</span>
-                        </a>
+                        </Link>
 
                     </div>
 

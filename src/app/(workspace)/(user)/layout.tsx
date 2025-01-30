@@ -35,7 +35,7 @@ export default async function RootLayout({
         {/* Main Layout content - Contenido principal del Layout */}
         <div className="ml-auto  mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%] min-h-screen">
 
-          <TopMenu user = {session.user}   />
+          <TopMenu user={session.user} />
 
 
           {/* TODO: Contenido en el Layout.tsx */}

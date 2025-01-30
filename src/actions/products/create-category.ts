@@ -38,7 +38,7 @@ export const createCategory = async (name: string) => {
             data: result.data
         });
 
-        revalidatePath('/dashboard/inventory/create');
+        revalidatePath('/inventory/create');
 
         return {
             ok: true,

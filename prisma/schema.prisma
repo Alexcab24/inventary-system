@@ -51,6 +51,7 @@ model Products {
   description String?
   price       Decimal
   stock       Int
+  createdAt   DateTime @default(now())
 
   //relaciones
 

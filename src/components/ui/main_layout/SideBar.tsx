@@ -1,9 +1,10 @@
 import React from 'react'
 import { FaBoxOpen, FaReceipt, FaTruck, FaUsers } from 'react-icons/fa'
-import { SideBarItems } from './SideBarItems'
+
 import { ViewRoute } from './ViewRoute'
 import { IoAppsSharp } from 'react-icons/io5'
 import { AiFillProduct } from 'react-icons/ai'
+import { SideBarItems } from './SideBarItems'
 
 
 
@@ -19,19 +20,19 @@ const menuItems = [
     {
         icon: <AiFillProduct />,
         title: 'Inventario',
-        path: '/dashboard/inventory'
+        path: '/inventory'
 
     },
     {
         icon: <FaTruck />,
         title: 'Proveedores',
-        path: '/dashboard/suppliers'
+        path: '/suppliers'
 
     },
     {
         icon: <FaReceipt />,
         title: 'Reportes',
-        path: '/dashboard/reports'
+        path: '/reports'
 
     },
 ]

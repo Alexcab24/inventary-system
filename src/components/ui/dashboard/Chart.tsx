@@ -1,8 +1,6 @@
-"use client"
-
-import { TrendingUp } from "lucide-react"
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts"
-
+'use client';
+import { TrendingUp } from "lucide-react";
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
 import {
     Card,
     CardContent,
@@ -10,48 +8,47 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "../card"
+} from "../card";
 import {
     ChartConfig,
     ChartContainer,
     ChartTooltip,
     ChartTooltipContent,
-} from "../chart"
+} from "../chart";
+import { FaChartBar } from "react-icons/fa";
 
-const chartData = [
-    { month: "January", desktop: 186 },
-    { month: "February", desktop: 305 },
-    { month: "March", desktop: 237 },
-    { month: "April", desktop: 73 },
-    { month: "May", desktop: 209 },
-    { month: "June", desktop: 214 },
-    { month: "June", desktop: 214 },
-    { month: "June", desktop: 214 },
-    { month: "June", desktop: 214 },
-    { month: "June", desktop: 214 },
-    { month: "June", desktop: 214 },
-    { month: "June", desktop: 214 },
-]
 
 const chartConfig = {
     desktop: {
-        label: "Desktop",
+        label: "Products",
         color: "hsl(var(--chart-2))",
     },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
-export default function Component() {
+interface ChartComponentProps {
+    chartData: { month: string; desktop: number }[];
+    numberOfMonths: number;
+}
+
+export default function Component({ chartData, numberOfMonths }: ChartComponentProps) {
+    const date = new Date()
+    const year = date.getFullYear();
+
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Bar Chart - Label</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
+                <div className="flex items-center gap-x-4">
+                    <FaChartBar size={26} />
+                    <CardTitle>Productos Ingresados por Mes</CardTitle>
+                </div>
+
+                <CardDescription>{`Enero - Diciembre ${year}`}</CardDescription>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig}>
                     <BarChart
                         accessibilityLayer
-                        data={chartData}
+                        data={chartData} 
                         margin={{
                             top: 20,
                         }}
@@ -62,7 +59,7 @@ export default function Component() {
                             tickLine={false}
                             tickMargin={10}
                             axisLine={false}
-                            tickFormatter={(value) => value.slice(0, 3)}
+                            tickFormatter={(value) => value.slice(0, 3)} 
                         />
                         <ChartTooltip
                             cursor={false}
@@ -80,13 +77,10 @@ export default function Component() {
                 </ChartContainer>
             </CardContent>
             <CardFooter className="flex-col items-start gap-2 text-sm">
-                <div className="flex gap-2 font-medium leading-none">
-                    Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-                </div>
                 <div className="leading-none text-muted-foreground">
-                    Showing total visitors for the last 6 months
+                    Mostrando el total de productos de los últimos {numberOfMonths} meses
                 </div>
             </CardFooter>
         </Card>
-    )
+    );
 }

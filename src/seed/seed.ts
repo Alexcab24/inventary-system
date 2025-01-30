@@ -19,6 +19,7 @@ interface SeedProducts {
     description?: string;
     price: number;
     stock: number;
+    createdAt: Date;
     companyId: string;
 }
 interface SeedSupplier {
@@ -174,6 +175,7 @@ export const initialData: SeedData = {
             description: "Descripción del producto 1",
             price: 10.99,
             stock: 0,
+            createdAt: new Date("2025-02-17T16:45:30"),
             // supplier: "Proveedor A",
             companyId: 'subdomain'
         },
@@ -182,6 +184,7 @@ export const initialData: SeedData = {
             description: "Descripción del producto 2",
             price: 10.99,
             stock: 100,
+            createdAt: new Date("2025-03-17T16:45:30"),
             // supplierName: "Proveedor B",
             companyId: 'subdomain'
         },
@@ -190,6 +193,34 @@ export const initialData: SeedData = {
             description: "Descripción del producto 3",
             price: 10.99,
             stock: 100,
+            createdAt: new Date("2025-04-17T16:45:30"),
+            // supplierName: "Proveedor C",
+            companyId: 'subdomain'
+        },
+        {
+            name: "Producto41",
+            description: "Descripción del producto 1",
+            price: 10.99,
+            stock: 0,
+            createdAt: new Date("2025-01-17T16:45:30"),
+            // supplier: "Proveedor A",
+            companyId: 'subdomain'
+        },
+        {
+            name: "Producto 2",
+            description: "Descripción del producto 2",
+            price: 10.99,
+            stock: 100,
+            createdAt: new Date("2025-06-17T16:45:30"),
+            // supplierName: "Proveedor B",
+            companyId: 'subdomain'
+        },
+        {
+            name: "Producto 3",
+            description: "Descripción del producto 3",
+            price: 10.99,
+            stock: 100,
+            createdAt: new Date("2025-04-17T16:45:30"),
             // supplierName: "Proveedor C",
             companyId: 'subdomain'
         },

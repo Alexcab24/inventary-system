@@ -139,7 +139,7 @@ export const SuppliersTable = async ({ query, page }: Props) => {
                             <td className="size-px whitespace-nowrap">
                               <div className="px-6 py-1.5">
                                 <UpdateButton
-                                  url="/dashboard/suppliers/"
+                                  url="/suppliers/"
                                   id={supplier.id}
                                 />
 

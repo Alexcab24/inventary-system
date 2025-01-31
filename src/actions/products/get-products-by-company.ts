@@ -61,6 +61,11 @@ export const getProductsByCompany = async ({
 
         })
 
+        const formattedProducts = products.map(product => ({
+            ...product,
+            price: product.price.toNumber()
+        }));
+
         const totalCount = await prisma.products.count({
             where: {
                 companyId: session.user.companyId
@@ -73,7 +78,7 @@ export const getProductsByCompany = async ({
             ok: true,
             currentPage: page,
             totalPages: totalPages,
-            products
+            products: formattedProducts
         }
 
     } catch (error) {

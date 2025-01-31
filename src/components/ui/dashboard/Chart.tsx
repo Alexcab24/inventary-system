@@ -44,8 +44,8 @@ export default function Component({ chartData, numberOfMonths }: ChartComponentP
 
                 <CardDescription>{`Enero - Diciembre ${year}`}</CardDescription>
             </CardHeader>
-            <CardContent>
-                <ChartContainer config={chartConfig}>
+            <CardContent >
+                <ChartContainer className="h-full" config={chartConfig}>
                     <BarChart
                         accessibilityLayer
                         data={chartData} 

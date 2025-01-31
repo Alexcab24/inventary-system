@@ -2,7 +2,7 @@ import { fetchProductByCompany } from "@/actions/products/get-products-by-compan
 import { CreateButton } from "@/components/ui/Buttons";
 import { Search } from "@/components/ui/Search";
 import Card from "@/components/ui/dashboard/Cards";
-import { ProductsTable } from "@/components/ui/products/ProductsTable";
+import { ProductsContainer } from "@/components/ui/products/ProductsContainer";
 import { TableSkeleton } from "@/components/ui/users/Skeletons/TableSkeleton";
 import { Suspense } from "react";
 import { AiOutlineAppstore } from "react-icons/ai";
@@ -59,7 +59,7 @@ export default async function productPage({
                 </div>
 
                 <Suspense key={query} fallback={<TableSkeleton />}>
-                    <ProductsTable query={query} page={page} />
+                    <ProductsContainer query={query} page={page} />
                 </Suspense>
 
 

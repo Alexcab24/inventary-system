@@ -16,7 +16,7 @@ export const SideBarItems = ({ icon, title, path }: Props) => {
     const pathName = usePathname();
     
     const baseClass = "transition-all duration-500 flex items-center gap-x-3.5 py-3 px-2.5 bg-white text-lg text-gray-800 rounded-lg hover:bg-gray-100";
-    const activeClass = path === pathName ? 'text-white bg-gradient-to-r from-sky-600 to-cyan-400' : '';
+    const activeClass = pathName.startsWith(path) ? 'text-white bg-gradient-to-r from-sky-600 to-cyan-400' : '';
     
     return (
         <li>

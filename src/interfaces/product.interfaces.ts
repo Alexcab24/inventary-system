@@ -5,6 +5,7 @@ export interface Product {
     description?: string;
     price: number;
     stock: number;
+    createdAt: Date;
     supplierId?: string;
     categoryId?: string;
     companyId?: string;

@@ -4,19 +4,19 @@ import Card from "@/components/ui/dashboard/Cards";
 import { FaFileInvoiceDollar, FaUsers } from "react-icons/fa";
 import { MdAttachMoney } from "react-icons/md";
 import Chart from '@/components/ui/dashboard/Chart';
-import { fetchProductsGroupedByMonth } from "@/actions/products/get-products-by-company";
+import { fetchProductsGroupedByMonth, getLastProducts } from "@/actions/products/get-products-by-company";
+import LastedProducts from "@/components/ui/dashboard/LastedProducts";
 
 
 export default async function DashboardPage() {
-  const session = await auth();
 
-  const resp = await fetchProductsGroupedByMonth();
-
-
+  const resp = await fetchProductsGroupedByMonth()
 
   if (!resp.ok || !resp.data) {
     return <div>Error fetching data</div>;
   }
+
+
 
 
   const chartData = resp.data.map((item) => ({
@@ -44,7 +44,8 @@ export default async function DashboardPage() {
           chartData={chartData}
           numberOfMonths={numberOfMonths}
         />
-        {/* <InventorySummary /> */}
+
+        <LastedProducts />
       </section>
     </main>
   );

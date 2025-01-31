@@ -124,13 +124,13 @@ type ProductGroupResponse = {
 
 export const fetchProductsGroupedByMonth = async (): Promise<ProductGroupResponse> => {
     const session = await auth();
-  
+
     if (!session?.user) {
-      return { ok: false, message: "Debe estar autenticado" };
+        return { ok: false, message: "Debe estar autenticado" };
     }
-  
+
     try {
-      const groupedData = await prisma.$queryRaw<{ month: string; count: number }[]>`
+        const groupedData = await prisma.$queryRaw<{ month: string; count: number }[]>`
         SELECT 
           TO_CHAR("createdAt", 'FMMonth') AS month,
           COUNT(*)::int
@@ -138,12 +138,45 @@ export const fetchProductsGroupedByMonth = async (): Promise<ProductGroupRespons
         WHERE "companyId" = ${session.user.companyId}
         GROUP BY month
         ORDER BY MIN(EXTRACT(MONTH FROM "createdAt"))`;
-  
-      return { ok: true, data: groupedData };
+
+        return { ok: true, data: groupedData };
     } catch (error) {
-      console.error(error);
-      return { ok: false, message: "Error al obtener los datos" };
+        console.error(error);
+        return { ok: false, message: "Error al obtener los datos" };
     }
-  };
+};
 
 
+export const getLastProducts = async () => {
+    const session = await auth();
+
+    if (!session?.user) {
+        return { ok: false, message: "Debe estar autenticado" };
+    }
+
+    try {
+        const lastSixProducts = await prisma.products.findMany({
+            where: {
+                companyId: session.user.companyId
+            },
+            orderBy: {
+                createdAt: "asc"
+            },
+            include: {
+                supplier: true
+            },
+            take: 6
+        })
+
+        return {
+            ok: true,
+            lastSixProducts
+        }
+    } catch (error) {
+        console.error(error)
+        return {
+            ok: false
+        }
+    }
+
+}

@@ -38,7 +38,7 @@ export default function Component({ chartData, numberOfMonths }: ChartComponentP
         <Card>
             <CardHeader>
                 <div className="flex items-center gap-x-4">
-                    <FaChartBar size={26} />
+                    <FaChartBar size={28} />
                     <CardTitle>Productos Ingresados por Mes</CardTitle>
                 </div>
 

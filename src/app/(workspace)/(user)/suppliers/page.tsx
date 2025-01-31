@@ -53,7 +53,7 @@ export default async function suppliersPage({
 
                     <div className="flex justify-between items-center gap-3 w-full mt-4">
                         <Search placeholder="Buscar proveedor..." />
-                        <CreateButton label="Crear proveedor" url="/dashboard/suppliers/create" />
+                        <CreateButton label="Crear proveedor" url="/suppliers/create" />
                     </div>
                 </div>
                 <Suspense key={query} fallback={<TableSkeleton />}>

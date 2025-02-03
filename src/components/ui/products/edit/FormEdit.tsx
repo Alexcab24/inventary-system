@@ -52,7 +52,8 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
         defaultValues: {
             ...productById,
             price: productById.price.toString(),
-            stock: productById.stock.toString()
+            stock: productById.stock.toString(),
+            description: productById.description ?? ''
         }
     });
 
@@ -76,7 +77,7 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
 
         if (resp.ok) {
             successNotification(resp.message);
-            router.push('/dashboard/inventory');
+            router.push('/inventory');
             return;
         } else {
             // setErrorMessage(resp.message);
@@ -172,7 +173,7 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
 
 
 
-                <div className='flex gap-x-4'>
+                <div className='flex flex-col lg:flex-row gap-x-4'>
 
                     {/* Categoría del Producto */}
                     <div className="w-full mb-4">
@@ -240,7 +241,7 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
                 </div>
 
                 {/* Botón de envío */}
-                <div className="flex flex-col md:flex-row justify-end gap-x-4">
+                <div className="flex flex-col-reverse md:flex-row justify-end gap-4">
                     <Link href={'/inventory'} className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                         Cancelar
                     </Link>

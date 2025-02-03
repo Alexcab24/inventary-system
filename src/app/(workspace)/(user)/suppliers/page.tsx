@@ -1,5 +1,5 @@
 import { Search } from "@/components/ui/Search";
-import { SuppliersTable } from "@/components/ui/suppliers/SuppliersTable";
+import { SuppliersContainer  } from "@/components/ui/suppliers/SuppliersContainer";
 import Card from "@/components/ui/dashboard/Cards";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { MdInventory, MdRemoveShoppingCart } from "react-icons/md";
@@ -57,7 +57,7 @@ export default async function suppliersPage({
                     </div>
                 </div>
                 <Suspense key={query} fallback={<TableSkeleton />}>
-                    <SuppliersTable query={query} page={page} />
+                    <SuppliersContainer query={query} page={page} />
                 </Suspense>
 
             </section>

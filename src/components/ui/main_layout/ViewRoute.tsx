@@ -17,7 +17,7 @@ export const ViewRoute = () => {
 
     return (
         <nav aria-label="breadcrumb">
-            <ol className="flex items-center ml-4">
+            <ol className="flex items-center ml-4 text-xs md:text-sm">
                 <li>
                     <Link href={'/'}>Inicio</Link>
                 </li>

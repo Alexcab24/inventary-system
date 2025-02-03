@@ -23,7 +23,7 @@ export default async function EditProductPage({ params }: { params: { id: string
 
 
     if (!productById) {
-        return;
+        return <h1>holaaa?</h1>;
     }
 
 

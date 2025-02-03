@@ -1,5 +1,4 @@
 'use client';
-import { TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
 import {
     Card,
@@ -33,6 +32,9 @@ interface ChartComponentProps {
 export default function Component({ chartData, numberOfMonths }: ChartComponentProps) {
     const date = new Date()
     const year = date.getFullYear();
+    const footerDescription = numberOfMonths > 1 
+    ? `Mostrando el total de productos de los últimos ${numberOfMonths} meses, incluyendo este mes` 
+    : `Mostrando los productos de este mes`;
 
     return (
         <Card>
@@ -45,7 +47,7 @@ export default function Component({ chartData, numberOfMonths }: ChartComponentP
                 <CardDescription>{`Enero - Diciembre ${year}`}</CardDescription>
             </CardHeader>
             <CardContent >
-                <ChartContainer className="h-full" config={chartConfig}>
+                <ChartContainer className="" config={chartConfig}>
                     <BarChart
                         accessibilityLayer
                         data={chartData} 
@@ -78,7 +80,7 @@ export default function Component({ chartData, numberOfMonths }: ChartComponentP
             </CardContent>
             <CardFooter className="flex-col items-start gap-2 text-sm">
                 <div className="leading-none text-muted-foreground">
-                    Mostrando el total de productos de los últimos {numberOfMonths} meses
+                    {footerDescription}
                 </div>
             </CardFooter>
         </Card>

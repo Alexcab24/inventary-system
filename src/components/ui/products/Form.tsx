@@ -164,7 +164,7 @@ export const Form = ({ user, suppliers, categories }: Props) => {
 
 
 
-                <div className='flex gap-x-4'>
+                <div className='flex flex-col lg:flex-row gap-x-4'>
 
                     {/* Categoría del Producto */}
                     <div className="w-full mb-4">
@@ -232,7 +232,7 @@ export const Form = ({ user, suppliers, categories }: Props) => {
                 </div>
 
                 {/* Botón de envío */}
-                <div className="flex flex-col md:flex-row justify-end gap-x-4">
+                <div className="flex flex-col-reverse gap-4 md:flex-row justify-end gap-x-4">
                     <Link href={'/inventory'} className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                         Cancelar
                     </Link>

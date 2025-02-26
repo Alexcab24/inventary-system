@@ -2,7 +2,7 @@ import { ProductWithRelations } from '@/interfaces'
 import Image from 'next/image'
 import React from 'react'
 import { UpdateButton } from '../Buttons'
-import { DeleteProductFunction } from '../users/function-buttons/DeleteProductFunction'
+import { DeleteProductFunction } from './function-buttons/DeleteProductFunction'
 
 interface Props {
     products: ProductWithRelations[]

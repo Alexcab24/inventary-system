@@ -35,7 +35,7 @@ export const updateSupplier = async (
             }
         })
 
-        revalidatePath('/dashboard/suppliers');
+        revalidatePath('/suppliers');
         return {
             ok: true,
             message: 'Proveedor actualizado exitosamente'

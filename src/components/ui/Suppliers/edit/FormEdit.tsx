@@ -52,7 +52,7 @@ const FormEdit = ({ userSession, supplierById }: Props) => {
 
         if (resp.ok) {
             successNotification(resp.message);
-            router.push('/dashboard/suppliers');
+            router.push('/suppliers');
             return;
         } else {
             // setErrorMessage(resp.message);

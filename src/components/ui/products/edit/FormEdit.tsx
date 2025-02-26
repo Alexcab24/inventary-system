@@ -246,7 +246,7 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
                         Cancelar
                     </Link>
                     <button type="submit" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                        Agregar Producto
+                        Actualizar producto
                     </button>
                 </div>
             </form>

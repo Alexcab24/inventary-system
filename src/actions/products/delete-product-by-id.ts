@@ -30,7 +30,7 @@ export const deleteProductById = async (id: string) => {
                 id
             }
         });
-        revalidatePath('/management/users');
+        revalidatePath('/inventory');
         return {
             ok: true,
             message: 'Producto eliminado con éxito'

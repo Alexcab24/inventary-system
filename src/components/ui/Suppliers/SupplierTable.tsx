@@ -1,5 +1,6 @@
 import { Supplier } from "@/interfaces/supplier.interface"
 import { UpdateButton } from "../Buttons"
+import DeleteSupplierFunction from "./function-buttons/DeleteSupplierFunction"
 
 
 interface Props {
@@ -110,12 +111,13 @@ export const SupplierTable = ({ suppliers }: Props) => {
                                         <span className="text-sm text-gray-500">{supplier.address}</span>
                                     </div>
                                 </td>
-                                <td className="size-px whitespace-nowrap">
-                                    <div className="px-6 py-1.5">
+                            <td className="size-px whitespace-nowrap">
+                                    <div className="flex gap-x-2 px-6 py-1.5">
                                         <UpdateButton
                                             url="/suppliers/"
                                             id={supplier.id}
                                         />
+                                        <DeleteSupplierFunction id={supplier.id} aria-label={`Eliminar suplidor ${supplier.name}`} />
 
 
                                     </div>

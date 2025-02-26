@@ -1,6 +1,6 @@
 import { Supplier } from "@/interfaces/supplier.interface"
 import { UpdateButton } from "../Buttons"
-import { DeleteProductFunction } from "../users/function-buttons/DeleteProductFunction"
+import { DeleteProductFunction } from "../products/function-buttons/DeleteProductFunction"
 import Image from "next/image"
 
 

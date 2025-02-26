@@ -32,12 +32,6 @@ const menuItems = [
 
     },
     {
-        icon: <HiOutlineDocumentReport />,
-        title: 'Historial de facturas',
-        path: '/management/invoice_history'
-
-    },
-    {
         icon: <TfiSettings />,
         title: 'Editar perfíl',
         path: '/management/profile'

@@ -31,23 +31,30 @@ export default async function DashboardPage() {
 const session = await auth();
 
   return (
-    <main>
-      <div>
-        <span className="text-3xl text-gray-700 font-semibold">Bienvenido/a, {session?.user.name}! </span>
+    <main className="p-6 space-y-6">
+    {/* Encabezado de bienvenida */}
+    <div className=" p-6 rounded-lg shadow-md">
+      <span className="text-4xl font-bold text-gray-800">
+        Bienvenido/a, {session?.user.name}! 👋
+      </span>
+    </div>
+  
+    {/* Sección de estadísticas */}
+    <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <Card title="Productos en el inventario" value={1234} icon={FaUsers} />
+      <Card title="Proveedores registrados" value={"1234"} icon={FaFileInvoiceDollar} />
+      <Card title="Productos con stock bajo" value={"1234"} icon={MdAttachMoney} />
+    </section>
+  
+    {/* Gráfico y Últimos productos */}
+    <section className="grid gap-6 md:grid-cols-2 w-full">
+      <div className="p-6 bg-white  rounded-lg ">
+        <Chart chartData={chartData} numberOfMonths={numberOfMonths} />
       </div>
-      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 p-4">
-        <Card title="productos en el inventario" value={1234} icon={FaUsers} />
-        <Card title="proveedores registrados" value={'1234'} icon={FaFileInvoiceDollar} />
-        <Card title="Productos con stock bajo" value={'1234'} icon={MdAttachMoney} />
-      </section>
-      <section className="grid gap-3 grid-cols-1 md:grid-cols-2 p-4 w-full">
-        <Chart
-          chartData={chartData}
-          numberOfMonths={numberOfMonths}
-        />
-
-        <LastedProducts />
-      </section>
-    </main>
+      
+      <LastedProducts />
+    </section>
+  </main>
+  
   );
 }

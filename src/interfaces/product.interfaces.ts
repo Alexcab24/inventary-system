@@ -5,7 +5,7 @@ export interface Product {
     description?: string | null;
     price: number;
     stock: number;
-    createdAt: Date;
+  
     supplierId?: string;
     categoryId?: string;
     companyId?: string;
@@ -13,6 +13,7 @@ export interface Product {
 
 export interface ProductWithRelations extends Product {
     id: string,
+    createdAt: Date;
     category: {
         id: string;
         name: string;

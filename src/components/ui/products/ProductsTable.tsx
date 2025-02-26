@@ -1,6 +1,6 @@
 import React from 'react'
 import { UpdateButton } from '../Buttons'
-import { DeleteProductFunction } from '../users/function-buttons/DeleteProductFunction'
+import { DeleteProductFunction } from './function-buttons/DeleteProductFunction'
 import { ProductWithRelations } from '@/interfaces'
 import Image from 'next/image'
 
@@ -136,7 +136,7 @@ export const ProductsTable = ({ products }: Props) => {
                                         url="/inventory/"
                                         aria-label={`Actualizar producto ${product.name}`}
                                     />
-                                    <DeleteProductFunction id={product.id} aria-label={`Eliminar usuario ${product.name}`} />
+                                    <DeleteProductFunction id={product.id} aria-label={`Eliminar producto ${product.name}`} />
 
                                 </div>
                             </td>

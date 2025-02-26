@@ -16,11 +16,10 @@ import {
 } from "../chart";
 import { FaChartBar } from "react-icons/fa";
 
-
 const chartConfig = {
     desktop: {
         label: "Products",
-        color: "hsl(var(--chart-2))",
+        color: "#4F46E5", 
     },
 } satisfies ChartConfig;
 
@@ -30,58 +29,65 @@ interface ChartComponentProps {
 }
 
 export default function Component({ chartData, numberOfMonths }: ChartComponentProps) {
-    const date = new Date()
+    const date = new Date();
     const year = date.getFullYear();
+    
     const footerDescription = numberOfMonths > 1 
-    ? `Mostrando el total de productos de los últimos ${numberOfMonths} meses, incluyendo este mes` 
-    : `Mostrando los productos de este mes`;
+        ? `Mostrando el total de productos de los últimos ${numberOfMonths} meses, incluyendo este mes.` 
+        : `Mostrando los productos de este mes.`;
+
+    const barSize = chartData.length <= 4 ? 60 : chartData.length <= 8 ? 40 : 30;
+    const chartWidth = Math.max(chartData.length * 80, 300); 
 
     return (
-        <Card>
+        <Card className="shadow-lg rounded-2xl bg-white dark:bg-zinc-900">
             <CardHeader>
                 <div className="flex items-center gap-x-4">
-                    <FaChartBar size={28} />
-                    <CardTitle>Productos Ingresados por Mes</CardTitle>
+                    <FaChartBar size={28} className="text-primary" />
+                    <CardTitle className="text-lg font-semibold">Productos Ingresados por Mes</CardTitle>
                 </div>
-
-                <CardDescription>{`Enero - Diciembre ${year}`}</CardDescription>
+                <CardDescription className="text-muted-foreground">
+                    Enero - Diciembre {year}
+                </CardDescription>
             </CardHeader>
-            <CardContent >
-                <ChartContainer className="" config={chartConfig}>
+            <CardContent className="pb-4">
+                <ChartContainer className="w-full min-w-[300px]" config={chartConfig}>
                     <BarChart
-                        accessibilityLayer
-                        data={chartData} 
-                        margin={{
-                            top: 20,
-                        }}
+                        width={chartWidth} 
+                        height={250}
+                        data={chartData}
+                        margin={{ top: 20, right: 20, left: -10, bottom: 5 }}
                     >
-                        <CartesianGrid vertical={false} />
+                        <CartesianGrid vertical={false} strokeOpacity={0.1} />
                         <XAxis
                             dataKey="month"
                             tickLine={false}
                             tickMargin={10}
                             axisLine={false}
                             tickFormatter={(value) => value.slice(0, 3)} 
+                            className="text-muted-foreground text-sm"
                         />
-                        <ChartTooltip
-                            cursor={false}
-                            content={<ChartTooltipContent hideLabel />}
-                        />
-                        <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8}>
+                        <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+                        <Bar 
+                            dataKey="desktop" 
+                            fill={chartConfig.desktop.color} 
+                            radius={[6, 6, 0, 0]} 
+                            barSize={barSize} 
+                            fillOpacity={0.85} 
+                        >
                             <LabelList
                                 position="top"
-                                offset={12}
-                                className="fill-foreground"
+                                offset={10}
+                                className="fill-foreground text-sm"
                                 fontSize={12}
+                                fill="currentColor"
                             />
                         </Bar>
                     </BarChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter className="flex-col items-start gap-2 text-sm">
-                <div className="leading-none text-muted-foreground">
-                    {footerDescription}
-                </div>
+            <CardFooter className="flex-col items-start gap-2 text-sm text-muted-foreground">
+                <div className="leading-none">{footerDescription}</div>
             </CardFooter>
         </Card>
     );

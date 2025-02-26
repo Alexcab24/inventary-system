@@ -14,7 +14,7 @@ export default function Card({
 }) {
 
   return (
-    <div className="flex flex-col w-full bg-white border shadow-sm rounded-xl">
+    <div className="flex flex-col w-full bg-white border shadow-md rounded-xl">
       <div className="p-4 md:p-5 flex gap-x-4">
         <div className="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg">
           <Icon size={26} />

@@ -10,6 +10,7 @@ import LastedProducts from "@/components/ui/dashboard/LastedProducts";
 
 export default async function DashboardPage() {
 
+
   const resp = await fetchProductsGroupedByMonth()
 
   if (!resp.ok || !resp.data) {
@@ -27,13 +28,13 @@ export default async function DashboardPage() {
   const numberOfMonths = chartData.length
 
 
-
+const session = await auth();
 
   return (
     <main>
-      {/* <div>
-        <span className="text-3xl text-gray-700 font-semibold">Bienvenido, {session?.user.name}! </span>
-      </div> */}
+      <div>
+        <span className="text-3xl text-gray-700 font-semibold">Bienvenido/a, {session?.user.name}! </span>
+      </div>
       <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 p-4">
         <Card title="productos en el inventario" value={1234} icon={FaUsers} />
         <Card title="proveedores registrados" value={'1234'} icon={FaFileInvoiceDollar} />

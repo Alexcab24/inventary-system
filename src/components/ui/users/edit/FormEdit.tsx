@@ -67,7 +67,7 @@ export const FormEdit = ({ userSession, userById }: Props) => {
     return (
         <>
 
-            <div className='bg-gray-50 rounded-xl shadow-sm overflow-hidden p-8 min-w-full'>
+            <div className='bg-white rounded-xl shadow-md border overflow-hidden p-8 min-w-full'>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
                     {/* Nombre */}
@@ -138,7 +138,7 @@ export const FormEdit = ({ userSession, userById }: Props) => {
                         <Link href={'/management/users'} className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                             Cancelar
                         </Link>
-                        <button type="submit" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                        <button type="submit" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-demoHover text-white hover:bg-demo transition-all duration-300 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
                             Actualizar usuario
                         </button>
                     </div>

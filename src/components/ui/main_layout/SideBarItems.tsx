@@ -1,29 +1,25 @@
 'use client';
-import Link from "next/link"
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-
-
 interface Props {
-    icon: React.ReactNode,
-    path: string,
-    title: string,
-
+    icon: React.ReactNode;
+    path: string;
+    title: string;
 }
 
 export const SideBarItems = ({ icon, title, path }: Props) => {
-
     const pathName = usePathname();
     
-    const baseClass = "transition-all duration-500 flex items-center gap-x-3.5 py-3 px-2.5 bg-white text-lg text-gray-800 rounded-lg hover:bg-gray-100";
-    const activeClass = pathName.startsWith(path) ? 'text-white bg-gradient-to-r from-sky-600 to-cyan-400' : '';
+    const baseClass = "transition-all duration-300 flex items-center gap-x-4 py-3 px-4 rounded-lg text-lg text-gray-800 hover:text-white hover:bg-gray-100 hover:bg-[#5dade2]";
+    const activeClass = pathName.startsWith(path) ? 'bg-[#2e86c1] text-white' : '';
     
     return (
         <li>
             <Link href={path} className={`${baseClass} ${activeClass}`}>
-                {icon}
+                <span className="flex-shrink-0">{icon}</span>
                 <span>{title}</span>
             </Link>
         </li>
     );
-}
+};

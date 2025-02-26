@@ -24,7 +24,7 @@ export default async function ManagementLayout({
   }
   return (
     <html lang="es">
-      <body className={inter.className}>
+      <body className={inter.className} style={{ backgroundColor: "#F8FAFC" }}>
         <SideBar />
         {/* Main Layout content - Contenido principal del Layout */}
         <div className="ml-auto  mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%] min-h-screen">
@@ -33,7 +33,7 @@ export default async function ManagementLayout({
 
 
           {/* TODO: Contenido en el Layout.tsx */}
-          <div className="px-6 pt-14 lg:pt-6 bg-white p-2 pb-5 m-2 rounded">
+          <div className="px-6 pt-14 lg:pt-6 p-2 pb-5 m-2 rounded">
 
             {children}
 

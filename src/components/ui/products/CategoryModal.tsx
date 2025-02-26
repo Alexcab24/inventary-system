@@ -63,7 +63,7 @@ export const CategoryModal = ({ onClose }: Props) => {
                         />
                         <button
                             type="submit"
-                            className="bg-blue-600 text-white hover:bg-blue-700 px-5 py-2 rounded-md shadow-lg transition duration-150 transform  hover:shadow-md focus:outline-none focus:ring-2"
+                            className="bg-demoHover text-white hover:bg-demo px-5 py-2 rounded-md shadow-lg transition duration-150 transform  hover:shadow-md focus:outline-none focus:ring-2"
                         >
                             <FiPlus size={25} />
                         </button>

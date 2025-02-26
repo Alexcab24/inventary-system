@@ -13,6 +13,7 @@ const config: Config = {
   		colors: {
   			'demo': '#5dade2',
   			'demoHover': '#2e86c1',
+			'demodemo': '#28759d',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

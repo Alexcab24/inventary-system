@@ -42,13 +42,13 @@ export default async function UserPage({
 
     return (
         <>
-            <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 p-4">
+            <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 py-4">
                 <Card title="Usuarios" value={totalNormalUsers} icon={MdCheckCircleOutline} />
                 <Card title="Administradores" value={totalAdmins} icon={MdPendingActions} />
                 <Card title="Total de usuarios" value={totalUsers} icon={AiOutlineUser} />
             </section>
 
-            <section className="my-8">
+            <section className="my-8 bg-white p-6 border shadow-sm rounded-xl">
                 <div className=" py-4 grid gap-3">
                     <div>
                         <h2 className="text-2xl font-semibold text-gray-800">

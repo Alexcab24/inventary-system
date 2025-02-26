@@ -19,7 +19,7 @@ import { FaChartBar } from "react-icons/fa";
 const chartConfig = {
     desktop: {
         label: "Products",
-        color: "#4F46E5", 
+        color: "#2e86c1", 
     },
 } satisfies ChartConfig;
 

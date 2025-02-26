@@ -35,13 +35,13 @@ export default async function productPage({
 
     return (
         <>
-            <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 p-4">
+            <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 py-4">
                 <Card title="Productos en Stock" value={ProductsWithStock} icon={MdInventory} />
                 <Card title="Productos sin Stock" value={ProductsWithoutStock} icon={MdRemoveShoppingCart} />
                 <Card title="Total de Productos" value={totalProducts} icon={AiOutlineAppstore} />
             </section>
 
-            <section className="my-8">
+            <section className="my-8 bg-white p-6 border shadow-sm rounded-xl">
                 <div className=" py-4 grid gap-3">
                     <div>
                         <h2 className="text-2xl font-semibold text-gray-800">

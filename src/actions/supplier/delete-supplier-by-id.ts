@@ -33,13 +33,13 @@ export const deleteSupplierById = async (id: string) => {
         revalidatePath('/supplier');
         return {
             ok: true,
-            message: 'Producto eliminado con éxito'
+            message: 'Supplidor eliminado con éxito'
         }
     } catch (error) {
         console.log(error);
         return {
             ok: false,
-            message: 'Error al intentar eliminar el producto'
+            message: 'Error al intentar eliminar el Supplidor'
         }
     }
 

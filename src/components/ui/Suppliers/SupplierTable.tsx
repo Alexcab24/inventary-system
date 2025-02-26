@@ -111,13 +111,14 @@ export const SupplierTable = ({ suppliers }: Props) => {
                                         <span className="text-sm text-gray-500">{supplier.address}</span>
                                     </div>
                                 </td>
-                            <td className="size-px whitespace-nowrap">
+                                <td className="size-px whitespace-nowrap">
                                     <div className="flex gap-x-2 px-6 py-1.5">
                                         <UpdateButton
                                             url="/suppliers/"
                                             id={supplier.id}
                                         />
-                                        <DeleteSupplierFunction id={supplier.id} aria-label={`Eliminar suplidor ${supplier.name}`} />
+                                        {/* lo implementamos cuando resolvamos el error de relaciones */}
+                                        {/* <DeleteSupplierFunction id={supplier.id} aria-label={`Eliminar suplidor ${supplier.name}`} /> */}
 
 
                                     </div>

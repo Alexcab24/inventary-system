@@ -7,7 +7,7 @@ export const PageNotFound = () => {
   {/* <!-- ========== HEADER ========== --> */}
   <header className="mb-auto flex justify-center z-50 w-full py-4">
     <nav className="px-4 sm:px-6 lg:px-8">
-      <h1 className="flex-none text-xl font-semibold sm:text-3xl" aria-label="MidasSystem">MidasSystem</h1>
+      <h1 className="flex-none text-xl font-semibold sm:text-3xl" aria-label="MidasSystem">InventorySystem</h1>
     </nav>
   </header>
   {/* <!-- ========== END HEADER ========== -->

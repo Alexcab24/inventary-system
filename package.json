@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -H subdomain.localhost",
-    "build": "npm run prisma:deploy && next build",
+    "build": "next build",
     "start": "next start -H subdomain.localhost",
     "lint": "next lint",
     "prisma:deploy": "npx prisma migrate deploy && prisma generate",

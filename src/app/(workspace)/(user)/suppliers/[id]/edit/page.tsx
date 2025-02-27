@@ -1,6 +1,8 @@
 import { getSupplierById } from "@/actions/supplier/get-supplier-by-id";
 import { auth } from "@/auth.config";
-import FormEdit from "../../../../../../components/ui/suppliers/edit/FormEdit";
+import FormEdit from "@/components/ui/suppliers/edit/FormEdit";
+
+
 import { CiEdit } from "react-icons/ci";
 
 
@@ -12,12 +14,7 @@ export default async function editSupplierPage({ params }: { params: { id: strin
     const supplierById = await getSupplierById(id);
     const session = await auth();
 
-    if(!supplierById) return;
-
-
-
-  
-
+    if (!supplierById) return;
 
 
     return (
@@ -35,8 +32,8 @@ export default async function editSupplierPage({ params }: { params: { id: strin
 
                 <div className=" my-4">
                     <FormEdit
-                    userSession={session?.user}
-                    supplierById={supplierById}
+                        userSession={session?.user}
+                        supplierById={supplierById}
                     />
 
                 </div>

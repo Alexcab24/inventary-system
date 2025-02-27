@@ -1,4 +1,3 @@
-import Image from "next/image"
 import { getSupplierByCompany } from "@/actions/supplier/get-supplier"
 import { Pagination } from "../orders/Pagination";
 import SupplierTable from "./SupplierTable";

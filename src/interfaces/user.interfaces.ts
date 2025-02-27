@@ -13,6 +13,7 @@ export interface User {
     role: string;
     companyId: string;
     image?: string | null;
+    disabled?: boolean;
 }
 
 

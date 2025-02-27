@@ -10,8 +10,8 @@ import { fetchUserByCompany } from "@/actions/users/get-user-by-company";
 import { Suspense } from "react";
 import { TableSkeleton } from "@/components/ui/users/Skeletons/TableSkeleton";
 import { CreateButton } from "@/components/ui/Buttons";
-import { DeleteUserById } from "@/actions/users/delete-user-by-id";
-import { UsersTable } from "@/components/ui/users/UsersTable";
+import UsersContainer from "@/components/ui/users/UsersContainer";
+
 
 
 
@@ -65,7 +65,8 @@ export default async function UserPage({
                     </div>
                 </div>
                 <Suspense key={query} fallback={<TableSkeleton />}>
-                    <UsersTable query={query} page={page} />
+                <UsersContainer query={query} page={page}/>
+                    {/* <UsersTable query={query} page={page} /> */}
                 </Suspense>
 
             </section>

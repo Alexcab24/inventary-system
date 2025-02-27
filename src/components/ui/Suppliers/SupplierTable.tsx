@@ -1,6 +1,6 @@
 import { Supplier } from "@/interfaces/supplier.interface"
 import { UpdateButton } from "../Buttons"
-import DeleteSupplierFunction from "./function-buttons/DeleteSupplierFunction"
+
 
 
 interface Props {
@@ -84,7 +84,7 @@ export const SupplierTable = ({ suppliers }: Props) => {
                                 </td>
                                 <td className="size-px whitespace-nowrap">
                                     <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
-                                        <span className="text-sm text-gray-500">{supplier.id.split('-').at(-1)}</span>
+                                        <span className="text-sm text-gray-500">{supplier.id?.split('-').at(-1)}</span>
                                     </div>
                                 </td>
                                 <td className="h-px w-72 whitespace-nowrap">
@@ -115,7 +115,7 @@ export const SupplierTable = ({ suppliers }: Props) => {
                                     <div className="flex gap-x-2 px-6 py-1.5">
                                         <UpdateButton
                                             url="/suppliers/"
-                                            id={supplier.id}
+                                            id={supplier.id || ''}
                                         />
                                         {/* lo implementamos cuando resolvamos el error de relaciones */}
                                         {/* <DeleteSupplierFunction id={supplier.id} aria-label={`Eliminar suplidor ${supplier.name}`} /> */}

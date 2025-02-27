@@ -4,16 +4,14 @@ import { Pagination } from '../orders/Pagination';
 import { DisabledFunctionButton } from './function-buttons/DisabledFunctionButton';
 import Image from 'next/image';
 import { UpdateButton } from '../Buttons';
+import { User } from '@/interfaces';
 
 interface Props {
-    query: string;
-    page?: number;
+  users: User[]
 }
 
-export const UsersTable = async ({ query, page }: Props) => {
-    const { users = [], totalPages = 1 } = await fetchPaginatedUsers({ query, page });
-
-    const totalUsers = users?.length || 0;
+export const UsersTable = async ({ users }: Props) => {
+ 
 
     return (
         <>
@@ -76,7 +74,7 @@ export const UsersTable = async ({ query, page }: Props) => {
                                                     <td className="size-px whitespace-nowrap">
                                                         <div className="ps-6 py-3">
                                                             <label className="flex">
-                                                                <span className={`block text-sm ${user.disabled ? 'text-gray-400' : 'text-gray-500'}`}>{user.id.split('-').at(-1)}</span>
+                                                                <span className={`block text-sm ${user.disabled ? 'text-gray-400' : 'text-gray-500'}`}>{user.id?.split('-').at(-1)}</span> 
                                                             </label>
                                                         </div>
                                                     </td>
@@ -114,12 +112,12 @@ export const UsersTable = async ({ query, page }: Props) => {
                                                     <td className="size-px whitespace-nowrap">
                                                         <div className="flex gap-x-2 px-6 py-1.5">
                                                             <UpdateButton
-                                                                id={user.id}
+                                                                id={user.id || ''}
                                                                 url='/management/users'
                                                                 aria-label={`Actualizar usuario ${user.name}`}
                                                             />
-                                                            <DisabledFunctionButton id={user.id} enabled={user.disabled} aria-label={user.disabled ? `Habilitar usuario ${user.name}` : `Deshabilitar usuario ${user.name}`} />
-                                                            <DeleteUserFunction id={user.id} aria-label={`Eliminar usuario ${user.name}`} />
+                                                            <DisabledFunctionButton id={user.id || ''} enabled={user.disabled || false} aria-label={user.disabled ? `Habilitar usuario ${user.name}` : `Deshabilitar usuario ${user.name}`} />
+                                                            <DeleteUserFunction id={user.id || ''} aria-label={`Eliminar usuario ${user.name}`} />
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -139,9 +137,9 @@ export const UsersTable = async ({ query, page }: Props) => {
                 </div>
             </div>
 
-            <div className="mt-5 flex w-full justify-center">
+            {/* <div className="mt-5 flex w-full justify-center">
                 <Pagination totalItems={totalUsers} totalPages={totalPages} />
-            </div>
+            </div> */}
         </>
     )
 }

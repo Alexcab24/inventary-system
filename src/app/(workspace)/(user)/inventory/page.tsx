@@ -25,7 +25,7 @@ export default async function productPage({
     const query = searchParams?.query || '';
     const page = searchParams?.page ? parseInt(searchParams?.page) : 1;
 
-    const { products } = await fetchProductByCompany()
+    const { products } = await fetchProductByCompany();
 
 
     const totalProducts = products?.length || 0;

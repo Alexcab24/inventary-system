@@ -35,7 +35,7 @@ export const SupplierCard = ({ suppliers }: Props) => {
 
                                 </div>
 
-                                <span className="text-gray-500 text-sm"> <span className='font-semibold'>ID:</span> {supplier.id.split('-').at(-1)}</span>
+                                <span className="text-gray-500 text-sm"> <span className='font-semibold'>ID:</span> {supplier.id?.split('-').at(-1)}</span>
                             </div>
                             <hr />
 
@@ -47,11 +47,11 @@ export const SupplierCard = ({ suppliers }: Props) => {
                                 </div>
                                 <div className="flex gap-2 py-2">
                                     <UpdateButton
-                                        id={supplier.id}
+                                        id={supplier.id || ''}
                                         url="/suppliers/"
                                         aria-label={`Actualizar suplidor ${supplier.name}`}
                                     />
-                                    <DeleteProductFunction id={supplier.id} aria-label={`Eliminar suplidor ${supplier.name}`} />
+                                    <DeleteProductFunction id={supplier.id || ''} aria-label={`Eliminar suplidor ${supplier.name}`} />
                                 </div>
                             </div>
 

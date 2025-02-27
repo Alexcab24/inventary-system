@@ -11,7 +11,7 @@ interface Props {
 export const SideBarItems = ({ icon, title, path }: Props) => {
     const pathName = usePathname();
     
-    const baseClass = "transition-all duration-300 flex items-center gap-x-4 py-3 px-4 rounded-lg text-lg text-gray-800 hover:text-white hover:bg-gray-100 hover:bg-[#5dade2]";
+    const baseClass = "transition-all duration-300 flex items-center gap-x-4 py-3 px-4 rounded-lg text-lg text-gray-800 hover:text-white  hover:bg-[#5dade2]";
     const activeClass = pathName.startsWith(path) ? 'bg-[#2e86c1] text-white' : '';
     
     return (

@@ -53,63 +53,63 @@ export const initialData: SeedData = {
             email: 'acabral2442@google.com',
             password: bcryptjs.hashSync('alex123'),
             role: 'admin',
-            companyId: 'subdomain'
+            companyId: 'testcompany'
         },
         {
             name: 'Vielka Ami',
             email: 'vielka@google.com',
             password: bcryptjs.hashSync('vielka123'),
             role: 'user',
-            companyId: 'subdomain'
+            companyId: 'testcompany'
         },
         {
             name: 'María Gómez',
             email: 'maria.gomez@google.com',
             password: bcryptjs.hashSync('maria456'),
             role: 'user',
-            companyId: 'subdomain'
+            companyId: 'testcompany'
         },
         {
             name: 'Juan Pérez',
             email: 'juan.perez@google.com',
             password: bcryptjs.hashSync('juan789'),
             role: 'user',
-            companyId: 'subdomain'
+            companyId: 'testcompany'
         },
         {
             name: 'Laura Sánchez',
             email: 'laura.sanchez@google.com',
             password: bcryptjs.hashSync('laura101'),
             role: 'admin',
-            companyId: 'subdomain'
+            companyId: 'testcompany'
         },
         {
             name: 'Carlos Medina',
             email: 'carlos.medina@google.com',
             password: bcryptjs.hashSync('carlos202'),
             role: 'user',
-            companyId: 'subdomain'
+            companyId: 'testcompany'
         },
         {
             name: 'Ana López',
             email: 'ana.lopez@google.com',
             password: bcryptjs.hashSync('ana303'),
             role: 'user',
-            companyId: 'subdomain'
+            companyId: 'testcompany'
         },
         {
             name: 'Pedro Martínez',
             email: 'pedro.martinez@google.com',
             password: bcryptjs.hashSync('pedro404'),
             role: 'user',
-            companyId: 'subdomain'
+            companyId: 'testcompany'
         },
         {
             name: 'Sofía Hernández',
             email: 'sofia.hernandez@google.com',
             password: bcryptjs.hashSync('sofia505'),
             role: 'user',
-            companyId: 'subdomain'
+            companyId: 'testcompany'
         },
         {
             name: 'Luis Fernández',
@@ -158,82 +158,27 @@ export const initialData: SeedData = {
             address: "Calle Principal #3",
             companyId: 'subdomain'
         },
+    ], category: [
+        { name: 'Tecnología', companyId: 'testcompany' },
+        { name: 'Cosméticos', companyId: 'testcompany' },
+        { name: 'Hogar', companyId: 'testcompany' },
+        { name: 'Deportes', companyId: 'testcompany' }
     ],
-    category: [
-        {
-            name: 'Tecnología',
-            companyId: 'subdomain'
-        },
-        {
-            name: 'Cosméticos',
-            companyId: 'subdomain'
-        }
-    ],
-    products: [
-        {
-            name: "Producto 1",
-            description: "Descripción del producto 1",
-            price: 10.99,
-            stock: 0,
-            createdAt: new Date("2025-02-17T16:45:30"),
-            // supplier: "Proveedor A",
-            companyId: 'subdomain'
-        },
-        {
-            name: "Producto 2",
-            description: "Descripción del producto 2",
-            price: 10.99,
-            stock: 100,
-            createdAt: new Date("2025-03-17T16:45:30"),
-            // supplierName: "Proveedor B",
-            companyId: 'subdomain'
-        },
-        {
-            name: "Producto 3",
-            description: "Descripción del producto 3",
-            price: 10.99,
-            stock: 100,
-            createdAt: new Date("2025-04-17T16:45:30"),
-            // supplierName: "Proveedor C",
-            companyId: 'subdomain'
-        },
-        {
-            name: "Producto41",
-            description: "Descripción del producto 1",
-            price: 10.99,
-            stock: 0,
-            createdAt: new Date("2025-01-17T16:45:30"),
-            // supplier: "Proveedor A",
-            companyId: 'subdomain'
-        },
-        {
-            name: "Producto 2",
-            description: "Descripción del producto 2",
-            price: 10.99,
-            stock: 100,
-            createdAt: new Date("2025-06-17T16:45:30"),
-            // supplierName: "Proveedor B",
-            companyId: 'subdomain'
-        },
-        {
-            name: "Producto 3",
-            description: "Descripción del producto 3",
-            price: 10.99,
-            stock: 100,
-            createdAt: new Date("2025-04-17T16:45:30"),
-            // supplierName: "Proveedor C",
-            companyId: 'subdomain'
-        },
 
+    products: [
+        { name: "Laptop", description: "Laptop de alta gama", price: 1200.99, stock: 5, createdAt: new Date(), companyId: 'testcompany' },
+        { name: "Perfume", description: "Perfume exclusivo", price: 75.50, stock: 20, createdAt: new Date(), companyId: 'testcompany' },
+        { name: "Sofá", description: "Sofá de cuero", price: 500.00, stock: 3, createdAt: new Date(), companyId: 'testcompany' },
+        { name: "Bicicleta", description: "Bicicleta de montaña", price: 300.00, stock: 10, createdAt: new Date(), companyId: 'testcompany' }
     ],
 
 
     companies: [
         {
-            id_tenant: 'subdomain',
-            name: 'Subdomain Company',
+            id_tenant: 'testcompany',
+            name: 'Test Company',
             phone: '8091231234',
-            email: 'subdomain@google.com',
+            email: 'testcompany@google.com',
             // createdAt: new Date()
         },
         {

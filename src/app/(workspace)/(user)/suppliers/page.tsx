@@ -1,5 +1,5 @@
 import { Search } from "@/components/ui/Search";
-import { SuppliersContainer  } from "@/components/ui/suppliers/SuppliersContainer";
+import { SuppliersContainer } from "@/components/ui/supplier/SuppliersContainer";
 import Card from "@/components/ui/dashboard/Cards";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { MdInventory, MdRemoveShoppingCart } from "react-icons/md";

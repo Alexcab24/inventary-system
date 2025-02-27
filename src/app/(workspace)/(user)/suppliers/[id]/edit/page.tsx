@@ -1,6 +1,6 @@
 import { getSupplierById } from "@/actions/supplier/get-supplier-by-id";
 import { auth } from "@/auth.config";
-import FormEdit from "@/components/ui/suppliers/edit/FormEdit";
+import FormEdit from "@/components/ui/supplier/edit/FormEdit";
 
 
 import { CiEdit } from "react-icons/ci";

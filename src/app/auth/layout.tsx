@@ -34,7 +34,7 @@ export default async function RootLayout({
     return (
         <html lang="es">
             <body className={inter.className}>
-                <main className="bg-gray-100 grid grid-cols-2 ">
+                <main className="bg-gray-100">
                     {children}
                 </main>
             </body>

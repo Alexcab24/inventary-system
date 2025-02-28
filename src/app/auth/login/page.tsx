@@ -18,7 +18,7 @@ export default function loginPage() {
             </div>
           </div>
         </section>
-      
+{/*       
         <section className="w-full flex justify-center items-center mt-8 sm:mt-0">
           <Image 
             src={'/images/authImage.svg'} 
@@ -27,7 +27,7 @@ export default function loginPage() {
             alt="Auth Image" 
             className="max-w-full sm:max-w-xs" 
           />
-        </section>
+        </section> */}
       </>
       
     )

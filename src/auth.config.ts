@@ -26,19 +26,24 @@ export const authConfig: NextAuthConfig = {
       return session;
     },
     async redirect({ url, baseUrl }) {
-      // Extraer el subdominio de la baseUrl
-      const urlParts = baseUrl.split('.'); // Divide la URL por los puntos
-      const subdomain = urlParts.length > 2 ? urlParts[0] : ''; // Asegurarse de que haya subdominio
+      // Obtener el subdominio de baseUrl (por ejemplo, 'testcompany')
+      const urlParts = baseUrl.split('.'); // Divide la URL en partes
+      const subdomain = urlParts.length > 2 ? urlParts[0] : ''; // Obtener el subdominio (si existe)
   
-      // Verificar si la URL está vacía y ajustarla correctamente
-      const correctBaseUrl = baseUrl.replace('https://', `https://${subdomain}.`);
-  
-      // Si no hay URL de redirección (url es vacía), redirigir a la base URL con el subdominio
-      if (!url) {
-        return `${correctBaseUrl}${url || '/'}`;
+      // Si no hay subdominio, no agregar nada a la URL base
+      if (!subdomain) {
+        return url || baseUrl;  // Si no hay subdominio, solo devolver la URL
       }
   
-      // Si hay una URL de redirección, asegúrate de que esté correctamente concatenada con el subdominio
+      // Si hay subdominio, agregarlo a la baseUrl
+      const correctBaseUrl = `https://${subdomain}.${urlParts.slice(1).join('.')}`;
+  
+      // Si no hay URL de redirección, redirigir a la base URL con el subdominio
+      if (!url) {
+        return correctBaseUrl; // Solo devolver la URL base corregida
+      }
+  
+      // Si hay una URL de redirección, agregar el subdominio correctamente
       return `${correctBaseUrl}${url}`;
     },
   },

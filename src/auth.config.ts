@@ -6,6 +6,7 @@ import { z } from 'zod';
 import prisma from './lib/prisma';
 import { getSubdomain } from './lib/subdomain';
 
+
 export const authConfig: NextAuthConfig = {
   pages: {
     signIn: '/auth/login',
@@ -14,35 +15,29 @@ export const authConfig: NextAuthConfig = {
 
   trustHost: true,
   callbacks: {
+
+
     jwt({ token, user }) {
       if (user) {
         token.data = user;
       }
+
       return token;
     },
 
-    session({ session, token }) {
+    session({ session, token, user }) {
       session.user = token.data as any;
       return session;
     },
 
-    // Agregar callback de redirección
-    async redirect({ url, baseUrl }) {
-      // Extraer el subdominio del baseUrl
-      const urlParts = baseUrl.split('.');
-      const subdomain = urlParts.length > 2 ? urlParts[0] : '';
 
-      // Si no hay redirección, solo devolver la baseUrl con el subdominio
-      if (!url) {
-        return `${baseUrl.replace('https://', `https://${subdomain}.`)}${url || '/'}`;
-      }
 
-      // Si ya hay una URL de redirección, asegurarse de que mantenga el subdominio
-      return `${baseUrl.replace('https://', `https://${subdomain}.`)}${url}`;
-    }
   },
 
+
+
   providers: [
+
     Credentials({
       async authorize(credentials, req) {
         const parsedCredentials = z
@@ -53,11 +48,10 @@ export const authConfig: NextAuthConfig = {
 
         const { email, password } = parsedCredentials.data;
 
-        const subdomain = getSubdomain(req);  // Aquí extraes el subdominio de la solicitud
+        const subdomain = getSubdomain(req);
 
         const user = await prisma.user.findUnique({ where: { email: email.toLocaleLowerCase() } });
         if (!user) return null;
-        
         // Comprobación del tenant
         const company = await prisma.company.findUnique({ where: { id_tenant: user.companyId } });
         if (!company || company.id_tenant !== subdomain) {
@@ -69,7 +63,9 @@ export const authConfig: NextAuthConfig = {
           return null;
         }
 
+
         if (!bcryptjs.compareSync(password, user.password)) return null;
+
 
         const { password: _, ...rest } = user;
 
@@ -79,7 +75,12 @@ export const authConfig: NextAuthConfig = {
         };
       },
     }),
-  ],
+
+
+
+  ]
 }
+
+
 
 export const { signIn, signOut, auth, handlers } = NextAuth(authConfig);

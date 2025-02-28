@@ -25,21 +25,22 @@ export const authConfig: NextAuthConfig = {
       session.user = token.data as any;
       return session;
     },
-
-    // Agregar callback de redirección
     async redirect({ url, baseUrl }) {
-      // Extraer el subdominio del baseUrl
-      const urlParts = baseUrl.split('.');
-      const subdomain = urlParts.length > 2 ? urlParts[0] : '';
-
-      // Si no hay redirección, solo devolver la baseUrl con el subdominio
+      // Extraer el subdominio de la baseUrl
+      const urlParts = baseUrl.split('.'); // Divide la URL por los puntos
+      const subdomain = urlParts.length > 2 ? urlParts[0] : ''; // Asegurarse de que haya subdominio
+  
+      // Verificar si la URL está vacía y ajustarla correctamente
+      const correctBaseUrl = baseUrl.replace('https://', `https://${subdomain}.`);
+  
+      // Si no hay URL de redirección (url es vacía), redirigir a la base URL con el subdominio
       if (!url) {
-        return `${baseUrl.replace('https://', `https://${subdomain}.`)}${url || '/'}`;
+        return `${correctBaseUrl}${url || '/'}`;
       }
-
-      // Si ya hay una URL de redirección, asegurarse de que mantenga el subdominio
-      return `${baseUrl.replace('https://', `https://${subdomain}.`)}${url}`;
-    }
+  
+      // Si hay una URL de redirección, asegúrate de que esté correctamente concatenada con el subdominio
+      return `${correctBaseUrl}${url}`;
+    },
   },
 
   providers: [

@@ -27,10 +27,11 @@ export const authConfig: NextAuthConfig = {
     },
 
     // Agregar callback de redirección
-    async redirect({ url, baseUrl, req }) {
-      // Obtener el subdominio
-      const subdomain = getSubdomain(req);
-      
+    async redirect({ url, baseUrl }) {
+      // Extraer el subdominio del baseUrl
+      const urlParts = baseUrl.split('.');
+      const subdomain = urlParts.length > 2 ? urlParts[0] : '';
+
       // Si no hay redirección, solo devolver la baseUrl con el subdominio
       if (!url) {
         return `${baseUrl.replace('https://', `https://${subdomain}.`)}${url || '/'}`;
@@ -52,7 +53,7 @@ export const authConfig: NextAuthConfig = {
 
         const { email, password } = parsedCredentials.data;
 
-        const subdomain = getSubdomain(req);
+        const subdomain = getSubdomain(req);  // Aquí extraes el subdominio de la solicitud
 
         const user = await prisma.user.findUnique({ where: { email: email.toLocaleLowerCase() } });
         if (!user) return null;

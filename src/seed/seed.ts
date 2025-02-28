@@ -48,117 +48,28 @@ interface SeedData {
 
 export const initialData: SeedData = {
     users: [
-        {
-            name: 'Alex Cabral',
-            email: 'acabral2442@google.com',
-            password: bcryptjs.hashSync('alex123'),
-            role: 'admin',
-            companyId: 'testcompany'
-        },
-        {
-            name: 'Vielka Ami',
-            email: 'vielka@google.com',
-            password: bcryptjs.hashSync('vielka123'),
-            role: 'user',
-            companyId: 'testcompany'
-        },
-        {
-            name: 'María Gómez',
-            email: 'maria.gomez@google.com',
-            password: bcryptjs.hashSync('maria456'),
-            role: 'user',
-            companyId: 'testcompany'
-        },
-        {
-            name: 'Juan Pérez',
-            email: 'juan.perez@google.com',
-            password: bcryptjs.hashSync('juan789'),
-            role: 'user',
-            companyId: 'testcompany'
-        },
-        {
-            name: 'Laura Sánchez',
-            email: 'laura.sanchez@google.com',
-            password: bcryptjs.hashSync('laura101'),
-            role: 'admin',
-            companyId: 'testcompany'
-        },
-        {
-            name: 'Carlos Medina',
-            email: 'carlos.medina@google.com',
-            password: bcryptjs.hashSync('carlos202'),
-            role: 'user',
-            companyId: 'testcompany'
-        },
-        {
-            name: 'Ana López',
-            email: 'ana.lopez@google.com',
-            password: bcryptjs.hashSync('ana303'),
-            role: 'user',
-            companyId: 'testcompany'
-        },
-        {
-            name: 'Pedro Martínez',
-            email: 'pedro.martinez@google.com',
-            password: bcryptjs.hashSync('pedro404'),
-            role: 'user',
-            companyId: 'testcompany'
-        },
-        {
-            name: 'Sofía Hernández',
-            email: 'sofia.hernandez@google.com',
-            password: bcryptjs.hashSync('sofia505'),
-            role: 'user',
-            companyId: 'testcompany'
-        },
-        {
-            name: 'Luis Fernández',
-            email: 'luis.fernandez@google.com',
-            password: bcryptjs.hashSync('luis606'),
-            role: 'user',
-            companyId: 'subdomain'
-        },
-        {
-            name: 'Elena Torres',
-            email: 'elena.torres@google.com',
-            password: bcryptjs.hashSync('elena707'),
-            role: 'admin',
-            companyId: 'subdomain'
-        },
-        {
-            name: 'Eduardo Cabral',
-            email: 'eduardo@google.com',
-            password: bcryptjs.hashSync('123456'),
-            role: 'admin',
-            companyId: 'proyectomidas'
-        }
+        // Usuarios para Subdomain Company
+        { name: 'Alex Cabral', email: 'acabral2442@google.com', password: bcryptjs.hashSync('alex123'), role: 'admin', companyId: 'testcompany' },
+        { name: 'Vielka Ami', email: 'vielka@google.com', password: bcryptjs.hashSync('vielka123'), role: 'user', companyId: 'testcompany' },
+        { name: 'Eduardo Cabral', email: 'eduardo@google.com', password: bcryptjs.hashSync('123456'), role: 'admin', companyId: 'subdomain' },
+        
+        // Usuarios para nuevas compañías
+        { name: 'Javier Nuñez', email: 'javier@empresa1.com', password: bcryptjs.hashSync('empresa1123'), role: 'admin', companyId: 'testcompany' },
+        { name: 'Mariana López', email: 'mariana@empresa1.com', password: bcryptjs.hashSync('empresa1456'), role: 'user', companyId: 'testcompany' },
+        { name: 'Roberto Díaz', email: 'roberto@empresa2.com', password: bcryptjs.hashSync('empresa2123'), role: 'admin', companyId: 'testcompany' },
+        { name: 'Andrea Pérez', email: 'andrea@empresa2.com', password: bcryptjs.hashSync('empresa2456'), role: 'user', companyId: 'testcompany' },
+        { name: 'Carlos Suárez', email: 'carlos@empresa3.com', password: bcryptjs.hashSync('empresa3123'), role: 'admin', companyId: 'testcompany' },
+        { name: 'Lucía González', email: 'lucia@empresa3.com', password: bcryptjs.hashSync('empresa3456'), role: 'user', companyId: 'testcompany' }
     ],
 
-
     suppliers: [
-        {
-            name: "Proveedor A",
-            email: "proveedora@google.com",
-            phone: "8091234567",
-            address: "Calle Principal #1",
+        { name: "Proveedor A", email: "proveedora@google.com", phone: "8091234567", address: "Calle Principal #1", companyId: 'testcompany' },
+        { name: "Proveedor B", email: "proveedorb@google.com", phone: "8091234567", address: "Calle Principal #2", companyId: 'testcompany' },
+        { name: "Proveedor C", email: "proveedorc@google.com", phone: "8091234567", address: "Calle Principal #3", companyId: 'testcompany' },
+        { name: "Proveedor D", email: "proveedord@google.com", phone: "8091234567", address: "Calle Principal #4", companyId: 'testcompany' }
+    ],
 
-            companyId: 'subdomain'
-        },
-        {
-            name: "Proveedor B",
-            email: "proveedorb@google.com",
-            phone: "8091234567",
-            address: "Calle Principal #2",
-            companyId: 'subdomain'
-        },
-        {
-            name: "Proveedor C",
-            email: "proveedorc@google.com",
-            phone: "8091234567",
-            address: "Calle Principal #3",
-            companyId: 'subdomain'
-        },
-    ], category: [
+    category: [
         { name: 'Tecnología', companyId: 'testcompany' },
         { name: 'Cosméticos', companyId: 'testcompany' },
         { name: 'Hogar', companyId: 'testcompany' },
@@ -172,23 +83,13 @@ export const initialData: SeedData = {
         { name: "Bicicleta", description: "Bicicleta de montaña", price: 300.00, stock: 10, createdAt: new Date(), companyId: 'testcompany' }
     ],
 
-
     companies: [
-        {
-            id_tenant: 'testcompany',
-            name: 'Test Company',
-            phone: '8091231234',
-            email: 'testcompany@google.com',
-            // createdAt: new Date()
-        },
-        {
-            id_tenant: 'proyectomidas',
-            name: 'Proyecto Midas',
-            phone: '8091231234',
-            email: 'proyectomidas@google.com',
-            // createdAt: new Date()
-        }
+        { id_tenant: 'testcompany', name: 'Subdomain Company', phone: '8091231234', email: 'subdomain@google.com' },
+        { id_tenant: 'subdomain', name: 'Empresa Uno', phone: '8095551111', email: 'contacto@empresa1.com' },
+        { id_tenant: 'empresa2', name: 'Empresa Dos', phone: '8095552222', email: 'contacto@empresa2.com' },
+        { id_tenant: 'empresa3', name: 'Empresa Tres', phone: '8095553333', email: 'contacto@empresa3.com' }
     ]
+    
 
 
 }

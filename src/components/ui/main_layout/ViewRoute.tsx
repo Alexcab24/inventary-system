@@ -7,11 +7,11 @@ export const ViewRoute = () => {
     const pathName = usePathname() || '';
     const pathSegments = pathName.split('/').filter(Boolean);
 
-    // Expresión regular para detectar UUIDs
+    // Regular expression to detect UUIDs
     const isUUID = (str: string) =>
         /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
 
-    // Filtramos los segmentos que sean UUIDs
+    // Filter out UUID segments
     const filteredSegments = pathSegments.filter(segment => !isUUID(segment));
 
     const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
@@ -33,7 +33,7 @@ export const ViewRoute = () => {
             <ol className="flex items-center space-x-2 text-sm md:text-base text-gray-600 dark:text-gray-300 px-4 py-2">
                 <li>
                     <Link href="/" className="hover:text-gray-800 dark:hover:text-white transition-colors">
-                        Inicio
+                        Home
                     </Link>
                 </li>
                 {filteredSegments.map((segment, index) => {

@@ -19,7 +19,7 @@ import { FaChartBar } from "react-icons/fa";
 const chartConfig = {
     desktop: {
         label: "Products",
-        color: "#2e86c1", 
+        color: "#2e86c1",
     },
 } satisfies ChartConfig;
 
@@ -31,29 +31,29 @@ interface ChartComponentProps {
 export default function Component({ chartData, numberOfMonths }: ChartComponentProps) {
     const date = new Date();
     const year = date.getFullYear();
-    
-    const footerDescription = numberOfMonths > 1 
-        ? `Mostrando el total de productos de los últimos ${numberOfMonths} meses, incluyendo este mes.` 
-        : `Mostrando los productos de este mes.`;
+
+    const footerDescription = numberOfMonths > 1
+        ? `Showing total products for the last ${numberOfMonths} months, including this month.`
+        : `Showing products for this month.`;
 
     const barSize = chartData.length <= 4 ? 60 : chartData.length <= 8 ? 40 : 30;
-    const chartWidth = Math.max(chartData.length * 80, 300); 
+    const chartWidth = Math.max(chartData.length * 80, 300);
 
     return (
         <Card className="shadow-lg rounded-2xl bg-white dark:bg-zinc-900">
             <CardHeader>
                 <div className="flex items-center gap-x-4">
                     <FaChartBar size={28} className="text-primary" />
-                    <CardTitle className="text-lg font-semibold">Productos Ingresados por Mes</CardTitle>
+                    <CardTitle className="text-lg font-semibold">Products Added by Month</CardTitle>
                 </div>
                 <CardDescription className="text-muted-foreground">
-                    Enero - Diciembre {year}
+                    January - December {year}
                 </CardDescription>
             </CardHeader>
             <CardContent className="pb-4">
                 <ChartContainer className="w-full min-w-[300px]" config={chartConfig}>
                     <BarChart
-                        width={chartWidth} 
+                        width={chartWidth}
                         height={250}
                         data={chartData}
                         margin={{ top: 20, right: 20, left: -10, bottom: 5 }}
@@ -64,16 +64,16 @@ export default function Component({ chartData, numberOfMonths }: ChartComponentP
                             tickLine={false}
                             tickMargin={10}
                             axisLine={false}
-                            tickFormatter={(value) => value.slice(0, 3)} 
+                            tickFormatter={(value) => value.slice(0, 3)}
                             className="text-muted-foreground text-sm"
                         />
                         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-                        <Bar 
-                            dataKey="desktop" 
-                            fill={chartConfig.desktop.color} 
-                            radius={[6, 6, 0, 0]} 
-                            barSize={barSize} 
-                            fillOpacity={0.85} 
+                        <Bar
+                            dataKey="desktop"
+                            fill={chartConfig.desktop.color}
+                            radius={[6, 6, 0, 0]}
+                            barSize={barSize}
+                            fillOpacity={0.85}
                         >
                             <LabelList
                                 position="top"

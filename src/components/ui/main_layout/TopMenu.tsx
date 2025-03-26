@@ -27,13 +27,13 @@ export const TopMenu = ({ user }: Props) => {
       <header className="absolute top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 lg:ps-[260px]">
         <nav className="px-4 sm:px-6 flex basis-full items-center w-full mx-auto">
           <div className="me-5 lg:me-0 lg:hidden">
-            
-            <a className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80" href="#" aria-label="Preline">
-                            <span>InventarySystem</span>
-                        </a>
+
+            <a className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80" href="#" aria-label="InventorySystem">
+              <span>InventorySystem</span>
+            </a>
 
           </div>
-     
+
 
           <div className="w-full flex items-center justify-end ms-auto lg:justify-between gap-x-1 md:gap-x-3">
 
@@ -65,7 +65,7 @@ export const TopMenu = ({ user }: Props) => {
 
                 <div className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 d  after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">
                   <div className="py-3 px-5 bg-gray-100 rounded-t-lg ">
-                    <p className="text-sm text-gray-500 ">Iniciado como</p>
+                    <p className="text-sm text-gray-500 ">Signed in as</p>
                     <p className="text-sm font-medium text-gray-800 ">{user.name} <span className='text-gray-400 font-normal'>- {user.role}</span></p>
                   </div>
                   <div className="p-1.5 space-y-0.5">
@@ -74,11 +74,11 @@ export const TopMenu = ({ user }: Props) => {
                         <>
                           <Link href={'/management/company'} className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 ">
                             <PiBuilding size={20} />
-                            Empresa
+                            Company
                           </Link>
                           <Link href={'/management/users'} className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 ">
                             <AiOutlineUser size={20} />
-                            Usuarios
+                            Users
                           </Link>
                         </>
 
@@ -87,7 +87,7 @@ export const TopMenu = ({ user }: Props) => {
                     }
                     <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 " href="#">
                       <TfiSettings size={20} />
-                      Editar perfíl
+                      Edit Profile
                     </a>
                     <div>
                       <hr className='border border-gray-100  mx-2 my-3' />
@@ -95,7 +95,7 @@ export const TopMenu = ({ user }: Props) => {
 
                     <button onClick={() => logout()} className="flex items-center w-full gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100">
                       <IoExitOutline size={20} />
-                      Cerrar sesión
+                      Sign Out
                     </button>
                   </div>
                 </div>

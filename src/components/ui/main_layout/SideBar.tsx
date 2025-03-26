@@ -19,19 +19,19 @@ const menuItems = [
     },
     {
         icon: <AiFillProduct />,
-        title: 'Inventario',
+        title: 'Inventory',
         path: '/inventory'
 
     },
     {
         icon: <FaTruck />,
-        title: 'Proveedores',
+        title: 'Suppliers',
         path: '/suppliers'
 
     },
     {
         icon: <FaReceipt />,
-        title: 'Reportes',
+        title: 'Reports',
         path: '/reports'
 
     },
@@ -84,9 +84,9 @@ export const SideBar = () => {
                         <a
                             className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
                             href="#"
-                            aria-label="InventarySystem"
+                            aria-label="InventorySystem"
                         >
-                            <span>InventarySystem</span>
+                            <span>InventorySystem</span>
                         </a>
                     </div>
 

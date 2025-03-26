@@ -49,16 +49,16 @@ const ProductCard = ({ products }: Props) => {
                                     <UpdateButton
                                         id={product.id}
                                         url="/inventory/"
-                                        aria-label={`Actualizar producto ${product.name}`}
+                                        aria-label={`Update product ${product.name}`}
                                     />
-                                    <DeleteProductFunction id={product.id} aria-label={`Eliminar usuario ${product.name}`} />
+                                    <DeleteProductFunction id={product.id} aria-label={`Delete product ${product.name}`} />
                                 </div>
                             </div>
 
                         </div>
                     ))
                 ) : (
-                    <span className="block text-sm text-gray-500">No se encontraron usuarios que coincidan con la búsqueda.</span>
+                    <span className="block text-sm text-gray-500">No products found matching the search.</span>
                 )
             }
         </>

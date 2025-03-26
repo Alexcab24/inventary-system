@@ -43,7 +43,7 @@ export const DeleteUserFunction = ({ id }: { id: string }) => {
                 isOpen={isModalOpen}
                 onConfirm={deleteUser}
                 onCancel={closeModal}
-                message="¿Seguro que desea eliminar este usuario?"
+                message="Are you sure you want to delete this user?"
             />
 
         </>

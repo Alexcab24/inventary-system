@@ -11,10 +11,10 @@ export const LastedProducts = async () => {
             <CardHeader>
                 <div className="flex items-center gap-x-4">
                     <FaList size={28} className="text-primary" />
-                    <CardTitle className="text-lg font-semibold">Últimos productos agregados</CardTitle>
+                    <CardTitle className="text-lg font-semibold">Latest Added Products</CardTitle>
                 </div>
                 <CardDescription className="text-muted-foreground">
-                    Últimos 6 productos agregados recientemente
+                    Last 6 products added recently
                 </CardDescription>
             </CardHeader>
 
@@ -26,12 +26,12 @@ export const LastedProducts = async () => {
                                 <td className="py-3 px-4">
                                     <div className="flex items-center gap-x-3">
                                         <div className="w-12 h-12 rounded-full overflow-hidden">
-                                            <Image 
-                                                className="object-cover w-full h-full" 
-                                                src="https://plus.unsplash.com/premium_photo-1719289799376-d3de0ca4ddbc?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                                                width={48} 
-                                                height={48} 
-                                                alt="Avatar" 
+                                            <Image
+                                                className="object-cover w-full h-full"
+                                                src="https://plus.unsplash.com/premium_photo-1719289799376-d3de0ca4ddbc?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                                width={48}
+                                                height={48}
+                                                alt="Product Image"
                                             />
                                         </div>
                                         <div className="grow">

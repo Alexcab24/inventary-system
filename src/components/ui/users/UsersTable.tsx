@@ -7,16 +7,13 @@ import { UpdateButton } from '../Buttons';
 import { User } from '@/interfaces';
 
 interface Props {
-  users: User[]
+    users: User[]
 }
 
 export const UsersTable = async ({ users }: Props) => {
- 
-
     return (
         <>
             <div className="w-full mx-auto">
-                {/* <!-- Card --> */}
                 <div className="flex flex-col">
                     <div className="-m-1.5 overflow-x-auto">
                         <div className="p-1.5 min-w-full inline-block align-middle">
@@ -32,35 +29,28 @@ export const UsersTable = async ({ users }: Props) => {
                                             <th scope="col" className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3 text-start">
                                                 <div className="flex items-center gap-x-2">
                                                     <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                                                        Usuario
+                                                        User
                                                     </span>
                                                 </div>
                                             </th>
                                             <th scope="col" className="px-6 py-3 text-start">
                                                 <div className="flex items-center gap-x-2">
                                                     <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                                                        Correo electrónico
+                                                        Email
                                                     </span>
                                                 </div>
                                             </th>
                                             <th scope="col" className="px-6 py-3 text-start">
                                                 <div className="flex items-center gap-x-2">
                                                     <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                                                        Rol
+                                                        Role
                                                     </span>
                                                 </div>
                                             </th>
-                                            {/* <th scope="col" className="px-6 py-3 text-start">
-                                                <div className="flex items-center gap-x-2">
-                                                    <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                                                        Activo
-                                                    </span>
-                                                </div>
-                                            </th> */}
                                             <th scope="col" className="px-6 py-3 text-start">
                                                 <div className="flex items-center gap-x-2">
                                                     <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                                                        Opciones
+                                                        Options
                                                     </span>
                                                 </div>
                                             </th>
@@ -74,7 +64,7 @@ export const UsersTable = async ({ users }: Props) => {
                                                     <td className="size-px whitespace-nowrap">
                                                         <div className="ps-6 py-3">
                                                             <label className="flex">
-                                                                <span className={`block text-sm ${user.disabled ? 'text-gray-400' : 'text-gray-500'}`}>{user.id?.split('-').at(-1)}</span> 
+                                                                <span className={`block text-sm ${user.disabled ? 'text-gray-400' : 'text-gray-500'}`}>{user.id?.split('-').at(-1)}</span>
                                                             </label>
                                                         </div>
                                                     </td>
@@ -84,7 +74,7 @@ export const UsersTable = async ({ users }: Props) => {
                                                                 <Image
                                                                     className={`inline-block size-[38px] rounded-full ${user.disabled ? 'opacity-50' : ''}`}
                                                                     src="https://images.unsplash.com/photo-1670272505340-d906d8d77d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
-                                                                    alt={`Avatar de ${user.name}`}
+                                                                    alt={`Avatar of ${user.name}`}
                                                                     width={50}
                                                                     height={50}
                                                                 />
@@ -104,20 +94,15 @@ export const UsersTable = async ({ users }: Props) => {
                                                             <span className={`block text-sm ${user.disabled ? 'text-gray-400' : 'text-gray-500'}`}>{user.role}</span>
                                                         </div>
                                                     </td>
-                                                    {/* <td className="size-px whitespace-nowrap">
-                                                        <div className="px-6 py-3">
-                                                            <span className={`block text-sm ${user.disabled ? 'text-gray-400' : 'text-gray-500'}`}>En línea</span>
-                                                        </div>
-                                                    </td> */}
                                                     <td className="size-px whitespace-nowrap">
                                                         <div className="flex gap-x-2 px-6 py-1.5">
                                                             <UpdateButton
                                                                 id={user.id || ''}
                                                                 url='/management/users'
-                                                                aria-label={`Actualizar usuario ${user.name}`}
+                                                                aria-label={`Update user ${user.name}`}
                                                             />
-                                                            <DisabledFunctionButton id={user.id || ''} enabled={user.disabled || false} aria-label={user.disabled ? `Habilitar usuario ${user.name}` : `Deshabilitar usuario ${user.name}`} />
-                                                            <DeleteUserFunction id={user.id || ''} aria-label={`Eliminar usuario ${user.name}`} />
+                                                            <DisabledFunctionButton id={user.id || ''} enabled={user.disabled || false} aria-label={user.disabled ? `Enable user ${user.name}` : `Disable user ${user.name}`} />
+                                                            <DeleteUserFunction id={user.id || ''} aria-label={`Delete user ${user.name}`} />
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -125,7 +110,7 @@ export const UsersTable = async ({ users }: Props) => {
                                         ) : (
                                             <tr>
                                                 <td className="text-center py-4" colSpan={6}>
-                                                    <span className="block text-sm text-gray-500">No se encontraron usuarios que coincidan con la búsqueda.</span>
+                                                    <span className="block text-sm text-gray-500">No users found matching the search.</span>
                                                 </td>
                                             </tr>
                                         )}
@@ -136,10 +121,6 @@ export const UsersTable = async ({ users }: Props) => {
                     </div>
                 </div>
             </div>
-
-            {/* <div className="mt-5 flex w-full justify-center">
-                <Pagination totalItems={totalUsers} totalPages={totalPages} />
-            </div> */}
         </>
     )
 }

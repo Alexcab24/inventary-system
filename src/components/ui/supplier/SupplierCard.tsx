@@ -43,22 +43,22 @@ export const SupplierCard = ({ suppliers }: Props) => {
 
                                 <div className="">
                                     <span className="text-gray-500 text-xs"> <span className='font-semibold'>Email:</span> {supplier.email}</span>
-                                    <p className="text-gray-500 text-xs"><span className='font-semibold'>Teléfono: </span> {supplier.phone}</p>
+                                    <p className="text-gray-500 text-xs"><span className='font-semibold'>Phone: </span> {supplier.phone}</p>
                                 </div>
                                 <div className="flex gap-2 py-2">
                                     <UpdateButton
                                         id={supplier.id || ''}
                                         url="/suppliers/"
-                                        aria-label={`Actualizar suplidor ${supplier.name}`}
+                                        aria-label={`Update supplier ${supplier.name}`}
                                     />
-                                    <DeleteProductFunction id={supplier.id || ''} aria-label={`Eliminar suplidor ${supplier.name}`} />
+                                    <DeleteProductFunction id={supplier.id || ''} aria-label={`Delete supplier ${supplier.name}`} />
                                 </div>
                             </div>
 
                         </div>
                     ))
                 ) : (
-                    <span className="block text-sm text-gray-500">No se encontraron suplidores que coincidan con la búsqueda.</span>
+                    <span className="block text-sm text-gray-500">No suppliers found matching the search.</span>
                 )
             }
         </>

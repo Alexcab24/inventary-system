@@ -21,19 +21,19 @@ const menuItems = [
     },
     {
         icon: <PiBuilding />,
-        title: 'Empresa',
+        title: 'Company',
         path: '/management/company'
 
     },
     {
         icon: <AiOutlineUser />,
-        title: 'Usuarios',
+        title: 'Users',
         path: '/management/users'
 
     },
     {
         icon: <TfiSettings />,
-        title: 'Editar perfíl',
+        title: 'Edit Profile',
         path: '/management/profile'
 
     },
@@ -72,7 +72,7 @@ export const SideBar = () => {
                 <div className="relative flex flex-col h-full max-h-full">
                     <div className="px-6 pt-4">
 
-                        <Link className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80" href="/dashboard" aria-label="Preline">
+                        <Link className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80" href="/dashboard" aria-label="InventorySystem">
                             <span>InventorySystem</span>
                         </Link>
 

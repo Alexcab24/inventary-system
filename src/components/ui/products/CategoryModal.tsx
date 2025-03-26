@@ -51,13 +51,13 @@ export const CategoryModal = ({ onClose }: Props) => {
 
                         <TbCategoryPlus size={25} />
 
-                        <p className="text-lg text-gray-700">Crear una nueva categoría</p>
+                        <p className="text-lg text-gray-700">Create a new category</p>
                     </div>
 
                     <form onSubmit={handleSubmit(onSubmitCategory)} className="flex justify-end gap-4">
                         <input
                             id="name"
-                            {...register("name", { required: "El nombre de la categoría es obligatorio" })}
+                            {...register("name", { required: "Category name is required" })}
                             type="text"
                             className="block w-full rounded-md border border-gray-300 py-2 px-3 text-sm text-gray-500 placeholder:text-gray-500"
                         />

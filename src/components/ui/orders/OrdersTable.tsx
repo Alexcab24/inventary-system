@@ -1,5 +1,5 @@
 import { UpdateOrder } from "./Buttons"
-
+import Image from 'next/image';
 
 export const OrdersTable = () => {
   return (
@@ -20,13 +20,12 @@ export const OrdersTable = () => {
                   <thead className="bg-gray-50">
                     <tr>
                       <th scope="col" className="ps-6 py-3 text-start">
-
                       </th>
 
                       <th scope="col" className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                            número de orden
+                            Order Number
                           </span>
                         </div>
                       </th>
@@ -34,7 +33,7 @@ export const OrdersTable = () => {
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                            Cliente
+                            Client
                           </span>
                         </div>
                       </th>
@@ -50,7 +49,7 @@ export const OrdersTable = () => {
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                            Estado
+                            Status
                           </span>
                         </div>
                       </th>
@@ -58,7 +57,7 @@ export const OrdersTable = () => {
                       <th scope="col" className="px-6 py-3 text-start">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                            Fecha
+                            Date
                           </span>
                         </div>
                       </th>
@@ -68,12 +67,11 @@ export const OrdersTable = () => {
                   </thead>
 
                   <tbody className="divide-y divide-gray-200">
-                    {/* fila */}
+                    {/* Row */}
                     <tr>
                       <td className="size-px whitespace-nowrap">
                         <div className="ps-6 py-3">
                           <label className="flex">
-
                           </label>
                         </div>
                       </td>
@@ -84,7 +82,13 @@ export const OrdersTable = () => {
                       </td>
                       <td className="h-px w-72 whitespace-nowrap">
                         <div className="flex items-center gap-x-3">
-                          <img className="inline-block size-[38px] rounded-full" src="https://images.unsplash.com/photo-1670272505340-d906d8d77d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar" />
+                          <Image
+                            className="inline-block size-[38px] rounded-full"
+                            src="https://images.unsplash.com/photo-1670272505340-d906d8d77d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
+                            alt="Client Avatar"
+                            width={38}
+                            height={38}
+                          />
                           <div className="grow">
                             <span className="block text-sm font-semibold text-gray-800">Jessica Williams</span>
                             <span className="block text-sm text-gray-500">myhairisred@site.com</span>
@@ -105,7 +109,7 @@ export const OrdersTable = () => {
                               <svg className="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                               </svg>
-                              Completada
+                              Completed
                             </span>
                           </div>
                         </div>
@@ -117,9 +121,7 @@ export const OrdersTable = () => {
                       </td>
                       <td className="size-px whitespace-nowrap">
                         <div className="px-6 py-1.5">
-
                           <UpdateOrder id="1" />
-
                         </div>
                       </td>
                     </tr>
@@ -128,7 +130,7 @@ export const OrdersTable = () => {
                 {/* <!-- End Table -->
 
           <!-- Footer --> */}
-             
+
                 {/* <!-- End Footer --> */}
               </div>
             </div>

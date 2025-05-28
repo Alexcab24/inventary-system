@@ -1,110 +1,134 @@
-import React from 'react'
-import { FaBoxOpen, FaReceipt, FaTruck, FaUsers } from 'react-icons/fa'
-
-import { ViewRoute } from './ViewRoute'
-import { IoAppsSharp } from 'react-icons/io5'
-import { AiFillProduct } from 'react-icons/ai'
-import { SideBarItems } from './SideBarItems'
-
+'use client';
+import React from 'react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { useSidebarStore } from '../../../store/sidebarStore';
+import { MenuItems } from '@/types';
 
 
+interface SideBarProps {
+    expanded: boolean;
+    mobileOpen?: boolean;
+    setMobileOpen?: (v: boolean) => void;
+    menuItems: MenuItems
+}
 
+export const SideBar = ({ expanded, mobileOpen = false, setMobileOpen, menuItems }: SideBarProps) => {
+    const pathname = usePathname();
+    const toggleSidebar = useSidebarStore((s) => s.toggle);
 
-const menuItems = [
-    {
-        icon: <IoAppsSharp />,
-        title: 'Dashboard',
-        path: '/dashboard'
+    // Overlay para móvil
+    const mobileSidebar = (
+        <>
+            {mobileOpen && (
+                <div className="fixed inset-0 z-40 bg-black/30" onClick={() => setMobileOpen && setMobileOpen(false)} />
+            )}
+            <aside
+                className={`fixed inset-y-0 left-0 z-50 bg-white border-r border-gray-200 flex flex-col transition-all duration-300 ease-in-out w-72 h-screen
+                ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}
+                lg:translate-x-0 lg:w-72 lg:static lg:z-40`}
+            >
+                {/* Logo y botón de colapso/cerrar */}
+                <div className="flex items-center justify-between px-6 py-4 border-b gap-2">
+                    <Link href="/dashboard" className="flex items-center gap-2">
+                        <span className="text-xl font-bold text-blue-600">Inventory</span>
+                        <span className="text-xl font-semibold text-gray-700">System</span>
+                    </Link>
+                </div>
+                {/* Navegación */}
+                <nav className="flex-1 py-4 flex flex-col gap-1">
+                    <ul className="flex flex-col gap-1">
+                        {menuItems.map((item) => {
+                            const isActive = pathname.startsWith(item.path);
+                            return (
+                                <li key={item.path} className="relative group">
+                                    <Link
+                                        href={item.path}
+                                        className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors duration-200
+                                            ${isActive ? 'bg-blue-100 text-blue-700 font-semibold' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}
+                                            justify-start`}
+                                    >
+                                        <span className="text-xl">{item.icon}</span>
+                                        <span className="text-base font-medium transition-all duration-200">{item.title}</span>
+                                    </Link>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </nav>
+                {/* Footer */}
+                <div className="mt-auto border-t px-4 py-4 flex items-center gap-3">
+                    <span className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg">IS</span>
+                    <div>
+                        <div className="font-semibold text-gray-800">Inventory System</div>
+                        <div className="text-xs text-gray-400">v1.0.0</div>
+                    </div>
+                </div>
+            </aside>
+        </>
+    );
 
-    },
-    {
-        icon: <AiFillProduct />,
-        title: 'Inventory',
-        path: '/inventory'
+    // Sidebar desktop/colapsable
+    const desktopSidebar = (
+        <aside
+            className={`hidden lg:flex fixed inset-y-0 left-0 z-40 bg-white border-r border-gray-200 flex-col transition-all duration-300 ease-in-out ${expanded ? 'w-72' : 'w-20'} h-screen`}
+        >
+            {/* Logo y botón de colapso */}
+            <div className={`flex items-center ${expanded ? 'justify-between px-6' : 'justify-center px-0'} h-16  gap-2`}>
+                <Link href="/dashboard" className="flex items-center gap-2">
+                    <span className={`text-xl font-bold text-blue-600 transition-all ${expanded ? 'block' : 'hidden'}`}>Inventory</span>
+                    <span className={`text-xl font-semibold text-gray-700 transition-all ${expanded ? 'block' : 'hidden'}`}>System</span>
+                    <span className={`w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg ${expanded ? 'hidden' : 'block'}`}>IS</span>
+                </Link>
+            </div>
+            {/* Navegación */}
+            <nav className="flex-1 py-4 flex flex-col gap-1">
+                <ul className="flex flex-col gap-1 px-2">
+                    {menuItems.map((item) => {
+                        const isActive = pathname.startsWith(item.path);
+                        return (
+                            <li key={item.path} className="relative group">
+                                <Link
+                                    href={item.path}
+                                    className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors duration-200
+                                        ${isActive ? 'bg-blue-100 text-blue-700 font-semibold' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}
+                                        ${expanded ? 'justify-start' : 'justify-center px-0'}`}
+                                >
+                                    <span className="text-xl">{item.icon}</span>
+                                    <span className={`text-base font-medium transition-all duration-200 ${expanded ? 'block' : 'hidden'}`}>{item.title}</span>
+                                </Link>
+                                {/* Tooltip */}
+                                {!expanded && (
+                                    <span className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap shadow-lg transition-opacity duration-200">
+                                        {item.title}
+                                    </span>
+                                )}
+                            </li>
+                        );
+                    })}
+                </ul>
+            </nav>
+            {/* Footer */}
+            <div className={`mt-auto border-t px-4 py-4 flex items-center gap-3 ${expanded ? '' : 'justify-center px-0'}`}>
+                <span className={`w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg`}>IS</span>
+                {expanded && (
+                    <div>
+                        <div className="font-semibold text-gray-800">Inventory System</div>
+                        <div className="text-xs text-gray-400">v1.0.0</div>
+                    </div>
+                )}
+            </div>
+        </aside>
+    );
 
-    },
-    {
-        icon: <FaTruck />,
-        title: 'Suppliers',
-        path: '/suppliers'
-
-    },
-    {
-        icon: <FaReceipt />,
-        title: 'Reports',
-        path: '/reports'
-
-    },
-]
-
-
-
-export const SideBar = () => {
     return (
         <>
-            <div className="absolute top-14 inset-x-0 bg-white border-y px-4 sm:px-6 lg:px-8 lg:hidden">
-                <div className="flex items-center py-2 justify-between">
-                    <button
-                        type="button"
-                        className="flex justify-center items-center gap-x-2 border border-gray-200 text-gray-800 hover:text-gray-500 rounded-lg focus:outline-none focus:text-gray-500 disabled:opacity-50 disabled:pointer-events-none"
-                        aria-haspopup="dialog"
-                        aria-expanded="false"
-                        aria-controls="hs-application-sidebar"
-                        aria-label="Toggle navigation"
-                        data-hs-overlay="#hs-application-sidebar"
-                    >
-                        <span className="sr-only">Toggle Navigation</span>
-                        <svg
-                            className="shrink-0 w-6 h-6"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        >
-                            <rect width="18" height="18" x="3" y="3" rx="2" />
-                            <path d="M15 3v18" />
-                            <path d="m8 9 3 3-3 3" />
-                        </svg>
-                    </button>
-                    <ViewRoute />
-                </div>
+            {/* Drawer móvil/tablet */}
+            <div className="lg:hidden">
+                {mobileSidebar}
             </div>
-
-            <div
-                id="hs-application-sidebar"
-                className="hs-overlay [--auto-close:lg] hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform w-[260px] h-full hidden fixed inset-y-0 left-0 z-50 bg-white border-e border-gray-200 lg:block lg:translate-x-0 lg:left-0"
-                role="dialog"
-                aria-label="Sidebar"
-            >
-                <div className="relative flex flex-col h-full max-h-full">
-                    <div className="px-6 pt-4">
-                        <a
-                            className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
-                            href="#"
-                            aria-label="InventorySystem"
-                        >
-                            <span>InventorySystem</span>
-                        </a>
-                    </div>
-
-                    <div className="h-full mt-16 overflow-y-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-bg-gray-100 scrollbar-thumb-bg-gray-300">
-                        <nav className="hs-accordion-group p-2 w-full flex flex-col" data-hs-accordion-always-open>
-                            <ul className="flex flex-col gap-y-1.5 mx-2">
-                                {menuItems.map((item) => (
-                                    <SideBarItems key={item.path} {...item} />
-                                ))}
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-
-            <div className="w-full pt-10 px-4 sm:px-6 md:px-8 lg:pl-72">
-                {/* Additional content or elements */}
-            </div>
+            {/* Sidebar desktop */}
+            {desktopSidebar}
         </>
     );
 };

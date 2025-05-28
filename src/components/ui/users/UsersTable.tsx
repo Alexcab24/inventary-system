@@ -57,7 +57,7 @@ export const UsersTable = async ({ users }: Props) => {
                                         </tr>
                                     </thead>
 
-                                    <tbody className="divide-y divide-gray-200">
+                                    <tbody className="divide-y divide-gray-200 ">
                                         {users.length > 0 ? (
                                             users.map(user => (
                                                 <tr key={user.id} className={`${user.disabled ? 'bg-gray-100 text-gray-400' : ''} hover:bg-gray-50 transition-colors`}>

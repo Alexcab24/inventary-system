@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { Supplier } from '@/interfaces/supplier.interface';
 import { Category } from '@/interfaces/category.interfaces';
 import { CategoryModal } from './CategoryModal';
+import { ROUTES } from '@/router/routes';
 
 
 interface FormInputs {
@@ -66,7 +67,7 @@ export const Form = ({ user, suppliers, categories }: Props) => {
 
         if (resp.ok) {
             successNotification(resp.message || '');
-            router.push('/inventory');
+            router.push(ROUTES.PRODUCTS);
             return;
         } else {
             // setErrorMessage(resp.message);
@@ -233,7 +234,7 @@ export const Form = ({ user, suppliers, categories }: Props) => {
 
                 {/* Submit Button */}
                 <div className="flex flex-col-reverse gap-4 md:flex-row justify-end gap-x-4">
-                    <Link href={'/inventory'} className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                    <Link href={ROUTES.PRODUCTS} className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                         Cancel
                     </Link>
                     <button type="submit" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-demoHover hover:bg-demo transition-all duration-300 text-white disabled:opacity-50 disabled:pointer-events-none">

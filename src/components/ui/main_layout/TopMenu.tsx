@@ -3,16 +3,15 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { ViewRoute } from './ViewRoute'
-import { IoExitOutline, IoSettingsOutline } from 'react-icons/io5'
+import { MdLogout, MdSettings, MdNotifications } from 'react-icons/md';
 import { PiBuilding } from "react-icons/pi";
 import { TfiSettings } from 'react-icons/tfi';
-import { HiOutlineDocumentReport } from 'react-icons/hi';
 import { AiOutlineUser } from 'react-icons/ai';
 import type { User } from '@/interfaces';
 import Link from 'next/link';
 import { logout } from '@/actions/auth/logout';
-import { HiOutlineBell } from 'react-icons/hi';
 import { useSidebarStore } from '../../../store/sidebarStore';
+import { ROUTES } from '@/router/routes';
 
 interface Props {
   user: User
@@ -47,8 +46,15 @@ export const TopMenu = ({ user, onHamburgerClick }: Props) => {
             <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           )}
         </button>
+
+        <div className="flex md:hidden items-center justify-between  py-4 border-b gap-2">
+          <Link href="/dashboard" className="flex items-center gap-2">
+            <span className="text-xl font-bold text-blue-600">Inventory</span>
+            <span className="text-xl font-semibold text-gray-700">System</span>
+          </Link>
+        </div>
         {/* Breadcrumb */}
-        <div className="flex-1">
+        <div className="hidden md:block flex-1">
           <ViewRoute />
         </div>
         {/* Acciones */}
@@ -58,7 +64,7 @@ export const TopMenu = ({ user, onHamburgerClick }: Props) => {
             className="relative p-2 rounded-full text-gray-500 hover:bg-gray-100 transition-colors"
             aria-label="Notificaciones"
           >
-            <HiOutlineBell className="w-5 h-5" />
+            <MdNotifications className="w-5 h-5" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-blue-500 rounded-full"></span>
           </button>
           <button
@@ -66,7 +72,7 @@ export const TopMenu = ({ user, onHamburgerClick }: Props) => {
             className="p-2 rounded-full text-gray-500 hover:bg-gray-100 transition-colors"
             aria-label="Configuración"
           >
-            <IoSettingsOutline className="w-5 h-5" />
+            <MdSettings className="w-5 h-5" />
           </button>
           {/* Perfil y Dropdown */}
           <div className="hs-dropdown [--placement:bottom-right] relative inline-flex">
@@ -87,11 +93,11 @@ export const TopMenu = ({ user, onHamburgerClick }: Props) => {
                 {
                   user.role === 'admin' && (
                     <>
-                      <Link href={'/management/company'} className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 ">
+                      <Link href={ROUTES.COMPANY} className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 ">
                         <PiBuilding size={20} />
                         Company
                       </Link>
-                      <Link href={'/management/users'} className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 ">
+                      <Link href={ROUTES.USERS} className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 ">
                         <AiOutlineUser size={20} />
                         Users
                       </Link>
@@ -100,7 +106,7 @@ export const TopMenu = ({ user, onHamburgerClick }: Props) => {
                   )
 
                 }
-                <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 " href="#">
+                <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 " href={ROUTES.PROFILE}>
                   <TfiSettings size={20} />
                   Edit Profile
                 </a>
@@ -109,7 +115,7 @@ export const TopMenu = ({ user, onHamburgerClick }: Props) => {
                 </div>
 
                 <button onClick={() => logout()} className="flex items-center w-full gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100">
-                  <IoExitOutline size={20} />
+                  <MdLogout size={20} />
                   Sign Out
                 </button>
               </div>

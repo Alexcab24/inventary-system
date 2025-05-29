@@ -4,6 +4,7 @@ import { Search } from "@/components/ui/Search";
 import Card from "@/components/ui/dashboard/Cards";
 import { ProductsContainer } from "@/components/ui/products/ProductsContainer";
 import { TableSkeleton } from "@/components/ui/users/Skeletons/TableSkeleton";
+import { ROUTES } from "@/router/routes";
 import { Suspense } from "react";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { MdInventory, MdRemoveShoppingCart } from "react-icons/md";
@@ -54,7 +55,7 @@ export default async function productPage({
 
                     <div className="flex justify-between items-center gap-3 w-full mt-4">
                         <Search placeholder="Buscar productos..." />
-                        <CreateButton label="Agregar Articulo" url="/inventory/create" />
+                        <CreateButton label="Agregar Articulo" url={ROUTES.CREATE_PRODUCT} />
                     </div>
                 </div>
 

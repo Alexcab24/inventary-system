@@ -10,6 +10,7 @@ async function main() {
         await prisma.supplier.deleteMany();
         await prisma.category.deleteMany();
         await prisma.company.deleteMany();
+        await prisma.productMovement.deleteMany();
 
         const { companies, users, products, suppliers, category } = initialData;
 
@@ -33,10 +34,20 @@ async function main() {
 
         const allSuppliers = await prisma.supplier.findMany();
 
+        // Create movements for each product
+        const movements = await Promise.all(
+            products.map(() =>
+                prisma.productMovement.create({
+                    data: { type: 'Inbound' }
+                })
+            )
+        );
+
         const productsWithNewId = products.map((product, index) => ({
             ...product,
             supplierId: allSuppliers[index % allSuppliers.length]?.id,
             categoryId: allCategories[index % allCategories.length]?.id,
+            productMovementId: movements[index].id
         }));
 
         await prisma.user.createMany({

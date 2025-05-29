@@ -5,10 +5,11 @@ import { z } from 'zod';
 
 import prisma from './lib/prisma';
 import { getSubdomain } from './lib/subdomain';
+import { ROUTES } from './router/routes';
 
 export const authConfig: NextAuthConfig = {
   pages: {
-    signIn: '/auth/login',
+    signIn: ROUTES.LOGIN,
     newUser: '/auth/new-account',
   },
 
@@ -29,20 +30,20 @@ export const authConfig: NextAuthConfig = {
       // Obtener el subdominio de baseUrl (por ejemplo, 'testcompany')
       const urlParts = baseUrl.split('.'); // Divide la URL en partes
       const subdomain = urlParts.length > 2 ? urlParts[0] : ''; // Obtener el subdominio (si existe)
-  
+
       // Si no hay subdominio, no agregar nada a la URL base
       if (!subdomain) {
         return url || baseUrl;  // Si no hay subdominio, solo devolver la URL
       }
-  
+
       // Si hay subdominio, agregarlo a la baseUrl
       const correctBaseUrl = `https://${subdomain}.${urlParts.slice(1).join('.')}`;
-  
+
       // Si no hay URL de redirección, redirigir a la base URL con el subdominio
       if (!url) {
         return correctBaseUrl; // Solo devolver la URL base corregida
       }
-  
+
       // Si hay una URL de redirección, agregar el subdominio correctamente
       return `${correctBaseUrl}${url}`;
     },
@@ -63,7 +64,7 @@ export const authConfig: NextAuthConfig = {
 
         const user = await prisma.user.findUnique({ where: { email: email.toLocaleLowerCase() } });
         if (!user) return null;
-        
+
         // Comprobación del tenant
         const company = await prisma.company.findUnique({ where: { id_tenant: user.companyId } });
         if (!company || company.id_tenant !== subdomain) {

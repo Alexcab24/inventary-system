@@ -14,7 +14,7 @@ import {
     ChartTooltip,
     ChartTooltipContent,
 } from "../chart";
-import { FaChartBar } from "react-icons/fa";
+import { MdBarChart } from "react-icons/md";
 
 const chartConfig = {
     desktop: {
@@ -43,7 +43,7 @@ export default function Component({ chartData, numberOfMonths }: ChartComponentP
         <Card className="shadow-lg rounded-2xl bg-white dark:bg-zinc-900">
             <CardHeader>
                 <div className="flex items-center gap-x-4">
-                    <FaChartBar size={28} className="text-primary" />
+                    <MdBarChart size={28} className="text-primary" />
                     <CardTitle className="text-lg font-semibold">Products Added by Month</CardTitle>
                 </div>
                 <CardDescription className="text-muted-foreground">

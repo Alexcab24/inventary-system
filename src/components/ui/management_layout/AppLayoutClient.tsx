@@ -5,7 +5,7 @@ import { TopMenu } from "../main_layout/TopMenu";
 import type { User } from '@/interfaces';
 import { useSidebarStore } from "@/store/sidebarStore";
 import { SideBar } from "../main_layout/SideBar";
-import { adminMenuItems } from "@/routes/admin.routes";
+import { adminMenuItems } from "@/router/admin.routes";
 
 interface Props {
     user: User;

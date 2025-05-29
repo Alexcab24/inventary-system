@@ -1,10 +1,10 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useSidebarStore } from '../../../store/sidebarStore';
 import { MenuItems } from '@/types';
-
+import { IoChevronDown } from 'react-icons/io5';
 
 interface SideBarProps {
     expanded: boolean;
@@ -16,6 +16,69 @@ interface SideBarProps {
 export const SideBar = ({ expanded, mobileOpen = false, setMobileOpen, menuItems }: SideBarProps) => {
     const pathname = usePathname();
     const toggleSidebar = useSidebarStore((s) => s.toggle);
+    const [openSubmenus, setOpenSubmenus] = useState<{ [key: string]: boolean }>({});
+
+    const toggleSubmenu = (path: string) => {
+        setOpenSubmenus(prev => ({
+            ...prev,
+            [path]: !prev[path]
+        }));
+    };
+
+    const renderMenuItem = (item: any, isSubmenu = false) => {
+        const isActive = pathname.startsWith(item.path);
+        const hasSubmenu = item.submenu && item.submenu.length > 0;
+        const isSubmenuOpen = openSubmenus[item.path];
+
+        return (
+            <li key={item.path} className="relative group">
+                <div className="flex flex-col">
+                    <div
+                        className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors duration-200 cursor-pointer
+                        ${isActive ? 'bg-blue-100 text-blue-700 font-semibold' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}
+                        ${expanded ? 'justify-between' : 'justify-center px-0'}`}
+                        onClick={() => hasSubmenu && toggleSubmenu(item.path)}
+                    >
+
+                        {!hasSubmenu ? (
+                            <Link href={item.path} className="flex items-center gap-3">
+                                <span className="text-xl">{item.icon}</span>
+                                {expanded && <span className="text-base font-medium">{item.title}</span>}
+                            </Link>
+                        ) : (
+
+                            <div className="flex items-center gap-3">
+                                <span className="text-xl">{item.icon}</span>
+                                {expanded && <span className="text-base font-medium">{item.title}</span>}
+                            </div>
+                        )}
+
+
+                        {hasSubmenu && expanded && (
+                            <IoChevronDown className={`transition-transform duration-200 ${isSubmenuOpen ? 'rotate-180' : ''}`} />
+                        )}
+                    </div>
+
+
+                    {hasSubmenu && expanded && (
+                        <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isSubmenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                            <ul className="ml-6 mt-1 space-y-1">
+                                {item.submenu.map((subItem: any) => renderMenuItem(subItem, true))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+
+
+                {!expanded && (
+                    <span className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap shadow-lg transition-opacity duration-200">
+                        {item.title}
+                    </span>
+                )}
+            </li>
+
+        );
+    };
 
     // Overlay para móvil
     const mobileSidebar = (
@@ -38,22 +101,7 @@ export const SideBar = ({ expanded, mobileOpen = false, setMobileOpen, menuItems
                 {/* Navegación */}
                 <nav className="flex-1 py-4 flex flex-col gap-1">
                     <ul className="flex flex-col gap-1">
-                        {menuItems.map((item) => {
-                            const isActive = pathname.startsWith(item.path);
-                            return (
-                                <li key={item.path} className="relative group">
-                                    <Link
-                                        href={item.path}
-                                        className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors duration-200
-                                            ${isActive ? 'bg-blue-100 text-blue-700 font-semibold' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}
-                                            justify-start`}
-                                    >
-                                        <span className="text-xl">{item.icon}</span>
-                                        <span className="text-base font-medium transition-all duration-200">{item.title}</span>
-                                    </Link>
-                                </li>
-                            );
-                        })}
+                        {menuItems.map((item) => renderMenuItem(item))}
                     </ul>
                 </nav>
                 {/* Footer */}
@@ -84,28 +132,7 @@ export const SideBar = ({ expanded, mobileOpen = false, setMobileOpen, menuItems
             {/* Navegación */}
             <nav className="flex-1 py-4 flex flex-col gap-1">
                 <ul className="flex flex-col gap-1 px-2">
-                    {menuItems.map((item) => {
-                        const isActive = pathname.startsWith(item.path);
-                        return (
-                            <li key={item.path} className="relative group">
-                                <Link
-                                    href={item.path}
-                                    className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors duration-200
-                                        ${isActive ? 'bg-blue-100 text-blue-700 font-semibold' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}
-                                        ${expanded ? 'justify-start' : 'justify-center px-0'}`}
-                                >
-                                    <span className="text-xl">{item.icon}</span>
-                                    <span className={`text-base font-medium transition-all duration-200 ${expanded ? 'block' : 'hidden'}`}>{item.title}</span>
-                                </Link>
-                                {/* Tooltip */}
-                                {!expanded && (
-                                    <span className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap shadow-lg transition-opacity duration-200">
-                                        {item.title}
-                                    </span>
-                                )}
-                            </li>
-                        );
-                    })}
+                    {menuItems.map((item) => renderMenuItem(item))}
                 </ul>
             </nav>
             {/* Footer */}

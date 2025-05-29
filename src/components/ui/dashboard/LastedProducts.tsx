@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FaList } from "react-icons/fa6";
+import { MdInventory } from "react-icons/md";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../card";
 import { getLastProducts } from "@/actions/products/get-products-by-company";
 
@@ -10,7 +10,7 @@ export const LastedProducts = async () => {
         <Card className="shadow-lg rounded-2xl bg-white dark:bg-zinc-900">
             <CardHeader>
                 <div className="flex items-center gap-x-4">
-                    <FaList size={28} className="text-primary" />
+                    <MdInventory size={28} className="text-primary" />
                     <CardTitle className="text-lg font-semibold">Latest Added Products</CardTitle>
                 </div>
                 <CardDescription className="text-muted-foreground">

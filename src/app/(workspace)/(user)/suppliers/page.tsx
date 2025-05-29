@@ -7,6 +7,7 @@ import { fetchSupplierByCompany } from "@/actions/supplier/get-supplier";
 import { Suspense } from "react";
 import { TableSkeleton } from "@/components/ui/users/Skeletons/TableSkeleton";
 import { CreateButton } from "@/components/ui/Buttons";
+import { ROUTES } from "@/router/routes";
 
 export default async function suppliersPage({
     searchParams }:
@@ -53,7 +54,7 @@ export default async function suppliersPage({
 
                     <div className="flex justify-between items-center gap-3 w-full mt-4">
                         <Search placeholder="Buscar proveedor..." />
-                        <CreateButton label="Crear proveedor" url="/suppliers/create" />
+                        <CreateButton label="Crear proveedor" url={ROUTES.CREATE_SUPPLIER} />
                     </div>
                 </div>
                 <Suspense key={query} fallback={<TableSkeleton />}>

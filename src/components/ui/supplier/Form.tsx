@@ -8,6 +8,7 @@ import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { errorNotification, successNotification } from '../notification/notifications';
 import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/router/routes';
 
 interface FormInputs {
     name: string;
@@ -132,7 +133,7 @@ const Form = ({ user }: Props) => {
 
                 {/* Botón de envío */}
                 <div className="flex flex-col-reverse md:flex-row justify-end gap-x-4">
-                    <Link href={'/suppliers'} className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                    <Link href={ROUTES.SUPPLIER} className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                         Cancelar
                     </Link>
                     <button type="submit" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-demoHover text-white hover:bg-demo transition-all duration-300 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">

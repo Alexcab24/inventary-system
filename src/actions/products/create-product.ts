@@ -2,6 +2,7 @@
 
 import { Product } from "@/interfaces";
 import prisma from "@/lib/prisma";
+import { ROUTES } from "@/router/routes";
 import { validateProduct } from "@/schemas/validation/productValidation";
 import { revalidatePath } from "next/cache";
 
@@ -44,16 +45,26 @@ export const createProduct = async (
 
 
     try {
+        // First create the product movement
+        const movement = await prisma.productMovement.create({
+            data: {
+                type: 'Inbound',
+            }
+        });
 
+        // Then create the product with the movement ID
         const newProduct = await prisma.products.create({
-            data: result.data,
+            data: {
+                ...result.data,
+                productMovementId: movement.id
+            },
             select: {
                 id: true,
                 name: true
             }
         });
 
-        revalidatePath('/inventory');
+        revalidatePath(ROUTES.PRODUCTS);
 
         return {
             ok: true,

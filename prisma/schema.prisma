@@ -13,6 +13,13 @@ enum Role {
   contador
 }
 
+enum MovementType {
+  Inbound
+  Outbound
+  Transfer
+  Adjustment
+}
+
 model Company {
   id_tenant        String   @id
   name             String
@@ -45,7 +52,7 @@ model User {
 }
 
 model Products {
-  id          String  @id @default(uuid())
+  id          String   @id @default(uuid())
   name        String
   // image       String?
   description String?
@@ -63,6 +70,17 @@ model Products {
 
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId String
+
+  productMovement   ProductMovement @relation(fields: [productMovementId], references: [id])
+  productMovementId String
+}
+
+model ProductMovement {
+  id        String       @id @default(uuid())
+  type      MovementType
+  createdAt DateTime     @default(now())
+
+  Products Products[]
 }
 
 model Category {

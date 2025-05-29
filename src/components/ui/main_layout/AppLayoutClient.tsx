@@ -4,7 +4,7 @@ import { SideBar } from "./SideBar";
 import { TopMenu } from "./TopMenu";
 import type { User } from '@/interfaces';
 import { useSidebarStore } from '../../../store/sidebarStore';
-import { clientMenuItems } from "@/routes/client.routes";
+import { clientMenuItems } from "@/router/client.routes";
 
 interface Props {
     user: User;

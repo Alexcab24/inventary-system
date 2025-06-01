@@ -32,10 +32,11 @@ model Company {
   suscription_plan String?
 
   //relaciones
-  user     User[]
-  products Products[]
-  category Category[]
-  supplier Supplier[]
+  user            User[]
+  products        Products[]
+  category        Category[]
+  supplier        Supplier[]
+  ProductMovement ProductMovement[]
 }
 
 model User {
@@ -71,8 +72,7 @@ model Products {
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId String
 
-  productMovement   ProductMovement @relation(fields: [productMovementId], references: [id])
-  productMovementId String
+  productMovements ProductMovement[]
 }
 
 model ProductMovement {
@@ -80,7 +80,11 @@ model ProductMovement {
   type      MovementType
   createdAt DateTime     @default(now())
 
-  Products Products[]
+//relaciones
+  product   Products @relation(fields: [productId], references: [id])
+  company   Company  @relation(fields: [companyId], references: [id_tenant])
+  productId String
+  companyId String
 }
 
 model Category {

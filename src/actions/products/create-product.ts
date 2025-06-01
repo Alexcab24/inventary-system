@@ -45,22 +45,19 @@ export const createProduct = async (
 
 
     try {
-        // First create the product movement
-        const movement = await prisma.productMovement.create({
-            data: {
-                type: 'Inbound',
-            }
-        });
-
-        // Then create the product with the movement ID
         const newProduct = await prisma.products.create({
-            data: {
-                ...result.data,
-                productMovementId: movement.id
-            },
+            data: result.data,
             select: {
                 id: true,
                 name: true
+            }
+        });
+
+        await prisma.productMovement.create({
+            data: {
+                type: 'Inbound',
+                productId: newProduct.id,
+                companyId: companyId
             }
         });
 

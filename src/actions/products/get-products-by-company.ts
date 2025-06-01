@@ -83,6 +83,7 @@ export const getProductsByCompany = async ({
 
     } catch (error) {
         console.error("Error al obtener los usuarios:", error);
+        
         return {
             ok: false,
             message: 'Error al obtener los productos'

@@ -34,30 +34,42 @@ async function main() {
 
         const allSuppliers = await prisma.supplier.findMany();
 
-        // Create movements for each product
-        const movements = await Promise.all(
-            products.map(() =>
-                prisma.productMovement.create({
-                    data: { type: 'Inbound' }
-                })
-            )
-        );
-
         const productsWithNewId = products.map((product, index) => ({
             ...product,
             supplierId: allSuppliers[index % allSuppliers.length]?.id,
             categoryId: allCategories[index % allCategories.length]?.id,
-            productMovementId: movements[index].id
         }));
 
         await prisma.user.createMany({
             data: users,
         });
 
-        await prisma.products.createMany({
+        const createdProducts = await prisma.products.createMany({
             data: productsWithNewId,
         });
 
+        const allProducts = await prisma.products.findMany();
+
+        // Create movements for each product
+        await Promise.all(
+            allProducts.map((product) =>
+                prisma.productMovement.create({
+                    data: {
+                        type: 'Inbound',
+                        company: {
+                            connect: {
+                                id_tenant: companies[0].id_tenant
+                            }
+                        },
+                        product: {
+                            connect: {
+                                id: product.id
+                            }
+                        }
+                    }
+                })
+            )
+        );
 
         console.log('seed executed');
     } catch (error) {

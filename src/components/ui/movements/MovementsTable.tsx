@@ -7,7 +7,20 @@ import Image from 'next/image'
 //     movements: ProductWithRelations[]
 // }
 
-
+    const products = [
+        {
+            id: '1',
+            name: 'Product 1',
+            price: 100,
+            stock: 10,
+            category: {
+                name: 'Category 1'
+            },
+            supplier: {
+                name: 'Supplier 1'
+            }
+        }
+]
 const MovementsTable = () => {
     return (
         <table className="min-w-full divide-y divide-gray-200 overflow-hidden hidden lg:table">

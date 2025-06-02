@@ -29,7 +29,7 @@ export const registerCompany = async (company_name: string, name: string, email:
         // Check if workspace already exists
         const existingCompany = await prisma.company.findUnique({
             where: {
-              workspace
+                workspace
             }
         });
 
@@ -40,13 +40,26 @@ export const registerCompany = async (company_name: string, name: string, email:
             };
         }
 
+        // Check if email already exists
+        const existingUser = await prisma.user.findUnique({
+            where: {
+                email
+            }
+        });
+
+        if (existingUser) {
+            return {
+                ok: false,
+                message: "This email is already registered"
+            };
+        }
+
         // Create company
         const newCompany = await prisma.company.create({
             data: {
                 name: company_name,
                 email,
-               workspace,
-               
+                workspace,
             }
         });
 

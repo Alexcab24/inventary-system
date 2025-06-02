@@ -58,7 +58,7 @@ async function main() {
                         type: 'Inbound',
                         company: {
                             connect: {
-                                id_tenant: companies[0].id_tenant
+                                workspace: companies[0].workspace
                             }
                         },
                         product: {

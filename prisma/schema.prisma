@@ -21,12 +21,12 @@ enum MovementType {
 }
 
 model Company {
-  id_tenant        String   @id
+  workspace        String   @id
   name             String
   address          String?
   rnc              String?
   logotype         String?
-  phone            String
+  phone            String?
   email            String   @unique
   createdAt        DateTime @default(now())
   suscription_plan String?
@@ -48,7 +48,7 @@ model User {
   role     Role    @default(admin)
 
   //relaciones
-  company   Company @relation(fields: [companyId], references: [id_tenant])
+  company   Company @relation(fields: [companyId], references: [workspace])
   companyId String
 }
 
@@ -63,7 +63,7 @@ model Products {
 
   //relaciones
 
-  company   Company @relation(fields: [companyId], references: [id_tenant])
+  company   Company @relation(fields: [companyId], references: [workspace])
   companyId String
 
   supplier   Supplier @relation(fields: [supplierId], references: [id])
@@ -82,7 +82,7 @@ model ProductMovement {
 
 //relaciones
   product   Products @relation(fields: [productId], references: [id])
-  company   Company  @relation(fields: [companyId], references: [id_tenant])
+  company   Company  @relation(fields: [companyId], references: [workspace])
   productId String
   companyId String
 }
@@ -92,7 +92,7 @@ model Category {
   name String
 
   //relaciones
-  company   Company @relation(fields: [companyId], references: [id_tenant])
+  company   Company @relation(fields: [companyId], references: [workspace])
   companyId String
 
   Products Products[]
@@ -106,7 +106,7 @@ model Supplier {
   address String
 
   //relaciones
-  company   Company @relation(fields: [companyId], references: [id_tenant])
+  company   Company @relation(fields: [companyId], references: [workspace])
   companyId String
 
   products Products[]

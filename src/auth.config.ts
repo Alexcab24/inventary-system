@@ -66,8 +66,8 @@ export const authConfig: NextAuthConfig = {
         if (!user) return null;
 
         // Comprobación del tenant
-        const company = await prisma.company.findUnique({ where: { id_tenant: user.companyId } });
-        if (!company || company.id_tenant !== subdomain) {
+        const company = await prisma.company.findUnique({ where: { workspace: user.companyId } });
+        if (!company || company.workspace !== subdomain) {
           return null;
         }
 

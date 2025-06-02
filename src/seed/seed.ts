@@ -30,7 +30,7 @@ interface SeedSupplier {
     companyId: string;
 }
 interface SeedCompany {
-    id_tenant: string;
+    workspace: string;
     name: string;
     phone: string;
     email: string;
@@ -84,10 +84,10 @@ export const initialData: SeedData = {
     ],
 
     companies: [
-        { id_tenant: 'testcompany', name: 'Subdomain Company', phone: '8091231234', email: 'subdomain@google.com' },
-        { id_tenant: 'subdomain', name: 'Empresa Uno', phone: '8095551111', email: 'contacto@empresa1.com' },
-        { id_tenant: 'empresa2', name: 'Empresa Dos', phone: '8095552222', email: 'contacto@empresa2.com' },
-        { id_tenant: 'empresa3', name: 'Empresa Tres', phone: '8095553333', email: 'contacto@empresa3.com' }
+        { workspace: 'testcompany', name: 'Subdomain Company', phone: '8091231234', email: 'subdomain@google.com' },
+        { workspace: 'subdomain', name: 'Empresa Uno', phone: '8095551111', email: 'contacto@empresa1.com' },
+        { workspace: 'empresa2', name: 'Empresa Dos', phone: '8095552222', email: 'contacto@empresa2.com' },
+        { workspace: 'empresa3', name: 'Empresa Tres', phone: '8095553333', email: 'contacto@empresa3.com' }
     ]
     
 

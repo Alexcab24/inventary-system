@@ -12,7 +12,7 @@ interface Props {
     children: React.ReactNode;
 }
 
-const AppLayoutClient = ({ user, children }: Props) => {
+const AppLayoutAdmin = ({ user, children }: Props) => {
     const [mobileOpen, setMobileOpen] = useState(false);
     const expanded = useSidebarStore((s) => s.expanded);
 
@@ -38,4 +38,4 @@ const AppLayoutClient = ({ user, children }: Props) => {
     );
 };
 
-export default AppLayoutClient; 
+export default AppLayoutAdmin; 

@@ -12,8 +12,8 @@ export const ROUTES = {
 
     //Users
     USERS: '/management/users',
-    COMPANY: '/managment/company',
-    PROFILE: '/managment/profile',
+    COMPANY: '/management/company',
+    PROFILE: '/management/profile',
 
 
 

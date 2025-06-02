@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useSidebarStore } from '../../../store/sidebarStore';
 import { MenuItems } from '@/types';
-import { IoChevronDown } from 'react-icons/io5';
+import { IoChevronDown, IoMenuOutline } from 'react-icons/io5';
 
 interface SideBarProps {
     expanded: boolean;
@@ -17,6 +17,7 @@ export const SideBar = ({ expanded, mobileOpen = false, setMobileOpen, menuItems
     const pathname = usePathname();
     const toggleSidebar = useSidebarStore((s) => s.toggle);
     const [openSubmenus, setOpenSubmenus] = useState<{ [key: string]: boolean }>({});
+    const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
     const toggleSubmenu = (path: string) => {
         setOpenSubmenus(prev => ({
@@ -29,39 +30,50 @@ export const SideBar = ({ expanded, mobileOpen = false, setMobileOpen, menuItems
         const isActive = pathname.startsWith(item.path);
         const hasSubmenu = item.submenu && item.submenu.length > 0;
         const isSubmenuOpen = openSubmenus[item.path];
+        const isHovered = hoveredItem === item.path;
 
         return (
             <li key={item.path} className="relative group">
                 <div className="flex flex-col">
                     <div
-                        className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors duration-200 cursor-pointer
-                        ${isActive ? 'bg-blue-100 text-blue-700 font-semibold' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}
-                        ${expanded ? 'justify-between' : 'justify-center px-0'}`}
+                        className={`flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 cursor-pointer
+                        ${isActive ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}
+                        ${expanded ? 'justify-between' : 'justify-center px-0'}
+                        ${isSubmenu ? 'ml-2' : ''}
+                        hover:scale-[1.02] active:scale-[0.98]`}
                         onClick={() => hasSubmenu && toggleSubmenu(item.path)}
+                        onMouseEnter={() => setHoveredItem(item.path)}
+                        onMouseLeave={() => setHoveredItem(null)}
                     >
-
                         {!hasSubmenu ? (
-                            <Link href={item.path} className="flex items-center gap-3">
-                                <span className="text-xl">{item.icon}</span>
-                                {expanded && <span className="text-base font-medium">{item.title}</span>}
+                            <Link href={item.path} className="flex items-center gap-3 w-full">
+                                <span className={`text-xl transition-colors duration-200 ${isActive ? 'text-blue-600' : 'text-gray-500'}`}>
+                                    {item.icon}
+                                </span>
+                                {expanded && (
+                                    <span className="text-base font-medium">{item.title}</span>
+                                )}
                             </Link>
                         ) : (
-
-                            <div className="flex items-center gap-3">
-                                <span className="text-xl">{item.icon}</span>
-                                {expanded && <span className="text-base font-medium">{item.title}</span>}
+                            <div className="flex items-center gap-3 w-full">
+                                <span className={`text-xl transition-colors duration-200 ${isActive ? 'text-blue-600' : 'text-gray-500'}`}>
+                                    {item.icon}
+                                </span>
+                                {expanded && (
+                                    <span className="text-base font-medium">{item.title}</span>
+                                )}
                             </div>
                         )}
 
-
                         {hasSubmenu && expanded && (
-                            <IoChevronDown className={`transition-transform duration-200 ${isSubmenuOpen ? 'rotate-180' : ''}`} />
+                            <div className={`transition-transform duration-200 ${isSubmenuOpen ? 'rotate-180' : ''}`}>
+                                <IoChevronDown className="text-gray-500" />
+                            </div>
                         )}
                     </div>
 
-
                     {hasSubmenu && expanded && (
-                        <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isSubmenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                        <div className={`overflow-hidden transition-all duration-200 ease-in-out ${isSubmenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
                             <ul className="ml-6 mt-1 space-y-1">
                                 {item.submenu.map((subItem: any) => renderMenuItem(subItem, true))}
                             </ul>
@@ -69,14 +81,15 @@ export const SideBar = ({ expanded, mobileOpen = false, setMobileOpen, menuItems
                     )}
                 </div>
 
-
                 {!expanded && (
-                    <span className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap shadow-lg transition-opacity duration-200">
+                    <div
+                        className={`absolute left-full top-1/2 -translate-y-1/2 ml-2 px-3 py-1.5 rounded-lg bg-gray-900 text-white text-sm pointer-events-none whitespace-nowrap shadow-lg z-50 transition-all duration-200
+                        ${isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'}`}
+                    >
                         {item.title}
-                    </span>
+                    </div>
                 )}
             </li>
-
         );
     };
 
@@ -84,32 +97,45 @@ export const SideBar = ({ expanded, mobileOpen = false, setMobileOpen, menuItems
     const mobileSidebar = (
         <>
             {mobileOpen && (
-                <div className="fixed inset-0 z-40 bg-black/30" onClick={() => setMobileOpen && setMobileOpen(false)} />
+                <div
+                    className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm transition-opacity duration-200"
+                    onClick={() => setMobileOpen && setMobileOpen(false)}
+                />
             )}
             <aside
-                className={`fixed inset-y-0 left-0 z-50 bg-white border-r border-gray-200 flex flex-col transition-all duration-300 ease-in-out w-72 h-screen
-                ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}
-                lg:translate-x-0 lg:w-72 lg:static lg:z-40`}
+                className={`fixed inset-y-0 left-0 z-50 bg-white border-r border-gray-200 flex flex-col w-72 h-screen lg:hidden transition-transform duration-200 ease-in-out ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}
             >
-                {/* Logo y botón de colapso/cerrar */}
-                <div className="flex items-center justify-between px-6 py-4 border-b gap-2">
+                <div className="flex items-center justify-between px-6 py-4 border-b">
                     <Link href="/dashboard" className="flex items-center gap-2">
-                        <span className="text-xl font-bold text-blue-600">Inventory</span>
-                        <span className="text-xl font-semibold text-gray-700">System</span>
+                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-sm">
+                            <span className="text-xl font-bold text-white">IS</span>
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-xl font-bold text-blue-600">Inventory</span>
+                            <span className="text-sm font-medium text-gray-500">System</span>
+                        </div>
                     </Link>
+                    <button
+                        onClick={() => setMobileOpen && setMobileOpen(false)}
+                        className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                    >
+                        <IoMenuOutline className="w-6 h-6 text-gray-500" />
+                    </button>
                 </div>
-                {/* Navegación */}
-                <nav className="flex-1 py-4 flex flex-col gap-1">
-                    <ul className="flex flex-col gap-1">
+                <nav className="flex-1 py-4">
+                    <ul className="flex flex-col gap-1 px-3">
                         {menuItems.map((item) => renderMenuItem(item))}
                     </ul>
                 </nav>
-                {/* Footer */}
-                <div className="mt-auto border-t px-4 py-4 flex items-center gap-3">
-                    <span className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg">IS</span>
-                    <div>
-                        <div className="font-semibold text-gray-800">Inventory System</div>
-                        <div className="text-xs text-gray-400">v1.0.0</div>
+                <div className="mt-auto border-t p-4">
+                    <div className="flex items-center gap-3 p-3 bg-gradient-to-br from-gray-50 to-white rounded-lg border border-gray-100 shadow-sm">
+                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-sm">
+                            <span className="text-lg font-bold text-white">IS</span>
+                        </div>
+                        <div>
+                            <div className="font-semibold text-gray-800">Inventory System</div>
+                            <div className="text-xs text-gray-500">v1.0.0</div>
+                        </div>
                     </div>
                 </div>
             </aside>
@@ -118,43 +144,80 @@ export const SideBar = ({ expanded, mobileOpen = false, setMobileOpen, menuItems
 
     // Sidebar desktop/colapsable
     const desktopSidebar = (
-        <aside
-            className={`hidden lg:flex fixed inset-y-0 left-0 z-40 bg-white border-r border-gray-200 flex-col transition-all duration-300 ease-in-out ${expanded ? 'w-72' : 'w-20'} h-screen`}
-        >
-            {/* Logo y botón de colapso */}
-            <div className={`flex items-center ${expanded ? 'justify-between px-6' : 'justify-center px-0'} h-16  gap-2`}>
-                <Link href="/dashboard" className="flex items-center gap-2">
-                    <span className={`text-xl font-bold text-blue-600 transition-all ${expanded ? 'block' : 'hidden'}`}>Inventory</span>
-                    <span className={`text-xl font-semibold text-gray-700 transition-all ${expanded ? 'block' : 'hidden'}`}>System</span>
-                    <span className={`w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg ${expanded ? 'hidden' : 'block'}`}>IS</span>
-                </Link>
-            </div>
-            {/* Navegación */}
-            <nav className="flex-1 py-4 flex flex-col gap-1">
-                <ul className="flex flex-col gap-1 px-2">
-                    {menuItems.map((item) => renderMenuItem(item))}
-                </ul>
-            </nav>
-            {/* Footer */}
-            <div className={`mt-auto border-t px-4 py-4 flex items-center gap-3 ${expanded ? '' : 'justify-center px-0'}`}>
-                <span className={`w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg`}>IS</span>
-                {expanded && (
-                    <div>
-                        <div className="font-semibold text-gray-800">Inventory System</div>
-                        <div className="text-xs text-gray-400">v1.0.0</div>
+        <>
+            <aside
+                className={`hidden lg:flex fixed inset-y-0 left-0 z-40 bg-white border-r border-gray-200 flex-col h-screen transition-all duration-300 ease-in-out ${expanded ? 'w-72' : 'w-20'}`}
+            >
+                <div className={`flex items-center ${expanded ? 'justify-between px-6' : 'justify-center'} h-16 border-b`}>
+                    <Link href="/dashboard" className="flex items-center gap-2">
+                        {expanded ? (
+                            <>
+                                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-sm">
+                                    <span className="text-xl font-bold text-white">IS</span>
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-xl font-bold text-blue-600">Inventory</span>
+                                    <span className="text-sm font-medium text-gray-500">System</span>
+                                </div>
+                            </>
+                        ) : (
+                            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-sm">
+                                <span className="text-xl font-bold text-white">IS</span>
+                            </div>
+                        )}
+                    </Link>
+                </div>
+                <nav className="flex-1 py-4">
+                    <ul className="flex flex-col gap-1 px-3">
+                        {menuItems.map((item) => renderMenuItem(item))}
+                    </ul>
+                </nav>
+                <div className={`mt-auto border-t p-4 ${expanded ? '' : 'flex justify-center'}`}>
+                    <div
+                        className={`flex items-center gap-3 p-1 bg-gradient-to-br from-gray-50 to-white rounded-lg border border-gray-100 shadow-sm transition-all duration-300
+                        ${expanded ? 'w-full' : 'w-12 h-12 justify-center'}`}
+                    >
+                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-sm">
+                            <span className="text-lg font-bold text-white">IS</span>
+                        </div>
+                        {expanded && (
+                            <div className="overflow-hidden">
+                                <div className="font-semibold text-gray-800 whitespace-nowrap">Inventory System</div>
+                                <div className="text-xs text-gray-500 whitespace-nowrap">v1.0.0</div>
+                            </div>
+                        )}
                     </div>
-                )}
-            </div>
-        </aside>
+                </div>
+            </aside>
+
+            {/* Barra de navegación cuando el sidebar está colapsado */}
+            {!expanded && (
+                <div className="hidden lg:block fixed top-0 left-20 right-0 h-16 bg-white border-b border-gray-200 z-30">
+                    <div className="flex items-center justify-between h-full px-6">
+                        <div className="flex items-center gap-4">
+                            {menuItems.map((item) => (
+                                <Link
+                                    key={item.path}
+                                    href={item.path}
+                                    className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors duration-200
+                                    ${pathname.startsWith(item.path) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'}`}
+                                >
+                                    <span className="text-xl">{item.icon}</span>
+                                    <span className="font-medium">{item.title}</span>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
+        </>
     );
 
     return (
         <>
-            {/* Drawer móvil/tablet */}
             <div className="lg:hidden">
                 {mobileSidebar}
             </div>
-            {/* Sidebar desktop */}
             {desktopSidebar}
         </>
     );

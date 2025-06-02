@@ -19,7 +19,7 @@ export default async function ManagementLayout({
     <html lang="es">
       <body className={inter.className}>
         <AppLayoutClient user={session.user}>
-          {children}
+            {children}
         </AppLayoutClient>
         <PrelineScript />
       </body>

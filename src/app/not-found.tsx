@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 
 export default function NotFound() {
   const pathname = usePathname();
-
+ 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex flex-col items-center justify-center p-4 relative overflow-hidden">
       {/* Background decorative elements */}

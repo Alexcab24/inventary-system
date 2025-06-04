@@ -27,6 +27,7 @@ model Company {
   rnc              String?
   logotype         String?
   phone            String?
+  description      String?
   email            String   @unique
   createdAt        DateTime @default(now())
   suscription_plan String?
@@ -80,7 +81,7 @@ model ProductMovement {
   type      MovementType
   createdAt DateTime     @default(now())
 
-//relaciones
+  //relaciones
   product   Products @relation(fields: [productId], references: [id])
   company   Company  @relation(fields: [companyId], references: [workspace])
   productId String

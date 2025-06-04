@@ -1,5 +1,3 @@
-
-
 export interface Supplier {
     id?: string;
     name: string;
@@ -7,4 +5,5 @@ export interface Supplier {
     phone: string;
     address: string;
     companyId?: string;
+    logo?: string;
 }

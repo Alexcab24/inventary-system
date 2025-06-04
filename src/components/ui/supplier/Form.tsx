@@ -2,13 +2,14 @@
 
 import { createSupplier } from '@/actions/supplier/create-supplier';
 import { User } from '@/interfaces';
-import clsx from 'clsx';
 import Link from 'next/link';
-import React from 'react'
+import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { errorNotification, successNotification } from '../notification/notifications';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/router/routes';
+import { LoadingOverlay } from '../LoadingOverlay';
+import { IoBusinessOutline, IoMailOutline, IoCallOutline, IoLocationOutline, IoInformationCircleOutline } from 'react-icons/io5';
 
 interface FormInputs {
     name: string;
@@ -17,133 +18,166 @@ interface FormInputs {
     address: string;
 }
 
-
 interface Props {
     user?: User;
 }
 
 const Form = ({ user }: Props) => {
-
     const router = useRouter();
     const companyId = user?.companyId;
+    const [isLoading, setIsLoading] = useState(false);
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-        const { name, email, phone, address } = data;
+        try {
+            setIsLoading(true);
+            const { name, email, phone, address } = data;
 
-        if (!companyId) return;
+            if (!companyId) return;
 
-        // server action
+            const resp = await createSupplier(name, phone, email, address, companyId);
 
-        const resp = await createSupplier(name, phone, email, address, companyId);
-
-        if (resp.ok) {
-            successNotification(resp.message || '');
-            router.push('/dashboard/suppliers');
-            return;
-        } else {
-            // setErrorMessage(resp.message);
-            errorNotification(resp.message || '');
-            return;
+            if (resp.ok) {
+                successNotification(resp.message || '');
+                router.push('/dashboard/suppliers');
+            } else {
+                errorNotification(resp.message || '');
+            }
+        } catch (error) {
+            errorNotification('An error occurred while creating the supplier');
+        } finally {
+            setIsLoading(false);
         }
-
-
     }
+
     return (
-        <div className='bg-white rounded-xl shadow-md border overflow-hidden p-8 min-w-full'>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-
-                {/* Nombre */}
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">Nombre</label>
-                    <input
-                        type="text"
-                        id="name"
-                        {...register('name', { required: "El nombre es requerido" })}
-                        className={clsx(
-                            "mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm sm:text-sm",
-                            { 'border-red-500': errors.name }
-                        )}
-                    />
-                    {errors.name && (
-                        <span className="text-sm text-red-500">{errors.name.message}</span>
-                    )}
+        <>
+            <LoadingOverlay isLoading={isLoading} />
+            <div className="w-full max-w-5xl animate-fade-in bg-white rounded-[2rem] border border-gray-200 overflow-hidden transition-all duration-300 mx-auto">
+                {/* Header */}
+                <div className="sticky md:static top-0 z-10 bg-white backdrop-blur-md px-8 pt-8 pb-4 border-b border-gray-200 flex flex-col gap-1">
+                    <div className="flex items-center gap-3 mb-1">
+                        <IoInformationCircleOutline className="text-blue-600 text-3xl" />
+                        <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Add Supplier</h2>
+                    </div>
+                    <p className="text-gray-500 text-base">Add a new supplier to your business network</p>
                 </div>
 
-                {/* Correo */}
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">Correo</label>
-                    <input
-                        type="email"
-                        id="email"
-                        {...register('email', {
-                            required: "El correo es requerido",
-                            pattern: {
-                                value: /^\S+@\S+$/i,
-                                message: "El formato del correo es inválido"
-                            }
-                        })}
-                        className={clsx(
-                            "mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm sm:text-sm",
-                            { 'border-red-500': errors.email }
-                        )}
-                    />
-                    {errors.email && (
-                        <span className="text-sm text-red-500">{errors.email.message}</span>
-                    )}
-                </div>
+                <form onSubmit={handleSubmit(onSubmit)} className="px-8 py-8 md:px-14 md:py-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        {/* Left column */}
+                        <div className="space-y-8">
+                            {/* Name */}
+                            <div>
+                                <label className="block text-base font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                                    <IoBusinessOutline className="text-gray-400 text-xl" />
+                                    Company Name
+                                </label>
+                                <input
+                                    type="text"
+                                    {...register('name', { required: "Company name is required" })}
+                                    className="w-full px-5 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-lg placeholder:text-gray-400 focus:bg-blue-50"
+                                    placeholder="Enter company name"
+                                />
+                                {errors.name && (
+                                    <p className="text-sm text-red-500 mt-1">{errors.name.message}</p>
+                                )}
+                            </div>
 
-                {/* Contraseña */}
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">Teléfono</label>
-                    <input
-                        type="text"
-                        id="text"
-                        {...register('phone', {
-                            required: "El telefono es requerido",
-                        })}
-                        className={clsx(
-                            "mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm sm:text-sm",
-                            { 'border-red-500': errors.email }
-                        )}
-                    />
-                    {errors.email && (
-                        <span className="text-sm text-red-500">{errors.email.message}</span>
-                    )}
-                </div>
+                            {/* Email */}
+                            <div>
+                                <label className="block text-base font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                                    <IoMailOutline className="text-gray-400 text-xl" />
+                                    Email Address
+                                </label>
+                                <input
+                                    type="email"
+                                    {...register('email', {
+                                        required: "Email is required",
+                                        pattern: {
+                                            value: /^\S+@\S+$/i,
+                                            message: "Invalid email format"
+                                        }
+                                    })}
+                                    className="w-full px-5 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-lg placeholder:text-gray-400 focus:bg-blue-50"
+                                    placeholder="Enter email address"
+                                />
+                                {errors.email && (
+                                    <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>
+                                )}
+                            </div>
+                        </div>
 
-                {/* Rol */}
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">Dirección</label>
-                    <textarea
-                        id="text"
-                        {...register('address', {
-                            required: "La dirección es requerida",
-                        })}
-                        className={clsx(
-                            "mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm sm:text-sm",
-                            { 'border-red-500': errors.email }
-                        )}
-                    />
-                    {errors.email && (
-                        <span className="text-sm text-red-500">{errors.email.message}</span>
-                    )}
-                </div>
+                        {/* Right column */}
+                        <div className="space-y-8">
+                            {/* Phone */}
+                            <div>
+                                <label className="block text-base font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                                    <IoCallOutline className="text-gray-400 text-xl" />
+                                    Phone Number
+                                </label>
+                                <input
+                                    type="tel"
+                                    {...register('phone', {
+                                        required: "Phone number is required",
+                                    })}
+                                    className="w-full px-5 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-lg placeholder:text-gray-400 focus:bg-blue-50"
+                                    placeholder="Enter phone number"
+                                />
+                                {errors.phone && (
+                                    <p className="text-sm text-red-500 mt-1">{errors.phone.message}</p>
+                                )}
+                            </div>
 
-                {/* Botón de envío */}
-                <div className="flex flex-col-reverse md:flex-row justify-end gap-x-4">
-                    <Link href={ROUTES.SUPPLIER} className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
-                        Cancelar
-                    </Link>
-                    <button type="submit" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-demoHover text-white hover:bg-demo transition-all duration-300 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                        Agregar suplidor
-                    </button>
-                </div>
+                            {/* Address */}
+                            <div>
+                                <label className="block text-base font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                                    <IoLocationOutline className="text-gray-400 text-xl" />
+                                    Address
+                                </label>
+                                <textarea
+                                    {...register('address', {
+                                        required: "Address is required",
+                                    })}
+                                    className="w-full px-5 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-lg placeholder:text-gray-400 focus:bg-blue-50 resize-none"
+                                    placeholder="Enter full address"
+                                    rows={4}
+                                />
+                                {errors.address && (
+                                    <p className="text-sm text-red-500 mt-1">{errors.address.message}</p>
+                                )}
+                            </div>
+                        </div>
+                    </div>
 
-            </form>
-
-        </div>
+                    {/* Submit & Cancel */}
+                    <div className="pt-10 flex flex-col md:flex-row gap-4 justify-end">
+                        <button
+                            type="submit"
+                            className="w-full md:w-auto py-3 px-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold text-lg hover:from-blue-700 hover:to-blue-600 transition-all"
+                        >
+                            Add Supplier
+                        </button>
+                        <Link
+                            href={ROUTES.SUPPLIER}
+                            className="w-full md:w-auto text-center py-3 px-10 rounded-full border border-gray-200 bg-white text-gray-500 hover:text-blue-600 hover:border-blue-200 transition-all"
+                        >
+                            Cancel
+                        </Link>
+                    </div>
+                </form>
+            </div>
+            <style jsx global>{`
+                @keyframes fade-in {
+                    0% { opacity: 0; transform: translateY(40px); }
+                    100% { opacity: 1; transform: translateY(0); }
+                }
+                .animate-fade-in {
+                    animation: fade-in 0.7s cubic-bezier(.4,0,.2,1);
+                }
+            `}</style>
+        </>
     )
 }
 

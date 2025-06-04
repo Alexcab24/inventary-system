@@ -1,16 +1,21 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSidebarStore } from '../../../store/sidebarStore';
 import { MenuItems } from '@/types';
 import { IoChevronDown, IoMenuOutline } from 'react-icons/io5';
+import { getCompanytById } from '@/actions/company/get-company-by-id';
+
+import { LoadingOverlay } from '../LoadingOverlay';
+import { getWorkspace } from '@/utils/getWorkspace';
 
 interface SideBarProps {
     expanded: boolean;
     mobileOpen?: boolean;
     setMobileOpen?: (v: boolean) => void;
-    menuItems: MenuItems
+    menuItems: MenuItems,
 }
 
 export const SideBar = ({ expanded, mobileOpen = false, setMobileOpen, menuItems }: SideBarProps) => {
@@ -18,6 +23,33 @@ export const SideBar = ({ expanded, mobileOpen = false, setMobileOpen, menuItems
     const toggleSidebar = useSidebarStore((s) => s.toggle);
     const [openSubmenus, setOpenSubmenus] = useState<{ [key: string]: boolean }>({});
     const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [companyData, setCompanyData] = useState<{ name: string; logotype: string | null }>({
+        name: 'Inventory System',
+        logotype: null
+    });
+
+    useEffect(() => {
+        const fetchCompanyData = async () => {
+            try {
+                setIsLoading(true);
+                const workspace = await getWorkspace();
+                const company = await getCompanytById(workspace);
+                if (company) {
+                    setCompanyData({
+                        name: company.name,
+                        logotype: company.logotype ?? null
+                    });
+                }
+            } catch (error) {
+                console.error('Error fetching company data:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchCompanyData();
+    }, []);
 
     const toggleSubmenu = (path: string) => {
         setOpenSubmenus(prev => ({
@@ -152,17 +184,40 @@ export const SideBar = ({ expanded, mobileOpen = false, setMobileOpen, menuItems
                     <Link href="/dashboard" className="flex items-center gap-2">
                         {expanded ? (
                             <>
+                                {/* Logotype */}
                                 <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-sm">
-                                    <span className="text-xl font-bold text-white">IS</span>
+                                    {companyData.logotype && companyData.logotype !== "NULL" ? (
+                                        <Image
+                                            src={companyData.logotype}
+                                            alt={companyData.name}
+                                            width={40}
+                                            height={40}
+                                            className="w-full h-full object-cover rounded-lg"
+                                        />
+                                    ) : (
+                                        <span className="text-xl font-bold text-white">IS</span>
+                                    )}
                                 </div>
+
+                                {/* companyName */}
                                 <div className="flex flex-col">
-                                    <span className="text-xl font-bold text-blue-600">Inventory</span>
-                                    <span className="text-sm font-medium text-gray-500">System</span>
+                                    <span className="text-xl font-bold text-blue-600">{companyData.name}</span>
                                 </div>
                             </>
                         ) : (
+                            // Logotype
                             <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-sm">
-                                <span className="text-xl font-bold text-white">IS</span>
+                                {companyData.logotype ? (
+                                    <Image
+                                        src={companyData.logotype}
+                                        alt={companyData.name}
+                                        width={40}
+                                        height={40}
+                                        className="w-full h-full object-cover rounded-lg"
+                                    />
+                                ) : (
+                                    <span className="text-xl font-bold text-white">IS</span>
+                                )}
                             </div>
                         )}
                     </Link>
@@ -215,6 +270,7 @@ export const SideBar = ({ expanded, mobileOpen = false, setMobileOpen, menuItems
 
     return (
         <>
+            <LoadingOverlay isLoading={isLoading} />
             <div className="lg:hidden">
                 {mobileSidebar}
             </div>
@@ -222,3 +278,26 @@ export const SideBar = ({ expanded, mobileOpen = false, setMobileOpen, menuItems
         </>
     );
 };
+
+
+// let person = {
+//     name: "Gabriel",
+//     secondName: "Antonio",
+//     lastName: "Paulino Ruiz",
+//     fullName: function(){
+//         console.log(this.name + " " + this.secondName + " " + this.lastName)
+//     },
+//     direction: {
+//         city: "Dom. Rep",
+//         takeCity: function(){
+//             let self = this
+
+//             let nuevaDireccion = function(){
+//                 console.log(self)
+//                 console.log("La direccion es: " + self.city)
+//             }
+
+//             nuevaDireccion();
+//         }
+//     }
+// }

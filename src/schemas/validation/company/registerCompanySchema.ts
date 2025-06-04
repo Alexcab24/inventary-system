@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const companySchema = z.object({
+export const registerCompanySchema = z.object({
     company_name: z.string()
         .min(3, "Company name must be at least 3 characters")
         .max(50, "Company name must be less than 50 characters"),
@@ -22,6 +22,6 @@ export const companySchema = z.object({
     path: ["confirmPassword"]
 });
 
-export const validateCompany = (company: unknown) => {
-    return companySchema.safeParse(company);
+export const validateRegisterCompany = (company: unknown) => {
+    return registerCompanySchema.safeParse(company);
 }; 

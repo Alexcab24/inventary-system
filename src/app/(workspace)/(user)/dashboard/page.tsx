@@ -40,9 +40,24 @@ export default async function DashboardPage() {
 
       {/* Cards */}
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <Card title="Productos en el inventario" value={totalProducts} icon={FaUsers} />
-        <Card title="Proveedores registrados" value={totalSuppliers} icon={FaFileInvoiceDollar} />
-        <Card title="Productos con stock bajo" value={lowStock} icon={MdAttachMoney} />
+        <Card
+          title="Productos en el inventario"
+          value={totalProducts}
+          icon={FaUsers}
+          className="bg-gradient-to-br from-blue-50 to-white border-blue-100 hover:shadow-blue-100/50"
+        />
+        <Card
+          title="Proveedores registrados"
+          value={totalSuppliers}
+          icon={FaFileInvoiceDollar}
+          className="bg-gradient-to-br from-emerald-50 to-white border-emerald-100 hover:shadow-emerald-100/50"
+        />
+        <Card
+          title="Productos con stock bajo"
+          value={lowStock}
+          icon={MdAttachMoney}
+          className="bg-gradient-to-br from-amber-50 to-white border-amber-100 hover:shadow-amber-100/50"
+        />
       </section>
 
       {/* Gráficos y Últimos Productos */}

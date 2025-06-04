@@ -1,5 +1,5 @@
 import { getSupplierByCompany } from "@/actions/supplier/get-supplier"
-import { Pagination } from "../orders/Pagination";
+import { Pagination } from "../Pagination";
 import SupplierTable from "./SupplierTable";
 import SupplierCard from "./SupplierCard";
 

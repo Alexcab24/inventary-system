@@ -1,5 +1,5 @@
 import React from 'react'
-import { Pagination } from '../orders/Pagination';
+import { Pagination } from '../Pagination';
 import { getProductsMovementsByCompany } from '@/actions/products/movements/get-movements-by-company';
 
 
@@ -15,10 +15,10 @@ interface Props {
 const MovementsContainer = async ({ query, page }: Props) => {
 
 
-  const { productsMovements = [], totalPages = 1 } = await getProductsMovementsByCompany({ query, page });
+    const { productsMovements = [], totalPages = 1 } = await getProductsMovementsByCompany({ query, page });
 
-  const totalProducts = productsMovements?.length || 0;
-  
+    const totalProducts = productsMovements?.length || 0;
+
     return (
         <>
             {/* <!-- Table Section --> */}

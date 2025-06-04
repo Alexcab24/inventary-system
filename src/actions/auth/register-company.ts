@@ -1,7 +1,7 @@
 'use server';
 
 import prisma from "@/lib/prisma";
-import { validateCompany } from "@/schemas/validation/companyValidation";
+import { validateRegisterCompany } from "@/schemas/validation/company/registerCompanySchema";
 import { revalidatePath } from "next/cache";
 import bcryptjs from 'bcryptjs';
 
@@ -16,7 +16,7 @@ export const registerCompany = async (company_name: string, name: string, email:
             confirmPassword: password
         };
 
-        const result = validateCompany(formData);
+        const result = validateRegisterCompany(formData);
 
         if (!result.success) {
             return {

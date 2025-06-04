@@ -1,141 +1,122 @@
-import { Supplier } from "@/interfaces/supplier.interface"
-import { UpdateButton } from "../Buttons"
-
-
+import { Supplier } from '@/interfaces/supplier.interface'
+import { cn } from '@/lib/utils'
+import Image from 'next/image'
+import React from 'react'
+import { UpdateButton } from '../Buttons'
+import DeleteSupplierFunction from './function-buttons/DeleteSupplierFunction'
 
 interface Props {
     suppliers: Supplier[]
 }
 
-export const SupplierTable = ({ suppliers }: Props) => {
-
-
-
+export const SupplierTable = async ({ suppliers }: Props) => {
     return (
-        <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-                <tr>
-                    <th scope="col" className="ps-6 py-3 text-start">
-
-                    </th>
-
-                    <th scope="col" className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3 text-start">
-                        <div className="flex items-center gap-x-2">
-                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                                código de suplidor
+        <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+            <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gradient-to-r from-gray-50 to-white">
+                    <tr>
+                        <th scope="col" className="ps-6 py-4">
+                            <div className="flex items-center gap-x-2">
+                                <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
+                                    ID
+                                </span>
+                            </div>
+                        </th>
+                        <th scope="col" className="px-6 py-4">
+                            <div className="flex items-center gap-x-2">
+                                <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
+                                    Proveedor
+                                </span>
+                            </div>
+                        </th>
+                        <th scope="col" className="px-6 py-4">
+                            <div className="flex items-center gap-x-2">
+                                <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
+                                    Email
+                                </span>
+                            </div>
+                        </th>
+                        <th scope="col" className="px-6 py-4">
+                            <div className="flex items-center gap-x-2">
+                                <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
+                                    Teléfono
+                                </span>
+                            </div>
+                        </th>
+                        <th scope="col" className="px-6 py-4 text-end">
+                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
+                                Acciones
                             </span>
-                        </div>
-                    </th>
+                        </th>
+                    </tr>
+                </thead>
 
-                    <th scope="col" className="px-6 py-3 text-start">
-                        <div className="flex items-center gap-x-2">
-                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                                nombre
-                            </span>
-                        </div>
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-start">
-                        <div className="flex items-center gap-x-2">
-                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                                Email
-                            </span>
-                        </div>
-                    </th>
-
-                    <th scope="col" className="px-6 py-3 text-start">
-                        <div className="flex items-center gap-x-2">
-                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                                teléfono
-                            </span>
-                        </div>
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-start">
-                        <div className="flex items-center gap-x-2">
-                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                                Dirección
-                            </span>
-                        </div>
-                    </th>
-
-                    <th scope="col" className="px-6 py-3 text-start">
-                        <div className="flex items-center gap-x-2">
-                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                                Opciones
-                            </span>
-                        </div>
-                    </th>
-
-
-                </tr>
-            </thead>
-
-            <tbody className="divide-y divide-gray-200">
-                {/* fila */}
-                {
-                    suppliers.length > 0 ? (
+                <tbody className="divide-y divide-gray-200">
+                    {suppliers.length > 0 ? (
                         suppliers.map(supplier => (
-                            <tr key={supplier.id}>
-                                <td className="size-px whitespace-nowrap">
-                                    <div className="ps-6 py-3">
-                                        <label className="flex">
-
-                                        </label>
-                                    </div>
+                            <tr key={supplier.id} className="transition-colors hover:bg-gray-50">
+                                <td className="whitespace-nowrap py-4 ps-6">
+                                    <span className="inline-flex items-center gap-x-2 rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600">
+                                        {supplier.id?.split('-').at(-1)}
+                                    </span>
                                 </td>
-                                <td className="size-px whitespace-nowrap">
-                                    <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
-                                        <span className="text-sm text-gray-500">{supplier.id?.split('-').at(-1)}</span>
-                                    </div>
-                                </td>
-                                <td className="h-px w-72 whitespace-nowrap">
-                                    <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
-                                        <span className="text-sm text-gray-500">{supplier.name}</span>
-                                    </div>
-                                </td>
-                                <td className="h-px w-72 whitespace-nowrap">
-                                    <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
-                                        <span className="text-sm text-gray-500">{supplier.email}</span>
-                                    </div>
-                                </td>
-                                <td className="size-px whitespace-nowrap">
-                                    <div className="px-6 py-3">
-                                        <div className="flex items-center gap-x-3">
-                                            <span className="text-sm text-gray-500">
-                                                {supplier.phone}
+                                <td className="whitespace-nowrap py-4 px-6">
+                                    <div className="flex items-center gap-x-3">
+                                        <div className="relative size-10 rounded-full overflow-hidden ring-2 ring-gray-100">
+                                            <Image
+                                                className="object-cover"
+                                                src={supplier.logo || "https://images.unsplash.com/photo-1670272505340-d906d8d77d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"}
+                                                alt={`Logo of ${supplier.name}`}
+                                                fill
+                                            />
+                                        </div>
+                                        <div className="grow">
+                                            <span className="block text-sm font-medium text-gray-800">
+                                                {supplier.name}
                                             </span>
                                         </div>
                                     </div>
                                 </td>
-                                <td className="size-px whitespace-nowrap">
-                                    <div className="px-6 py-3">
-                                        <span className="text-sm text-gray-500">{supplier.address}</span>
-                                    </div>
+                                <td className="whitespace-nowrap py-4 px-6">
+                                    <span className="text-sm text-gray-600">
+                                        {supplier.email}
+                                    </span>
                                 </td>
-                                <td className="size-px whitespace-nowrap">
-                                    <div className="flex gap-x-2 px-6 py-1.5">
+                                <td className="whitespace-nowrap py-4 px-6">
+                                    <span className="text-sm text-gray-600">
+                                        {supplier.phone}
+                                    </span>
+                                </td>
+                                <td className="whitespace-nowrap py-4 px-6">
+                                    <div className="flex items-center justify-end gap-x-2">
                                         <UpdateButton
-                                            url="/suppliers/"
                                             id={supplier.id || ''}
+                                            url='/suppliers'
+                                            aria-label={`Update supplier ${supplier.name}`}
                                         />
-                                        {/* lo implementamos cuando resolvamos el error de relaciones */}
-                                        {/* <DeleteSupplierFunction id={supplier.id} aria-label={`Eliminar suplidor ${supplier.name}`} /> */}
-
-
+                                        <DeleteSupplierFunction
+                                            id={supplier.id || ''}
+                                            aria-label={`Delete supplier ${supplier.name}`}
+                                        />
                                     </div>
                                 </td>
                             </tr>
                         ))
                     ) : (
                         <tr>
-                            <td className="text-center py-4" colSpan={6}>
-                                <span className="block text-sm text-gray-500">No se encontraron usuarios que coincidan con la búsqueda.</span>
+                            <td colSpan={5} className="py-8 text-center">
+                                <div className="flex flex-col items-center gap-2">
+                                    <svg className="size-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                                    </svg>
+                                    <span className="text-sm text-gray-500">No se encontraron proveedores que coincidan con la búsqueda.</span>
+                                </div>
                             </td>
                         </tr>
-                    )
-                }
-
-            </tbody>
-        </table>
+                    )}
+                </tbody>
+            </table>
+        </div>
     )
 }
 

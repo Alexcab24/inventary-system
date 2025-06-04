@@ -49,10 +49,10 @@ interface SeedData {
 export const initialData: SeedData = {
     users: [
         // Usuarios para Subdomain Company
-        { name: 'Alex Cabral', email: 'acabral2442@google.com', password: bcryptjs.hashSync('alex123'), role: 'admin', companyId: 'testcompany' },
-        { name: 'Vielka Ami', email: 'vielka@google.com', password: bcryptjs.hashSync('vielka123'), role: 'user', companyId: 'testcompany' },
+        { name: 'Alex Cabral', email: 'acabral2442@google.com', password: bcryptjs.hashSync('alex123'), role: 'admin', companyId: 'subdomain' },
+        { name: 'Vielka Ami', email: 'vielka@google.com', password: bcryptjs.hashSync('vielka123'), role: 'user', companyId: 'subdomain' },
         { name: 'Eduardo Cabral', email: 'eduardo@google.com', password: bcryptjs.hashSync('123456'), role: 'admin', companyId: 'subdomain' },
-        
+
         // Usuarios para nuevas compañías
         { name: 'Javier Nuñez', email: 'javier@empresa1.com', password: bcryptjs.hashSync('empresa1123'), role: 'admin', companyId: 'testcompany' },
         { name: 'Mariana López', email: 'mariana@empresa1.com', password: bcryptjs.hashSync('empresa1456'), role: 'user', companyId: 'testcompany' },
@@ -89,7 +89,7 @@ export const initialData: SeedData = {
         { workspace: 'empresa2', name: 'Empresa Dos', phone: '8095552222', email: 'contacto@empresa2.com' },
         { workspace: 'empresa3', name: 'Empresa Tres', phone: '8095553333', email: 'contacto@empresa3.com' }
     ]
-    
+
 
 
 }

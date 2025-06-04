@@ -33,26 +33,17 @@ export default async function EditProductPage({ params }: { params: { id: string
     return (
 
         <>
-            <div className="max-w-[950px] mx-auto my-10">
-                <div className="mb-5">
-                    <div className="flex items-center gap-x-2 mb-2">
-                        <span className="p-2 bg-slate-100 rounded-full shadow-md"> <CiEdit size={26} /></span>
+            {/* <div className="max-w-[950px]"> */}
 
-                        <h1 className="text-2xl sm:text-4xl font-light text-gray-800">Editar producto </h1>
-                    </div>
 
-                    <p className="antialiased text-sm sm:text-lg">Completa la información requerida para agregar un nuevo usuario.</p>
-                </div>
+            <div className="mx-auto max-w-[950px]">
+                <FormEdit
+                    userSession={session?.user}
+                    productById={productById}
+                    categories={categories}
+                    suppliers={suppliers.suppliers}
+                />
 
-                <div className=" my-4">
-                    <FormEdit
-                        userSession={session?.user}
-                        productById={productById}
-                        categories={categories}
-                        suppliers={suppliers.suppliers}
-                    />
-
-                </div>
             </div>
         </>
 

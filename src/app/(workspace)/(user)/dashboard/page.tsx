@@ -30,16 +30,16 @@ export default async function DashboardPage() {
   const lowStock = products?.filter(product => product.stock <= 5).length || 0;
 
   return (
-    <main className="p-4 md:p-6 space-y-6 w-full">
+    <main className="  w-full">
       {/* Saludo */}
-      <div className="py-4 md:py-6">
+      <div className="py-2 md:py-3">
         <span className="text-2xl md:text-4xl font-bold text-gray-800">
           Bienvenido/a, {session?.user.name}! 👋
         </span>
       </div>
 
       {/* Cards */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
         <Card
           title="Productos en el inventario"
           value={totalProducts}

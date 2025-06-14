@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma";
 
 export const getProductsByCompany = async ({
     page = 1,
-    take = 6,
+    take = 5,
     query }: PaginatedItemProps) => {
 
 
@@ -32,6 +32,7 @@ export const getProductsByCompany = async ({
             },
             where: {
                 companyId: session.user.companyId,
+                isActive: true,
                 OR: [
                     {
                         id: {
@@ -65,6 +66,7 @@ export const getProductsByCompany = async ({
             ...product,
             price: product.price.toNumber()
         }));
+        console.log(formattedProducts)
 
         const totalCount = await prisma.products.count({
             where: {
@@ -83,16 +85,12 @@ export const getProductsByCompany = async ({
 
     } catch (error) {
         console.error("Error al obtener los usuarios:", error);
-        
+
         return {
             ok: false,
             message: 'Error al obtener los productos'
         }
     }
-
-
-
-
 }
 
 
@@ -116,7 +114,6 @@ export const fetchProductByCompany = async () => {
     })
 
     return {
-
         products
     }
 }
@@ -161,7 +158,7 @@ export const getLastProducts = async () => {
     }
 
     try {
-        const lastSixProducts = await prisma.products.findMany({
+        const lastFourProducts = await prisma.products.findMany({
             where: {
                 companyId: session.user.companyId
             },
@@ -171,12 +168,12 @@ export const getLastProducts = async () => {
             include: {
                 supplier: true
             },
-            take: 6
+            take: 4
         })
 
         return {
             ok: true,
-            lastSixProducts
+            lastFourProducts
         }
     } catch (error) {
         console.error(error)

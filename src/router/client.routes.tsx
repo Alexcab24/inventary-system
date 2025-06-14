@@ -37,9 +37,9 @@ export const clientMenuItems = [
         title: 'Suppliers',
         path: ROUTES.SUPPLIER,
     },
-    {
-        icon: <RiFileList3Line />,
-        title: 'Reports',
-        path: ROUTES.REPORTS,
-    },
+    // {
+    //     icon: <RiFileList3Line />,
+    //     title: 'Reports',
+    //     path: ROUTES.REPORTS,
+    // },
 ];

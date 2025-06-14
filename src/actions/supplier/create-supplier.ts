@@ -27,7 +27,8 @@ export const createSupplier = async (
         phone,
         email,
         address,
-        companyId
+        companyId,
+        isActive: true,
     };
 
 

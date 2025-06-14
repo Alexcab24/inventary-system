@@ -1,7 +1,4 @@
-import { ProductWithRelations } from './product.interfaces';
-
-export * from './user.interfaces'
-export * from './product.interfaces'
+import { Product } from "./product.interfaces";
 
 export type MovementType = 'Inbound' | 'Outbound' | 'Transfer';
 
@@ -10,5 +7,5 @@ export interface Movement {
     type: MovementType;
     quantity: number;
     createdAt: Date;
-    product: ProductWithRelations;
-}
+    product: Product;
+} 

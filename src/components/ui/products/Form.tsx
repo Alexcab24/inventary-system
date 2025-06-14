@@ -3,7 +3,7 @@
 import { createProduct } from '@/actions/products/create-product';
 import { User } from '@/interfaces';
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { errorNotification, successNotification } from '../notification/notifications';
 import { useRouter } from 'next/navigation';
@@ -41,29 +41,33 @@ export const Form = ({ user, suppliers, categories }: Props) => {
     const handleOpen = () => setIsOpen(true);
     const handleClose = () => setIsOpen(false);
 
+    const [imageFile, setImageFile] = useState<File | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm<FormInputs>();
 
     if (!companyId) return;
 
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setPreviewImage(reader.result as string);
-                setValue('image', reader.result as string);
-            };
-            reader.readAsDataURL(file);
-        }
+    const handleFileUpload = (file: File) => {
+        setImageFile(file);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPreviewImage(reader.result as string);
+        };
+        reader.readAsDataURL(file);
     };
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
         try {
             setIsLoading(true);
-            const { name, price, stock, supplierId, description, categoryId, image } = data;
+            const formData = new FormData();
+            const { ...productData } = data;
 
-            const parsedStock = parseInt(stock, 10);
-            const parsedPrice = parseFloat(price);
+            console.log(formData)
+
+
+            const parsedStock = parseInt(productData.stock, 10);
+            const parsedPrice = parseFloat(productData.price);
 
             if (isNaN(parsedStock) || isNaN(parsedPrice)) {
                 errorNotification('Price and stock must be valid numbers.');
@@ -76,7 +80,18 @@ export const Form = ({ user, suppliers, categories }: Props) => {
                 return;
             }
 
-            const resp = await createProduct(name, parsedPrice, parsedStock, supplierId, categoryId, description, companyId);
+            formData.append('name', productData.name);
+            formData.append('price', parsedPrice.toString());
+            formData.append('stock', parsedStock.toString());
+            formData.append('supplierId', productData.supplierId);
+            formData.append('categoryId', productData.categoryId);
+            //optionals
+            if (productData.description) formData.append('description', productData.description);
+            console.log(productData.image)
+            if (imageFile) formData.append('image', imageFile)
+
+
+            const resp = await createProduct(formData);
 
             if (resp.ok) {
                 successNotification(resp.message || '');
@@ -147,6 +162,7 @@ export const Form = ({ user, suppliers, categories }: Props) => {
                                 </label>
                                 <input
                                     type="number"
+                                    min={1}
                                     {...register("stock", { required: "Stock quantity is required" })}
                                     className="w-full px-5 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-lg placeholder:text-gray-400 focus:bg-blue-50"
                                     placeholder="Available stock quantity"
@@ -174,9 +190,22 @@ export const Form = ({ user, suppliers, categories }: Props) => {
                                 <label className="block text-base font-semibold text-gray-700 mb-1">Product Image</label>
                                 <div
                                     className="w-48 h-48 bg-white border-4 border-dashed border-gray-200 rounded-2xl flex items-center justify-center cursor-pointer group relative overflow-hidden transition-all duration-300 hover:border-blue-400 focus-within:border-blue-500"
-                                    tabIndex={0}
-                                    onClick={() => document.getElementById('product-image-input')?.click()}
-                                    onKeyDown={e => { if (e.key === 'Enter') document.getElementById('product-image-input')?.click(); }}
+                                    onDragOver={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                    }}
+                                    onDrop={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        const file = e.dataTransfer.files[0];
+                                        if (file && file.type.startsWith('image/')) {
+                                            handleFileUpload(file);
+                                        } else {
+                                            errorNotification('Please upload an image file');
+                                        }
+                                    }}
+                                    onClick={() => fileInputRef.current?.click()}
+
                                 >
                                     {previewImage ? (
                                         <>
@@ -196,9 +225,15 @@ export const Form = ({ user, suppliers, categories }: Props) => {
                                     <input
                                         id="product-image-input"
                                         type="file"
-                                        accept="image/*"
-                                        onChange={handleImageChange}
-                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                        accept="image/png, image/jpeg, image/avif"
+                                        ref={fileInputRef}
+                                        onChange={(e) => {
+                                            const file = e.target.files?.[0];
+                                            if (file) {
+                                                handleFileUpload(file);
+                                            }
+                                        }}
+                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer hidden"
                                     />
                                 </div>
                                 <span className="text-xs text-gray-400">Click or drag to upload</span>

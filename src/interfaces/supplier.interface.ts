@@ -4,6 +4,7 @@ export interface Supplier {
     email: string;
     phone: string;
     address: string;
+    isActive: boolean;
     companyId?: string;
     logo?: string;
 }

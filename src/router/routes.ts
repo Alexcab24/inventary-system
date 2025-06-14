@@ -1,5 +1,3 @@
-
-
 export const ROUTES = {
     DASHBOARD: '/dashboard',
     CREATE_PRODUCT: '/inventory/products/create',

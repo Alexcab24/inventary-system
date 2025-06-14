@@ -56,11 +56,12 @@ model User {
 model Products {
   id          String   @id @default(uuid())
   name        String
-  // image       String?
+  image       String?
   description String?
   price       Decimal
   stock       Int
   createdAt   DateTime @default(now())
+  isActive    Boolean  @default(true)
 
   //relaciones
 
@@ -74,11 +75,16 @@ model Products {
   categoryId String
 
   productMovements ProductMovement[]
+
+  // Products   Products[]
+  // Products   Products?  @relation(fields: [productsId], references: [id])
+  productsId String?
 }
 
 model ProductMovement {
   id        String       @id @default(uuid())
   type      MovementType
+  quantity  Int       @default(1)
   createdAt DateTime     @default(now())
 
   //relaciones
@@ -89,8 +95,9 @@ model ProductMovement {
 }
 
 model Category {
-  id   String @id @default(uuid())
-  name String
+  id       String  @id @default(uuid())
+  name     String
+  isActive Boolean @default(true)
 
   //relaciones
   company   Company @relation(fields: [companyId], references: [workspace])
@@ -100,11 +107,12 @@ model Category {
 }
 
 model Supplier {
-  id      String @id @default(uuid())
-  name    String
-  email   String
-  phone   String
-  address String
+  id       String  @id @default(uuid())
+  name     String
+  email    String
+  phone    String
+  address  String
+  isActive Boolean @default(true)
 
   //relaciones
   company   Company @relation(fields: [companyId], references: [workspace])

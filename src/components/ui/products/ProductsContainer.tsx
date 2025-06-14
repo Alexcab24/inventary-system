@@ -1,5 +1,5 @@
 import { getProductsByCompany } from "@/actions/products/get-products-by-company";
-import ProductsTable from "./ProductsTable";
+import { ProductsTable } from "./ProductsTable";
 import ProductCard from "./ProductCard";
 import { Pagination } from '../Pagination';
 

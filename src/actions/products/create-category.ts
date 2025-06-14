@@ -20,7 +20,8 @@ export const createCategory = async (name: string) => {
 
     const category: Category = {
         name,
-        companyId,
+        isActive: true,
+        // companyId,
     };
 
     const result = validateCategory(category);

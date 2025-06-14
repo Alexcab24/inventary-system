@@ -5,7 +5,7 @@ import { getLastProducts } from "@/actions/products/get-products-by-company";
 import { cn } from "@/lib/utils";
 
 export const LastedProducts = async () => {
-    const { lastSixProducts = [] } = await getLastProducts();
+    const { lastFourProducts = [] } = await getLastProducts();
 
     return (
         <Card className="shadow-sm rounded-xl border border-gray-200 bg-gradient-to-br from-emerald-50/50 to-white">
@@ -25,7 +25,7 @@ export const LastedProducts = async () => {
 
             <CardContent className="p-6">
                 <div className="space-y-3">
-                    {lastSixProducts.map((product) => (
+                    {lastFourProducts.map((product) => (
                         <div
                             key={product.id}
                             className="group flex items-center justify-between p-3 rounded-lg hover:bg-white/80 transition-colors border border-gray-100"

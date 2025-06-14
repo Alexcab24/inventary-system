@@ -1,4 +1,4 @@
-'use server'
+'use server';
 
 
 import { auth } from "@/auth.config";
@@ -24,13 +24,13 @@ export const updateCompany = async (formData: FormData) => {
 
     delete data.logotype;
 
-    const productParsed = companySchema.safeParse(data);
-    if (!productParsed.success) {
-        console.log(productParsed.error);
+    const companyParsed = companySchema.safeParse(data);
+    if (!companyParsed.success) {
+        console.log(companyParsed.error);
         return { ok: false };
     }
 
-    const company = productParsed.data;
+    const company = companyParsed.data;
     const workspace = session.user.companyId;
 
     const logotype = formData.get("logotype") as File | null;

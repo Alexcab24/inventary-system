@@ -118,10 +118,6 @@ export const UsersTable = async ({ users }: Props) => {
                                             enabled={user.disabled || false}
                                             aria-label={user.disabled ? `Enable user ${user.name}` : `Disable user ${user.name}`}
                                         />
-                                        <DeleteUserFunction
-                                            id={user.id || ''}
-                                            aria-label={`Delete user ${user.name}`}
-                                        />
                                     </div>
                                 </td>
                             </tr>

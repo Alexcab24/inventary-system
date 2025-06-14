@@ -15,6 +15,8 @@ export const getProductById = async (id: string): Promise<ProductWithRelations |
                 price: true,
                 stock: true,
                 createdAt: true,
+                isActive: true,
+                image: true,
                 category: {
                     select: {
                         id: true,
@@ -44,6 +46,8 @@ export const getProductById = async (id: string): Promise<ProductWithRelations |
             createdAt: product.createdAt,
             category: product.category,
             supplier: product.supplier,
+            image: product.image,
+            isActive: product.isActive,
             description: product.description || '',
         };
 

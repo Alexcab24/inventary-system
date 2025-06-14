@@ -5,7 +5,7 @@ import { Category } from "@/interfaces/category.interfaces";
 import { Supplier } from "@/interfaces/supplier.interface";
 import Link from "next/link"
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { CategoryModal } from "../CategoryModal";
 import { updateProdut } from "@/actions/products/update-product";
 import { errorNotification, successNotification } from "../../notification/notifications";
@@ -36,7 +36,10 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
     const { id } = productById;
     const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    // const [previewImage, setPreviewImage] = useState<string | null>('' || null);
+    console.log(productById.image)
+    const [previewImage, setPreviewImage] = useState<string | null>(productById.image);
+    const [imageFile, setImageFile] = useState<File | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
     const handleOpen = () => setIsOpen(true);
     const handleClose = () => setIsOpen(false);
     const router = useRouter();
@@ -48,20 +51,18 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
             price: productById.price.toString(),
             stock: productById.stock.toString(),
             description: productById.description ?? '',
-            // image: productById.image || ''
+            image: productById.image || ''
         }
     });
 
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                // setPreviewImage(reader.result as string);
-                setValue('image', reader.result as string);
-            };
-            reader.readAsDataURL(file);
-        }
+
+    const handleFileUpload = (file: File) => {
+        setImageFile(file);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPreviewImage(reader.result as string);
+        };
+        reader.readAsDataURL(file);
     };
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
@@ -163,7 +164,7 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
                             {/* Image Upload */}
                             <div className="flex flex-col items-center gap-3 w-full">
                                 <label className="block text-base font-semibold text-gray-700 mb-1">Product Image</label>
-                                {/* <div
+                                <div
                                     className="w-48 h-48 bg-white border-4 border-dashed border-gray-200 rounded-2xl flex items-center justify-center cursor-pointer group relative overflow-hidden transition-all duration-300 hover:border-blue-400 focus-within:border-blue-500"
                                     tabIndex={0}
                                     onClick={() => document.getElementById('product-image-input')?.click()}
@@ -187,11 +188,17 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
                                     <input
                                         id="product-image-input"
                                         type="file"
-                                        accept="image/*"
-                                        onChange={handleImageChange}
-                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                        accept="image/png, image/jpeg, image/avif"
+                                        ref={fileInputRef}
+                                        onChange={(e) => {
+                                            const file = e.target.files?.[0];
+                                            if (file) {
+                                                handleFileUpload(file);
+                                            }
+                                        }}
+                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer hidden"
                                     />
-                                </div> */}
+                                </div>
                                 <span className="text-xs text-gray-400">Click or drag to upload</span>
                             </div>
                             {/* Category */}

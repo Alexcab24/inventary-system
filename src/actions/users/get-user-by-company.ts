@@ -84,7 +84,6 @@ export const fetchPaginatedUsers = async ({
 };
 
 
-//Not filtered users
 export const fetchUserByCompany = async () => {
 
    const session = await auth()

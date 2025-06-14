@@ -76,7 +76,7 @@ export const TopMenu = ({ user, onHamburgerClick }: Props) => {
           </button>
           {/* Perfil y Dropdown */}
           <div className="hs-dropdown [--placement:bottom-right] relative inline-flex">
-            <button id="hs-dropdown-account" type="button" className="size-[38px] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 focus:outline-none disabled:opacity-50 disabled:pointer-events-none dark:text-white" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+            <button id="hs-dropdown-account" type="button" className="size-[38px] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-gray-200 hover:border-gray-300 text-gray-800 focus:outline-none disabled:opacity-50 disabled:pointer-events-none dark:text-white" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
               <Image src={'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541'} width={500}
                 height={500}
                 alt="Profile picture"
@@ -84,37 +84,35 @@ export const TopMenu = ({ user, onHamburgerClick }: Props) => {
               />
             </button>
 
-            <div className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 d  after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">
-              <div className="py-3 px-5 bg-gray-100 rounded-t-lg ">
-                <p className="text-sm text-gray-500 ">Signed in as</p>
-                <p className="text-sm font-medium text-gray-800 ">{user.name} <span className='text-gray-400 font-normal'>- {user.role}</span></p>
+            <div className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-64 bg-white shadow-lg rounded-xl mt-2 border border-gray-100" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">
+              <div className="py-4 px-5 bg-gradient-to-r from-gray-50 to-gray-100 rounded-t-xl border-b border-gray-100">
+                <p className="text-sm text-gray-500 font-medium">Signed in as</p>
+                <p className="text-sm font-semibold text-gray-800 mt-1">{user.name} <span className='text-gray-500 font-normal'>- {user.role}</span></p>
               </div>
-              <div className="p-1.5 space-y-0.5">
+              <div className="p-2 space-y-1">
                 {
                   user.role === 'admin' && (
                     <>
-                      <Link href={ROUTES.COMPANY} className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 ">
-                        <PiBuilding size={20} />
+                      <Link href={ROUTES.COMPANY} className="flex items-center gap-x-3.5 py-2.5 px-3 rounded-lg text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus:bg-gray-50 transition-colors">
+                        <PiBuilding size={20} className="text-gray-500" />
                         Company
                       </Link>
-                      <Link href={ROUTES.USERS} className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 ">
-                        <AiOutlineUser size={20} />
+                      <Link href={ROUTES.USERS} className="flex items-center gap-x-3.5 py-2.5 px-3 rounded-lg text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus:bg-gray-50 transition-colors">
+                        <AiOutlineUser size={20} className="text-gray-500" />
                         Users
                       </Link>
                     </>
-
                   )
-
                 }
-                <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 " href={ROUTES.PROFILE}>
-                  <TfiSettings size={20} />
+                <a className="flex items-center gap-x-3.5 py-2.5 px-3 rounded-lg text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus:bg-gray-50 transition-colors" href={ROUTES.PROFILE}>
+                  <TfiSettings size={20} className="text-gray-500" />
                   Edit Profile
                 </a>
                 <div>
-                  <hr className='border border-gray-100  mx-2 my-3' />
+                  <hr className='border-gray-100 my-2' />
                 </div>
 
-                <button onClick={() => logout()} className="flex items-center w-full gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100">
+                <button onClick={() => logout()} className="flex items-center w-full gap-x-3.5 py-2.5 px-3 rounded-lg text-sm text-red-600 hover:bg-red-50 hover:text-red-700 focus:outline-none focus:bg-red-50 transition-colors">
                   <MdLogout size={20} />
                   Sign Out
                 </button>

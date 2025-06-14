@@ -1,80 +1,82 @@
 'use server';
 
-import { Product } from "@/interfaces";
+import { auth } from "@/auth.config";
 import prisma from "@/lib/prisma";
 import { ROUTES } from "@/router/routes";
-import { validateProduct } from "@/schemas/validation/productValidation";
+import { productSchema, validateProduct } from "@/schemas/validation/productValidation";
+import { UploadImage } from "@/utils/uploadImages";
 import { revalidatePath } from "next/cache";
 
 
-export const createProduct = async (
-    name: string,
-    price: number,
-    stock: number,
-    supplierId: string,
-    categoryId: string,
-    description: string,
-    companyId: string
-) => {
+export const createProduct = async (formData: FormData) => {
+    console.log(formData)
+    const session = await auth();
 
-    if (!companyId) {
+    if (session?.user.role !== 'admin') {
         return {
             ok: false,
-        };
+            message: 'Debe de estar autenticado como admin'
+        }
+    }
+    const data = Object.fromEntries(formData.entries());
+
+
+
+    delete data.image;
+
+
+    const productParsed = productSchema.safeParse(data);
+    console.log(productParsed)
+
+    if (!productParsed.success) {
+        console.log(productParsed.error);
+        return { ok: false };
     }
 
-    const product: Product = {
-        name,
-        price,
-        stock,
-        supplierId,
-        categoryId,
-        description,
-        companyId,
-    };
+    const product = productParsed.data;
+    const workspace = session.user.companyId;
 
-    const result = validateProduct(product);
-
-    if (!result.success) {
-        return {
-            ok: false,
-            message: "Validation error",
-            errors: result.error.errors
-        };
-    }
+    const imageData = formData.get("image") as File | null;
 
 
     try {
-        const newProduct = await prisma.products.create({
-            data: result.data,
-            select: {
-                id: true,
-                name: true
-            }
-        });
+        const newData: any = {
+            ...product,
+            companyId: workspace
+        };
 
-        await prisma.productMovement.create({
-            data: {
-                type: 'Inbound',
-                productId: newProduct.id,
-                companyId: companyId
+
+        if (imageData && imageData.size > 0) {
+            const productImage = await UploadImage(imageData);
+
+            if (!productImage || typeof productImage !== "string") {
+                throw new Error("Image upload failed or did not return a valid URL");
             }
+
+
+            console.log(productImage);
+
+            newData.image = productImage;
+
+
+        }
+
+        await prisma.products.create({
+            data: newData,
         });
 
         revalidatePath(ROUTES.PRODUCTS);
 
         return {
             ok: true,
-            message: 'Producto creado con éxito',
-            newProduct
-
-        }
+            message: 'Product updated successfully'
+        };
 
     } catch (error) {
-        console.log(error)
+        console.error("Error:", error);
         return {
             ok: false,
-            message: 'Error a crear producto'
-        }
+            message: 'Error creating product',
+        };
     }
-}
+};

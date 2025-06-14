@@ -2,9 +2,6 @@ import { fetchCategoriesByCompany } from "@/actions/products/get-categories-by-c
 import { fetchSupplierByCompany } from "@/actions/supplier/get-supplier";
 import { auth } from "@/auth.config";
 import { Form } from "@/components/ui/products/Form";
-import { AiOutlinePlusCircle } from "react-icons/ai";
-
-
 
 
 

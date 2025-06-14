@@ -2,6 +2,7 @@ import { fetchProductByCompany } from "@/actions/products/get-products-by-compan
 import { CreateButton } from "@/components/ui/Buttons";
 import { Search } from "@/components/ui/Search";
 import Card from "@/components/ui/dashboard/Cards";
+import { MovementModal } from "@/components/ui/movements/MovementModal";
 import { ProductsContainer } from "@/components/ui/products/ProductsContainer";
 import { TableSkeleton } from "@/components/ui/users/Skeletons/TableSkeleton";
 import { ROUTES } from "@/router/routes";
@@ -22,12 +23,14 @@ export default async function productPage({
 
     const { products } = await fetchProductByCompany();
 
+
     const totalProducts = products?.length || 0;
     const ProductsWithoutStock = products?.filter(product => product.stock === 0).length || 0;
     const ProductsWithStock = products?.filter(product => product.stock !== 0).length || 0;
 
     return (
         <div className="space-y-6">
+
             {/* Stats Cards Section */}
             <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <Card
@@ -82,6 +85,7 @@ export default async function productPage({
                     </Suspense>
                 </div>
             </section>
+            <MovementModal />
         </div>
     )
 }

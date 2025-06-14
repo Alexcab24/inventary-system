@@ -22,8 +22,12 @@ export const CreateButton = ({ label, url, className }: { label: string, url: st
 
 export const UpdateButton = ({ id, url }: { id: string, url: string }) => {
     return (
-        <Link href={`${url}/${id}/edit`} className="inline-flex items-center gap-x-1 text-sm decoration-2 hover:underline focus:outline-none focus:underline border border-gray-200 p-2 rounded-md hover:bg-gray-50 text-gray-800 ">
-            <FiEdit2 size={22} />
+        <Link
+            href={`${url}/${id}/edit`}
+            className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            aria-label="Editar"
+        >
+            <FiEdit2 size={14} />
         </Link>
     )
 }

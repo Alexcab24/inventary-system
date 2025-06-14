@@ -19,6 +19,7 @@ export const getSupplierById = async (id: string): Promise<Supplier | null> => {
             name: supplier?.name,
             phone: supplier?.phone,
             email: supplier?.email,
+            isActive: supplier?.isActive,
             address: supplier?.address,
             companyId: supplier?.companyId
         }

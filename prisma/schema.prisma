@@ -13,13 +13,6 @@ enum Role {
   contador
 }
 
-enum MovementType {
-  Inbound
-  Outbound
-  Transfer
-  Adjustment
-}
-
 model Company {
   workspace        String   @id
   name             String
@@ -81,11 +74,19 @@ model Products {
   productsId String?
 }
 
+enum MovementType {
+  Inbound
+  Outbound
+  Transfer
+  Adjustment
+}
+
 model ProductMovement {
-  id        String       @id @default(uuid())
-  type      MovementType
-  quantity  Int       @default(1)
-  createdAt DateTime     @default(now())
+  id          String       @id @default(uuid())
+  type        MovementType
+  quantity    Int          @default(1)
+  description String?
+  createdAt   DateTime     @default(now())
 
   //relaciones
   product   Products @relation(fields: [productId], references: [id])

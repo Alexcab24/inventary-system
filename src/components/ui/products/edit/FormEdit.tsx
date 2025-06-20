@@ -77,7 +77,7 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
         const resp = await updateProdut(id, name, parsedPrice, parsedStock, supplierId, categoryId, description, companyId);
         if (resp.ok) {
             successNotification(resp.message);
-            router.push('/inventory');
+            router.push(ROUTES.PRODUCTS);
         } else {
             errorNotification(resp.message);
         }
@@ -139,6 +139,7 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
                                 </label>
                                 <input
                                     type="number"
+                                    min={1}
                                     {...register("stock", { required: "Stock quantity is required" })}
                                     className="w-full px-5 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-lg placeholder:text-gray-400 focus:bg-blue-50"
                                     placeholder="Available stock quantity"

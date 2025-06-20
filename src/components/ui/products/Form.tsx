@@ -148,6 +148,7 @@ export const Form = ({ user, suppliers, categories }: Props) => {
                                 <input
                                     type="number"
                                     step="0.01"
+                                    min='0'
                                     {...register("price", { required: "Product price is required" })}
                                     className="w-full px-5 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-lg placeholder:text-gray-400 focus:bg-blue-50"
                                     placeholder="Product price"

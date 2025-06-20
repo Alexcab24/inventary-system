@@ -7,11 +7,10 @@ import { Movement } from '@/interfaces'
 import { MdSwapHoriz } from 'react-icons/md'
 
 interface Props {
-    movements: Movement[]
-    onOpenModal: () => void;
+    movements: Movement[];
 }
 
-export const MovementsTable = ({ movements, onOpenModal }: Props) => {
+export const MovementsTable = ({ movements }: Props) => {
     const formatDate = (date: Date) => {
         return new Date(date).toLocaleDateString('es-ES', {
             year: 'numeric',
@@ -22,15 +21,6 @@ export const MovementsTable = ({ movements, onOpenModal }: Props) => {
 
     return (
         <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
-            <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
-                <button
-                    onClick={onOpenModal}
-                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
-                >
-                    <MdSwapHoriz size={18} />
-                    Nuevo Movimiento
-                </button>
-            </div>
             <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gradient-to-r from-gray-50 to-white">
                     <tr>

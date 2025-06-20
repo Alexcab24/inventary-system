@@ -139,7 +139,7 @@ export const ProductsTable = ({ products }: Props) => {
                                     <td className="whitespace-nowrap py-4 px-6">
                                         <div className="flex items-center justify-end gap-x-1">
                                             <button
-                                                onClick={() => openModal(product.id, product.name)}
+                                                onClick={() => openModal(product.id, product.name, product.stock)}
                                                 className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                             >
                                                 <IoIosArrowRoundForward size={16} />

@@ -1,6 +1,6 @@
 import { CreateButton } from "@/components/ui/Buttons";
 import { Search } from "@/components/ui/Search";
-import { MovementsContainer } from "@/components/ui/movements/MovementsContainer";
+import { MovementsContainerWrapper } from "@/components/ui/movements/MovementsContainerWrapper";
 import { Suspense } from "react";
 import { TableSkeleton } from "@/components/ui/users/Skeletons/TableSkeleton";
 import { MdInventory, MdRemoveShoppingCart, MdSwapHoriz } from "react-icons/md";
@@ -41,12 +41,7 @@ export default async function movementsPage({
                             </p>
                         </div>
                         <div className="flex flex-col sm:flex-row gap-3">
-                            <Search placeholder="Buscar por producto, ID..." />
-                            <CreateButton
-                                label="Nuevo Movimiento"
-                                url="/inventory/movements/new"
-                                className="whitespace-nowrap"
-                            />
+                            <Search placeholder="Buscar por nombre, ID..." />
                         </div>
                     </div>
                 </div>
@@ -54,7 +49,7 @@ export default async function movementsPage({
                 <div className="p-6">
                     {/* Movements Table Section */}
                     <Suspense key={query} fallback={<TableSkeleton />}>
-                        <MovementsContainer query={query} page={page} />
+                        <MovementsContainerWrapper query={query} page={page} />
                     </Suspense>
                 </div>
             </section>

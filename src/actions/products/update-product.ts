@@ -2,6 +2,7 @@
 
 import { auth } from "@/auth.config";
 import prisma from "@/lib/prisma";
+import { ROUTES } from "@/router/routes";
 import { revalidatePath } from "next/cache";
 
 
@@ -39,7 +40,16 @@ export const updateProdut = async (
                 companyId,
             },
         })
-        revalidatePath('/dashboard/inventory');
+        await prisma.productMovement.create({
+            data: {
+                type: "Adjustment",
+                productId: id,
+                companyId: companyId,
+                quantity: stock
+
+            }
+        })
+        revalidatePath(ROUTES.PRODUCTS);
         return {
             ok: true,
             message: 'Producto actualizado exitosamente'

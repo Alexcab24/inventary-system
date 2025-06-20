@@ -8,4 +8,11 @@ export interface Movement {
     quantity: number;
     createdAt: Date;
     product: Product;
-} 
+}
+
+export interface Movements {
+    productId: string;
+    movementsType: MovementType;
+    quantity: number;
+    description?: string;
+}

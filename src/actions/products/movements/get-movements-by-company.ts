@@ -59,10 +59,13 @@ export const getProductsMovementsByCompany = async ({
 
         })
 
-        // const formattedProducts = products.map(product => ({
-        //     ...product,
-        //     price: product.price.toNumber()
-        // }));
+        const formattedMovements = productsMovements.map(movement => ({
+            ...movement,
+            product: {
+                ...movement.product,
+                price: movement.product.price.toNumber()
+            }
+        }));
 
         const totalCount = await prisma.productMovement.count({
             where: {
@@ -76,7 +79,7 @@ export const getProductsMovementsByCompany = async ({
             ok: true,
             currentPage: page,
             totalPages: totalPages,
-            productsMovements
+            productsMovements: formattedMovements
         }
 
     } catch (error) {

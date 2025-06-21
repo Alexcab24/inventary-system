@@ -72,7 +72,7 @@ const FormEdit = ({ userSession, supplierById }: Props) => {
                         </div>
                         <div>
                             <h1 className="text-2xl font-bold text-gray-900">Edit Supplier</h1>
-                            <p className="text-gray-600 mt-1">Update your supplier's information and contact details</p>
+                            <p className="text-gray-600 mt-1">Update your supplier&apos;s information and contact details</p>
                         </div>
                     </div>
                 </div>

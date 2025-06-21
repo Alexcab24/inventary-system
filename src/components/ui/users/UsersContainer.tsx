@@ -40,7 +40,7 @@ const UsersContainer = async ({ query, page }: Props) => {
       </div>
 
       <div className="mt-5 flex w-full justify-center">
-        <Pagination totalItems={totalUsers} totalPages={totalPages} />
+        <Pagination totalItems={totalUsers} totalPages={totalPages} itemsPerPage={6} />
       </div>
     </>
   )

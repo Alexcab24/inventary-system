@@ -8,6 +8,7 @@ import { Suspense } from "react";
 import { TableSkeleton } from "@/components/ui/users/Skeletons/TableSkeleton";
 import { CreateButton } from "@/components/ui/Buttons";
 import UsersContainer from "@/components/ui/users/UsersContainer";
+import { ROUTES } from "@/router/routes";
 
 export default async function UserPage({
     searchParams }:
@@ -33,19 +34,19 @@ export default async function UserPage({
             {/* Stats Cards Section */}
             <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <Card
-                    title="Usuarios normales"
+                    title="Normal users"
                     value={totalNormalUsers}
                     icon={MdPerson}
                     className="bg-gradient-to-br from-emerald-50 to-white border-emerald-100 hover:shadow-emerald-100/50"
                 />
                 <Card
-                    title="Administradores"
+                    title="Admin"
                     value={totalAdmins}
                     icon={MdAdminPanelSettings}
                     className="bg-gradient-to-br from-purple-50 to-white border-purple-100 hover:shadow-purple-100/50"
                 />
                 <Card
-                    title="Total de usuarios"
+                    title="Total users"
                     value={totalUsers}
                     icon={AiOutlineUser}
                     className="bg-gradient-to-br from-blue-50 to-white border-blue-100 hover:shadow-blue-100/50"
@@ -61,17 +62,18 @@ export default async function UserPage({
                                 <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                                 </svg>
-                                Lista de usuarios
+
+                                User List
                             </h2>
                             <p className="mt-1 text-sm text-gray-500">
-                                Gestiona los usuarios de tu empresa de manera eficiente
+                                Manage your companys users efficiently
                             </p>
                         </div>
                         <div className="flex flex-col sm:flex-row gap-3">
-                            <Search placeholder="Buscar usuarios..." />
+                            <Search placeholder="Search users..." />
                             <CreateButton
-                                label="Agregar usuario"
-                                url="/management/users/create"
+                                label="Add user"
+                                url={ROUTES.CREATE_USER}
                                 className="whitespace-nowrap"
                             />
                         </div>

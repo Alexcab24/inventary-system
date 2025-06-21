@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { MovementsTable } from "./MovementsTable";
+import MovementCard from "./MovementCard";
 import { Pagination } from '../Pagination';
 
 
@@ -22,11 +23,11 @@ export const MovementsContainer = ({ movements, totalPages, totalMovements }: Pr
                 <div className="flex flex-col">
                     <div className="-m-1.5 overflow-x-auto">
                         <div className="p-1.5 min-w-full inline-block align-middle">
-                            <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                            <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden hidden lg:block">
                                 <MovementsTable movements={movements} />
                             </div>
                             <div className="lg:hidden w-full">
-                                {/* <ProductCard products={products} /> */}
+                                <MovementCard movements={movements} />
                             </div>
                         </div>
                     </div>

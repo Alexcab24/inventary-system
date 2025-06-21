@@ -34,7 +34,7 @@ const Form = ({ closeModal, productId, productStock }: Props) => {
             const quantity = Number(movementData.quantity);
             console.log(typeof quantity);
 
-            // Only check stock availability for Outbound movements
+
             if (movementData.movementType === 'Outbound' && quantity > productStock) {
                 setErrorMessage("Not enough stock available for that quantity.")
                 return
@@ -65,10 +65,10 @@ const Form = ({ closeModal, productId, productStock }: Props) => {
         <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
             <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Tipo de Movimiento
+                    Movement type
                 </label>
                 <div className="grid grid-cols-3 gap-4">
-                    {/* Inbound */}
+
                     <label className="group cursor-pointer">
                         <input
                             {...register("movementType", { required: "Movement type is required" })}
@@ -83,7 +83,6 @@ const Form = ({ closeModal, productId, productStock }: Props) => {
                         </div>
                     </label>
 
-                    {/* Outbound */}
                     <label className="group cursor-pointer">
                         <input
                             {...register("movementType", { required: "Movement type is required" })}
@@ -98,7 +97,7 @@ const Form = ({ closeModal, productId, productStock }: Props) => {
                         </div>
                     </label>
 
-                    {/* Transfer (disabled) */}
+
                     <label className="group cursor-not-allowed">
                         <input
                             {...register("movementType", { required: "Movement type is required" })}
@@ -118,7 +117,7 @@ const Form = ({ closeModal, productId, productStock }: Props) => {
 
             <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Cantidad
+                    Quantity
                 </label>
                 <input
                     {...register("quantity", { required: "Quantity is required" })}
@@ -135,13 +134,14 @@ const Form = ({ closeModal, productId, productStock }: Props) => {
 
             <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Descripción
+                    Description
                 </label>
                 <textarea
                     {...register("description")}
                     rows={3}
                     className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                    placeholder="Describe el motivo del movimiento..."
+                    placeholder="
+Describe the reason for the movement..."
                 />
             </div>
 

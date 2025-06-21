@@ -12,7 +12,7 @@ interface Props {
 
 export const MovementsTable = ({ movements }: Props) => {
     const formatDate = (date: Date) => {
-        return new Date(date).toLocaleDateString('es-ES', {
+        return new Date(date).toLocaleDateString('en-EN', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
@@ -35,7 +35,7 @@ export const MovementsTable = ({ movements }: Props) => {
                         <th scope="col" className="px-6 py-4">
                             <div className="flex items-center gap-x-2">
                                 <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
-                                    Producto
+                                    Product
                                 </span>
                             </div>
                         </th>
@@ -43,7 +43,7 @@ export const MovementsTable = ({ movements }: Props) => {
                         <th scope="col" className="px-6 py-4">
                             <div className="flex items-center gap-x-2">
                                 <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
-                                    Tipo
+                                    Type
                                 </span>
                             </div>
                         </th>
@@ -51,7 +51,7 @@ export const MovementsTable = ({ movements }: Props) => {
                         <th scope="col" className="px-6 py-4">
                             <div className="flex items-center gap-x-2">
                                 <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
-                                    Fecha
+                                    Date
                                 </span>
                             </div>
                         </th>

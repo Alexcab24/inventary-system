@@ -15,16 +15,13 @@ const ProductCard = ({ products }: Props) => {
                 products.length > 0 ? (
                     products.map(product => (
                         <div key={product.id} className="w-full  mx-auto my-4 bg-white  border border-gray-200 rounded-xl p-4 flex flex-col gap-2 sm:flex-row sm:items-center">
-                            {/* Imagen del producto */}
-
-
-                            {/* Información del producto */}
+                        
                             <div className="flex flex-col flex-grow">
                                 <div className='flex items-center gap-2'>
 
                                     <Image
                                         className="rounded-full inline-block size-[36px]"
-                                        src="https://plus.unsplash.com/premium_photo-1719289799376-d3de0ca4ddbc?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                        src={product.image || '/images/placeholders/product-placeholder.png'}
                                         width={50}
                                         height={50}
                                         alt="Avatar"

@@ -34,20 +34,26 @@ export const CategoryModal = ({ onClose }: Props) => {
     return (
         <div>
             <div onClick={onClose} className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50">
-                <div onClick={(e) => e.stopPropagation()} className="bg-white border border-gray-200 p-6 rounded-xl shadow-xl max-w-md w-full animate-slide-in-top">
-                    <div className="flex items-center gap-3 mb-6">
-                        <div className="p-2 bg-blue-50 rounded-lg">
-                            <TbCategoryPlus size={24} className="text-blue-600" />
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-semibold text-gray-800">Create Category</h3>
-                            <p className="text-sm text-gray-500">Add a new category to organize your products</p>
+                <div onClick={(e) => e.stopPropagation()} className="bg-white border border-gray-200 rounded-2xl shadow-xl max-w-md w-full animate-slide-in-top overflow-hidden">
+                    {/* Header */}
+                    <div className="px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-indigo-50 via-white to-indigo-50">
+                        <div className="flex items-center gap-3">
+                            <div className="p-2 rounded-lg bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-sm">
+                                <TbCategoryPlus size={20} className="text-white" />
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-semibold text-gray-800">Create Category</h3>
+                                <p className="text-sm text-gray-600">Add a new category to organize your products</p>
+                            </div>
                         </div>
                     </div>
 
-                    <form onSubmit={handleSubmit(onSubmitCategory)} className="space-y-4">
-                        <div>
-                            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                    <form onSubmit={handleSubmit(onSubmitCategory)} className="p-6 space-y-6">
+                        <div className="group">
+                            <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                <div className="p-1.5 rounded-lg bg-indigo-100">
+                                    <TbCategoryPlus className="text-indigo-600 text-lg" />
+                                </div>
                                 Category Name
                             </label>
                             <input
@@ -55,10 +61,14 @@ export const CategoryModal = ({ onClose }: Props) => {
                                 {...register("name", { required: "Category name is required" })}
                                 type="text"
                                 placeholder="Enter category name"
-                                className="block w-full rounded-lg border border-gray-300 py-2.5 px-4 text-gray-700 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
+                                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition-all text-base placeholder:text-gray-400 group-hover:border-gray-300"
+                                aria-describedby={errors.name ? "name-error" : undefined}
                             />
                             {errors.name && (
-                                <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+                                <p id="name-error" className="text-sm text-red-600 mt-2 flex items-center gap-1" role="alert">
+                                    <span className="w-1 h-1 bg-red-600 rounded-full"></span>
+                                    {errors.name.message}
+                                </p>
                             )}
                         </div>
 
@@ -66,15 +76,15 @@ export const CategoryModal = ({ onClose }: Props) => {
                             <button
                                 type="button"
                                 onClick={onClose}
-                                className="px-4 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-colors"
+                                className="px-6 py-2.5 text-sm font-semibold text-gray-700 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:ring-4 focus:ring-gray-100 transition-all shadow-sm"
                             >
                                 Cancel
                             </button>
                             <button
                                 type="submit"
-                                className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+                                className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-xl hover:from-indigo-600 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-100 transition-all shadow-lg"
                             >
-                                <FiPlus size={18} />
+                                <FiPlus size={16} />
                                 Create Category
                             </button>
                         </div>

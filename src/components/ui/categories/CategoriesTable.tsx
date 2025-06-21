@@ -25,7 +25,7 @@ export const CategoriesTable = ({ categories }: Props) => {
                         <th scope="col" className="px-6 py-4">
                             <div className="flex items-center gap-x-2">
                                 <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
-                                    Nombre
+                                    Name
                                 </span>
                             </div>
                         </th>
@@ -33,14 +33,14 @@ export const CategoriesTable = ({ categories }: Props) => {
                         <th scope="col" className="px-6 py-4">
                             <div className="flex items-center gap-x-2">
                                 <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
-                                    Productos
+                                    Products
                                 </span>
                             </div>
                         </th>
 
                         <th scope="col" className="px-6 py-4 text-end">
                             <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
-                                Acciones
+                                Actions
                             </span>
                         </th>
                     </tr>
@@ -67,7 +67,7 @@ export const CategoriesTable = ({ categories }: Props) => {
                                 <td className="whitespace-nowrap py-4 px-6">
                                     <div className="flex items-center gap-x-2">
                                         <span className="inline-flex items-center gap-x-1 rounded-full bg-blue-50 px-2 py-1 text-sm font-medium text-blue-700">
-                                            {category.products || 0} productos
+                                            {category.products || 0} products
                                         </span>
                                     </div>
                                 </td>
@@ -113,7 +113,8 @@ export const CategoriesTable = ({ categories }: Props) => {
                                     <svg className="size-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                                     </svg>
-                                    <span className="text-sm text-gray-500">No se encontraron categorías que coincidan con la búsqueda.</span>
+                                    <span className="text-sm text-gray-500">
+                                        No categories were found that match your search.</span>
                                 </div>
                             </td>
                         </tr>

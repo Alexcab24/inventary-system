@@ -59,44 +59,58 @@ export const FormEdit = ({ userSession, userById }: Props) => {
     return (
         <>
             <LoadingOverlay isLoading={isLoading} />
-            <div className="w-full max-w-5xl animate-fade-in bg-white rounded-[2rem] border border-gray-200 overflow-hidden transition-all duration-300 mx-auto">
+            <div className="w-full max-w-6xl mx-auto bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden">
                 {/* Header */}
-                <div className="sticky md:static top-0 z-10 bg-white backdrop-blur-md px-8 pt-8 pb-4 border-b border-gray-200 flex flex-col gap-1">
-                    <div className="flex items-center gap-3 mb-1">
-                        <IoInformationCircleOutline className="text-blue-600 text-3xl" />
-                        <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Edit User</h2>
+                <div className="px-8 py-6 border-b border-gray-100 bg-gradient-to-r from-indigo-50 via-white to-indigo-50">
+                    <div className="flex items-center gap-4">
+                        <div className="p-3 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-sm">
+                            <IoInformationCircleOutline className="text-white text-xl" />
+                        </div>
+                        <div>
+                            <h1 className="text-2xl font-bold text-gray-900">Edit User</h1>
+                            <p className="text-gray-600 mt-1">Update user information and role permissions</p>
+                        </div>
                     </div>
-                    <p className="text-gray-500 text-base">Update user information</p>
                 </div>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="px-8 py-8 md:px-14 md:py-12">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                        {/* Left column */}
-                        <div className="space-y-8">
+                <form onSubmit={handleSubmit(onSubmit)} className="p-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        {/* Left Column */}
+                        <div className="space-y-6">
                             {/* Name */}
-                            <div>
-                                <label className="block text-base font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                                    <IoPersonOutline className="text-gray-400 text-xl" />
+                            <div className="group">
+                                <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <div className="p-1.5 rounded-lg bg-blue-100">
+                                        <IoPersonOutline className="text-blue-600 text-lg" />
+                                    </div>
                                     Full Name
                                 </label>
                                 <input
+                                    id="name"
                                     type="text"
                                     {...register('name', { required: "Name is required" })}
-                                    className="w-full px-5 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-lg placeholder:text-gray-400 focus:bg-blue-50"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all text-base placeholder:text-gray-400 group-hover:border-gray-300"
                                     placeholder="Enter full name"
+                                    aria-describedby={errors.name ? "name-error" : undefined}
                                 />
                                 {errors.name && (
-                                    <p className="text-sm text-red-500 mt-1">{errors.name.message}</p>
+                                    <p id="name-error" className="text-sm text-red-600 mt-2 flex items-center gap-1" role="alert">
+                                        <span className="w-1 h-1 bg-red-600 rounded-full"></span>
+                                        {errors.name.message}
+                                    </p>
                                 )}
                             </div>
 
                             {/* Email */}
-                            <div>
-                                <label className="block text-base font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                                    <IoMailOutline className="text-gray-400 text-xl" />
+                            <div className="group">
+                                <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <div className="p-1.5 rounded-lg bg-green-100">
+                                        <IoMailOutline className="text-green-600 text-lg" />
+                                    </div>
                                     Email Address
                                 </label>
                                 <input
+                                    id="email"
                                     type="email"
                                     {...register('email', {
                                         required: "Email is required",
@@ -105,64 +119,66 @@ export const FormEdit = ({ userSession, userById }: Props) => {
                                             message: "Invalid email format"
                                         }
                                     })}
-                                    className="w-full px-5 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-lg placeholder:text-gray-400 focus:bg-blue-50"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all text-base placeholder:text-gray-400 group-hover:border-gray-300"
                                     placeholder="Enter email address"
+                                    aria-describedby={errors.email ? "email-error" : undefined}
                                 />
                                 {errors.email && (
-                                    <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>
+                                    <p id="email-error" className="text-sm text-red-600 mt-2 flex items-center gap-1" role="alert">
+                                        <span className="w-1 h-1 bg-red-600 rounded-full"></span>
+                                        {errors.email.message}
+                                    </p>
                                 )}
                             </div>
                         </div>
 
-                        {/* Right column */}
-                        <div className="space-y-8">
+                        {/* Right Column */}
+                        <div className="space-y-6">
                             {/* Role */}
-                            <div>
-                                <label className="block text-base font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                                    <IoShieldOutline className="text-gray-400 text-xl" />
+                            <div className="group">
+                                <label htmlFor="role" className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <div className="p-1.5 rounded-lg bg-purple-100">
+                                        <IoShieldOutline className="text-purple-600 text-lg" />
+                                    </div>
                                     User Role
                                 </label>
                                 <select
+                                    id="role"
                                     {...register('role', { required: "Role is required" })}
-                                    className="w-full px-5 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-lg placeholder:text-gray-400 focus:bg-blue-50"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all text-base group-hover:border-gray-300"
+                                    aria-describedby={errors.role ? "role-error" : undefined}
                                 >
                                     <option value="admin">Administrator</option>
                                     <option value="contador">Accountant</option>
                                     <option value="user">User</option>
                                 </select>
                                 {errors.role && (
-                                    <p className="text-sm text-red-500 mt-1">{errors.role.message}</p>
+                                    <p id="role-error" className="text-sm text-red-600 mt-2 flex items-center gap-1" role="alert">
+                                        <span className="w-1 h-1 bg-red-600 rounded-full"></span>
+                                        {errors.role.message}
+                                    </p>
                                 )}
                             </div>
                         </div>
                     </div>
 
-                    {/* Submit & Cancel */}
-                    <div className="pt-10 flex flex-col md:flex-row gap-4 justify-end">
-                        <button
-                            type="submit"
-                            className="w-full md:w-auto py-3 px-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold text-lg hover:from-blue-700 hover:to-blue-600 transition-all"
-                        >
-                            Update User
-                        </button>
+                    {/* Submit & Cancel Buttons */}
+                    <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-end">
                         <Link
                             href="/management/users"
-                            className="w-full md:w-auto text-center py-3 px-10 rounded-full border border-gray-200 bg-white text-gray-500 hover:text-blue-600 hover:border-blue-200 transition-all"
+                            className="px-8 py-3 rounded-xl border border-gray-200 bg-white text-gray-700 font-semibold hover:text-gray-900 hover:border-gray-300 transition-all text-base focus:outline-none focus:ring-4 focus:ring-gray-100 shadow-sm"
                         >
                             Cancel
                         </Link>
+                        <button
+                            type="submit"
+                            className="px-8 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-semibold hover:from-indigo-600 hover:to-indigo-700 transition-all text-base focus:outline-none focus:ring-4 focus:ring-indigo-100 shadow-lg"
+                        >
+                            Update User
+                        </button>
                     </div>
                 </form>
             </div>
-            <style jsx global>{`
-                @keyframes fade-in {
-                    0% { opacity: 0; transform: translateY(40px); }
-                    100% { opacity: 1; transform: translateY(0); }
-                }
-                .animate-fade-in {
-                    animation: fade-in 0.7s cubic-bezier(.4,0,.2,1);
-                }
-            `}</style>
         </>
     )
 }

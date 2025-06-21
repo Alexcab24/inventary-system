@@ -10,7 +10,7 @@ import { CategoryModal } from "../CategoryModal";
 import { updateProdut } from "@/actions/products/update-product";
 import { errorNotification, successNotification } from "../../notification/notifications";
 import { useRouter } from "next/navigation";
-import { IoPricetagOutline, IoCubeOutline, IoLayersOutline, IoPeopleOutline, IoDocumentTextOutline, IoImageOutline, IoInformationCircleOutline, IoPencil } from 'react-icons/io5';
+import { IoPricetagOutline, IoCubeOutline, IoLayersOutline, IoPeopleOutline, IoDocumentTextOutline, IoImageOutline, IoInformationCircleOutline, IoPencil, IoAddCircleOutline } from 'react-icons/io5';
 import Image from 'next/image';
 import { LoadingOverlay } from '../../LoadingOverlay';
 import { ROUTES } from "@/router/routes";
@@ -85,134 +85,200 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
     }
 
     return (
-
         <>
             <LoadingOverlay isLoading={isLoading} />
             {isOpen && <CategoryModal onClose={handleClose} />}
-            <div className="w-full max-w-5xl animate-fade-in bg-white rounded-[2rem] border border-gray-200 overflow-hidden transition-all duration-300">
-                {/* Header: sticky solo en mobile */}
-                <div className="sticky md:static top-0 z-10 bg-gray-white backdrop-blur-md px-8 pt-8 pb-4 border-b border-gray-200 flex flex-col gap-1">
-                    <div className="flex items-center gap-3 mb-1">
-                        <IoInformationCircleOutline className="text-blue-600 text-3xl" />
-                        <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Edit Product</h2>
+            <div className="w-full max-w-6xl mx-auto bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden">
+                {/* Header */}
+                <div className="px-8 py-6 border-b border-gray-100 bg-gradient-to-r from-amber-50 via-white to-amber-50">
+                    <div className="flex items-center gap-4">
+                        <div className="p-3 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 shadow-sm">
+                            <IoInformationCircleOutline className="text-white text-xl" />
+                        </div>
+                        <div>
+                            <h1 className="text-2xl font-bold text-gray-900">Edit Product</h1>
+                            <p className="text-gray-600 mt-1">Update your product details and inventory information</p>
+                        </div>
                     </div>
-                    <p className="text-gray-500 text-base">Update your product details and inventory information</p>
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)} className="px-8 py-8 md:px-14 md:py-12">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                        {/* Left column: Inputs */}
-                        <div className="space-y-8">
+
+                <form onSubmit={handleSubmit(onSubmit)} className="p-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        {/* Left Column */}
+                        <div className="space-y-6">
                             {/* Name */}
-                            <div>
-                                <label className="block text-base font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                                    <IoCubeOutline className="text-gray-400 text-xl" />
+                            <div className="group">
+                                <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <div className="p-1.5 rounded-lg bg-blue-100">
+                                        <IoCubeOutline className="text-blue-600 text-lg" />
+                                    </div>
                                     Product Name
                                 </label>
                                 <input
+                                    id="name"
                                     type="text"
                                     {...register("name", { required: "Product name is required" })}
-                                    className="w-full px-5 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-lg placeholder:text-gray-400 focus:bg-blue-50"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all text-base placeholder:text-gray-400 group-hover:border-gray-300"
                                     placeholder="Descriptive product name"
+                                    aria-describedby={errors.name ? "name-error" : undefined}
                                 />
-                                {errors.name && <p className="text-sm text-red-500 mt-1">{errors.name.message}</p>}
+                                {errors.name && (
+                                    <p id="name-error" className="text-sm text-red-600 mt-2 flex items-center gap-1" role="alert">
+                                        <span className="w-1 h-1 bg-red-600 rounded-full"></span>
+                                        {errors.name.message}
+                                    </p>
+                                )}
                             </div>
+
                             {/* Price */}
-                            <div>
-                                <label className="block text-base font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                                    <IoPricetagOutline className="text-gray-400 text-xl" />
+                            <div className="group">
+                                <label htmlFor="price" className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <div className="p-1.5 rounded-lg bg-green-100">
+                                        <IoPricetagOutline className="text-green-600 text-lg" />
+                                    </div>
                                     Unit Price
                                 </label>
-                                <input
-                                    type="number"
-                                    step="0.01"
-                                    {...register("price", { required: "Product price is required" })}
-                                    className="w-full px-5 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-lg placeholder:text-gray-400 focus:bg-blue-50"
-                                    placeholder="Product price"
-                                />
-                                {errors.price && <p className="text-sm text-red-500 mt-1">{errors.price.message}</p>}
+                                <div className="relative">
+                                    <span className="absolute left-4 top-3 text-gray-400 text-base font-medium">$</span>
+                                    <input
+                                        id="price"
+                                        type="number"
+                                        step="0.01"
+                                        {...register("price", { required: "Product price is required" })}
+                                        className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all text-base placeholder:text-gray-400 group-hover:border-gray-300"
+                                        placeholder="0.00"
+                                        aria-describedby={errors.price ? "price-error" : undefined}
+                                    />
+                                </div>
+                                {errors.price && (
+                                    <p id="price-error" className="text-sm text-red-600 mt-2 flex items-center gap-1" role="alert">
+                                        <span className="w-1 h-1 bg-red-600 rounded-full"></span>
+                                        {errors.price.message}
+                                    </p>
+                                )}
                             </div>
+
                             {/* Stock */}
-                            <div>
-                                <label className="block text-base font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                                    <IoLayersOutline className="text-gray-400 text-xl" />
+                            <div className="group">
+                                <label htmlFor="stock" className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <div className="p-1.5 rounded-lg bg-purple-100">
+                                        <IoLayersOutline className="text-purple-600 text-lg" />
+                                    </div>
                                     Stock Quantity
                                 </label>
                                 <input
+                                    id="stock"
                                     type="number"
                                     min={1}
                                     {...register("stock", { required: "Stock quantity is required" })}
-                                    className="w-full px-5 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-lg placeholder:text-gray-400 focus:bg-blue-50"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all text-base placeholder:text-gray-400 group-hover:border-gray-300"
                                     placeholder="Available stock quantity"
+                                    aria-describedby={errors.stock ? "stock-error" : undefined}
                                 />
-                                {errors.stock && <p className="text-sm text-red-500 mt-1">{errors.stock.message}</p>}
+                                {errors.stock && (
+                                    <p id="stock-error" className="text-sm text-red-600 mt-2 flex items-center gap-1" role="alert">
+                                        <span className="w-1 h-1 bg-red-600 rounded-full"></span>
+                                        {errors.stock.message}
+                                    </p>
+                                )}
                             </div>
+
                             {/* Description */}
-                            <div>
-                                <label className="block text-base font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                                    <IoDocumentTextOutline className="text-gray-400 text-xl" />
+                            <div className="group">
+                                <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <div className="p-1.5 rounded-lg bg-orange-100">
+                                        <IoDocumentTextOutline className="text-orange-600 text-lg" />
+                                    </div>
                                     Description
                                 </label>
                                 <textarea
+                                    id="description"
                                     {...register("description")}
-                                    className="w-full px-5 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-lg placeholder:text-gray-400 focus:bg-blue-50 resize-none"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-100 transition-all text-base placeholder:text-gray-400 resize-none group-hover:border-gray-300"
                                     placeholder="Detailed product description"
                                     rows={4}
                                 />
                             </div>
                         </div>
-                        {/* Right column: Image and selects */}
-                        <div className="space-y-8 flex flex-col items-center justify-between">
+
+                        {/* Right Column */}
+                        <div className="space-y-6">
                             {/* Image Upload */}
-                            <div className="flex flex-col items-center gap-3 w-full">
-                                <label className="block text-base font-semibold text-gray-700 mb-1">Product Image</label>
+                            <div className="group">
+                                <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <div className="p-1.5 rounded-lg bg-pink-100">
+                                        <IoImageOutline className="text-pink-600 text-lg" />
+                                    </div>
+                                    Product Image
+                                </label>
                                 <div
-                                    className="w-48 h-48 bg-white border-4 border-dashed border-gray-200 rounded-2xl flex items-center justify-center cursor-pointer group relative overflow-hidden transition-all duration-300 hover:border-blue-400 focus-within:border-blue-500"
+                                    className="w-full bg-gradient-to-br from-gray-50 to-white border-2 border-dashed border-gray-300 rounded-2xl flex items-center justify-center cursor-pointer group relative overflow-hidden transition-all duration-300 hover:border-pink-400 hover:shadow-lg focus-within:border-pink-500"
+                                    onClick={() => fileInputRef.current?.click()}
+                                    role="button"
                                     tabIndex={0}
-                                    onClick={() => document.getElementById('product-image-input')?.click()}
-                                    onKeyDown={e => { if (e.key === 'Enter') document.getElementById('product-image-input')?.click(); }}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            e.preventDefault();
+                                            fileInputRef.current?.click();
+                                        }
+                                    }}
                                 >
-                                    {previewImage ? (
-                                        <>
-                                            <Image
-                                                src={previewImage}
-                                                alt="Product preview"
-                                                fill
-                                                className="object-cover rounded-2xl transition-all duration-300 group-hover:opacity-80"
-                                            />
-                                            <div className="absolute inset-0 flex items-center justify-center bg-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <IoPencil className="text-blue-700 text-3xl" />
+                                    <div className="aspect-square w-full max-w-48 mx-auto flex items-center justify-center p-6">
+                                        {previewImage ? (
+                                            <>
+                                                <Image
+                                                    src={previewImage}
+                                                    alt="Product preview"
+                                                    fill
+                                                    className="object-cover rounded-2xl transition-all duration-300 group-hover:opacity-80"
+                                                />
+                                                <div className="absolute inset-0 flex items-center justify-center bg-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl">
+                                                    <div className="bg-white/90 backdrop-blur-sm rounded-xl p-3">
+                                                        <IoPencil className="text-pink-700 text-2xl" />
+                                                    </div>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <div className="text-center">
+                                                <div className="w-16 h-16 bg-gradient-to-br from-pink-100 to-pink-200 rounded-2xl flex items-center justify-center mb-4 mx-auto">
+                                                    <IoImageOutline className="w-8 h-8 text-pink-600" />
+                                                </div>
+                                                <p className="text-sm font-medium text-gray-700 mb-1">Upload Image</p>
+                                                <p className="text-xs text-gray-500">Click or drag to upload</p>
                                             </div>
-                                        </>
-                                    ) : (
-                                        <IoImageOutline className="w-16 h-16 text-gray-300 group-hover:text-blue-500 transition-all duration-300" />
-                                    )}
+                                        )}
+                                    </div>
                                     <input
-                                        id="product-image-input"
                                         type="file"
-                                        accept="image/png, image/jpeg, image/avif"
                                         ref={fileInputRef}
+                                        className="sr-only"
+                                        accept="image/png, image/jpeg, image/avif"
                                         onChange={(e) => {
                                             const file = e.target.files?.[0];
                                             if (file) {
                                                 handleFileUpload(file);
                                             }
                                         }}
-                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer hidden"
+                                        aria-label="Upload product image"
                                     />
                                 </div>
-                                <span className="text-xs text-gray-400">Click or drag to upload</span>
                             </div>
+
                             {/* Category */}
-                            <div className="w-full">
-                                <label className="block text-base font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                                    <IoDocumentTextOutline className="text-gray-400 text-xl" />
+                            <div className="group">
+                                <label htmlFor="categoryId" className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <div className="p-1.5 rounded-lg bg-teal-100">
+                                        <IoDocumentTextOutline className="text-teal-600 text-lg" />
+                                    </div>
                                     Product Category
                                 </label>
-                                <div className="flex gap-2">
+                                <div className="flex gap-3">
                                     <select
+                                        id="categoryId"
                                         {...register("categoryId", { required: "Selecting a category is required" })}
-                                        className="w-full px-5 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-lg placeholder:text-gray-400 focus:bg-blue-50"
+                                        className="flex-1 px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-teal-500 focus:ring-4 focus:ring-teal-100 transition-all text-base group-hover:border-gray-300"
                                         defaultValue={productById.category.id || ''}
+                                        aria-describedby={errors.categoryId ? "category-error" : undefined}
                                     >
                                         <option value="" disabled>Select category</option>
                                         {categories.map(category => (
@@ -221,62 +287,69 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
                                     </select>
                                     <button
                                         type="button"
-                                        className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-all duration-300"
+                                        className="px-4 py-3 rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 text-white font-medium hover:from-teal-600 hover:to-teal-700 transition-all focus:outline-none focus:ring-4 focus:ring-teal-100 shadow-sm flex items-center gap-2"
                                         onClick={handleOpen}
                                     >
+                                        <IoAddCircleOutline className="text-lg" />
                                         Add
                                     </button>
                                 </div>
-                                {errors.categoryId && <p className="text-sm text-red-500 mt-1">{errors.categoryId.message}</p>}
+                                {errors.categoryId && (
+                                    <p id="category-error" className="text-sm text-red-600 mt-2 flex items-center gap-1" role="alert">
+                                        <span className="w-1 h-1 bg-red-600 rounded-full"></span>
+                                        {errors.categoryId.message}
+                                    </p>
+                                )}
                             </div>
+
                             {/* Supplier */}
-                            <div className="w-full">
-                                <label className="block text-base font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                                    <IoPeopleOutline className="text-gray-400 text-xl" />
+                            <div className="group">
+                                <label htmlFor="supplierId" className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <div className="p-1.5 rounded-lg bg-indigo-100">
+                                        <IoPeopleOutline className="text-indigo-600 text-lg" />
+                                    </div>
                                     Supplier
                                 </label>
                                 <select
+                                    id="supplierId"
                                     {...register("supplierId", { required: "Selecting a supplier is required" })}
-                                    className="w-full px-5 py-3 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-lg placeholder:text-gray-400 focus:bg-blue-50"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition-all text-base group-hover:border-gray-300"
                                     defaultValue={productById.supplier.id || ''}
+                                    aria-describedby={errors.supplierId ? "supplier-error" : undefined}
                                 >
                                     <option value="" disabled>Select supplier</option>
                                     {suppliers.map(supplier => (
                                         <option key={supplier.id} value={supplier.id}>{supplier.name}</option>
                                     ))}
                                 </select>
-                                {errors.supplierId && <p className="text-sm text-red-500 mt-1">{errors.supplierId.message}</p>}
+                                {errors.supplierId && (
+                                    <p id="supplier-error" className="text-sm text-red-600 mt-2 flex items-center gap-1" role="alert">
+                                        <span className="w-1 h-1 bg-red-600 rounded-full"></span>
+                                        {errors.supplierId.message}
+                                    </p>
+                                )}
                             </div>
                         </div>
                     </div>
-                    {/* Submit & Cancel */}
-                    <div className="pt-10 flex flex-col md:flex-row gap-4 justify-end">
+
+                    {/* Submit & Cancel Buttons */}
+                    <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-end">
+                        <Link
+                            href={ROUTES.PRODUCTS}
+                            className="px-8 py-3 rounded-xl border border-gray-200 bg-white text-gray-700 font-semibold hover:text-gray-900 hover:border-gray-300 transition-all text-base focus:outline-none focus:ring-4 focus:ring-gray-100 shadow-sm"
+                        >
+                            Cancel
+                        </Link>
                         <button
                             type="submit"
-                            className="w-full md:w-auto py-3 px-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold text-lg hover:from-blue-700 hover:to-blue-600 transition-all"
+                            className="px-8 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold hover:from-amber-600 hover:to-amber-700 transition-all text-base focus:outline-none focus:ring-4 focus:ring-amber-100 shadow-lg"
                         >
                             Save Changes
                         </button>
-                        <Link href={ROUTES.PRODUCTS} className="w-full md:w-auto text-center py-3 px-10 rounded-full border border-gray-200 bg-white text-gray-500 hover:text-blue-600 hover:border-blue-200 transition-all">
-                            Cancel
-                        </Link>
                     </div>
                 </form>
             </div>
-            <style jsx global>{`
-                @keyframes fade-in {
-                    0% { opacity: 0; transform: translateY(40px); }
-                    100% { opacity: 1; transform: translateY(0); }
-                }
-                .animate-fade-in {
-                    animation: fade-in 0.7s cubic-bezier(.4,0,.2,1);
-                }
-            `}</style>
-
         </>
-
-
-
     )
 }
 

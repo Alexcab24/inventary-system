@@ -26,15 +26,16 @@ export const MovementModal = () => {
                             <MdOutlineRemoveCircle size={24} className="text-blue-600" />
                         </div>
                         <div>
-                            <h3 className="text-lg font-semibold text-gray-800">Nuevo Movimiento</h3>
-                            <p className="text-sm text-gray-500">Registra un nuevo movimiento de inventario</p>
+                            <h3 className="text-lg font-semibold text-gray-800">New Movement</h3>
+                            <p className="text-sm text-gray-500">
+                            Record a new inventory movement</p>
                         </div>
                     </div>
 
                     <div className="space-y-6">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Producto
+                                Product
                             </label>
                             <div className="flex items-center gap-3 bg-gray-50 border border-gray-200 rounded-lg px-4 py-3">
                                 <span className="inline-block w-2 h-2 rounded-full bg-blue-500"></span>
@@ -46,7 +47,7 @@ export const MovementModal = () => {
 
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Stock Disponible
+                                Stock available
                             </label>
                             <div className="flex items-center gap-3 bg-gray-50 border border-gray-200 rounded-lg px-4 py-3">
                                 <span className={cn(
@@ -55,7 +56,7 @@ export const MovementModal = () => {
                                         selectedProductStock > 0 ? "bg-amber-50 text-amber-700" :
                                             "bg-red-50 text-red-700"
                                 )}>
-                                    {selectedProductStock} unidades
+                                    {selectedProductStock} in stock
                                 </span>
                             </div>
                         </div>

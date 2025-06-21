@@ -22,6 +22,7 @@
     "lucide-react": "^0.474.0",
     "next": "14.2.7",
     "next-auth": "^5.0.0-beta.22",
+    "next-intl": "^4.1.0",
     "nextjs-toast-notify": "^1.27.0",
     "preline": "^2.4.1",
     "react": "^18",

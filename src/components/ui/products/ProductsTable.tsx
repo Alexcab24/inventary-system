@@ -34,7 +34,7 @@ export const ProductsTable = ({ products }: Props) => {
                             <th scope="col" className="px-6 py-4">
                                 <div className="flex items-center gap-x-2">
                                     <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
-                                        Producto
+                                        Product
                                     </span>
                                 </div>
                             </th>
@@ -42,7 +42,7 @@ export const ProductsTable = ({ products }: Props) => {
                             <th scope="col" className="px-6 py-4">
                                 <div className="flex items-center gap-x-2">
                                     <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
-                                        Precio
+                                        Price
                                     </span>
                                 </div>
                             </th>
@@ -58,7 +58,7 @@ export const ProductsTable = ({ products }: Props) => {
                             <th scope="col" className="px-6 py-4">
                                 <div className="flex items-center gap-x-2">
                                     <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
-                                        Categoría
+                                        Category
                                     </span>
                                 </div>
                             </th>
@@ -66,14 +66,14 @@ export const ProductsTable = ({ products }: Props) => {
                             <th scope="col" className="px-6 py-4">
                                 <div className="flex items-center gap-x-2">
                                     <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
-                                        Proveedor
+                                        Supplier
                                     </span>
                                 </div>
                             </th>
 
                             <th scope="col" className="px-6 py-4 text-end">
                                 <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
-                                    Acciones
+                                    Actions
                                 </span>
                             </th>
                         </tr>
@@ -121,7 +121,7 @@ export const ProductsTable = ({ products }: Props) => {
                                                     product.stock > 0 ? "bg-amber-50 text-amber-700" :
                                                         "bg-red-50 text-red-700"
                                             )}>
-                                                {product.stock} unidades
+                                                {product.stock} in stock
                                             </span>
                                         </div>
                                     </td>
@@ -176,7 +176,7 @@ export const ProductsTable = ({ products }: Props) => {
                                         <svg className="size-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                                         </svg>
-                                        <span className="text-sm text-gray-500">No se encontraron productos que coincidan con la búsqueda.</span>
+                                        <span className="text-sm text-gray-500">No products were found matching your search.</span>
                                     </div>
                                 </td>
                             </tr>

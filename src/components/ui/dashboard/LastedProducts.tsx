@@ -57,7 +57,7 @@ export const LastedProducts = async () => {
 
             <CardFooter className="px-6 py-4 border-t border-gray-100 bg-gray-50/50">
                 <div className="text-sm text-gray-500 leading-relaxed">
-                    Mostrando los últimos 6 productos agregados.
+                    Showing the last 4 products added.
                 </div>
             </CardFooter>
         </Card>

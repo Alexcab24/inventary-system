@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { updateCompany } from "@/actions/company/update-company";
 import { LoadingOverlay } from "../LoadingOverlay";
 import Image from "next/image";
+import { IoBusinessOutline, IoMailOutline, IoCallOutline, IoLocationOutline, IoDocumentTextOutline, IoImageOutline, IoInformationCircleOutline } from 'react-icons/io5';
 
 interface Props {
     company: Company;
@@ -72,186 +73,201 @@ export const Form = ({ company }: Props) => {
     return (
         <>
             <LoadingOverlay isLoading={isLoading} />
-            <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* Logo Upload Section */}
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transform transition-all duration-300 hover:shadow-md">
-                    <div className="p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
-                        <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
-                            <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            Company Logo
-                        </h2>
-                        <p className="mt-1 text-sm text-gray-500">Upload your company logo to display across the platform</p>
-                    </div>
-                    <div className="p-6">
-                        <div
-                            className="flex flex-col items-center justify-center border-2 border-dashed border-gray-200 rounded-xl p-8 hover:border-blue-500 transition-all duration-300 cursor-pointer group bg-gradient-to-b from-gray-50 to-white"
-                            onDragOver={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                            }}
-                            onDrop={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                const file = e.dataTransfer.files[0];
-                                if (file && file.type.startsWith('image/')) {
-                                    handleFileUpload(file);
-                                } else {
-                                    errorNotification('Please upload an image file');
-                                }
-                            }}
-                            onClick={() => fileInputRef.current?.click()}
-                        >
-                            <input
-                                type="file"
-                                ref={fileInputRef}
-                                className="hidden"
-                                accept="image/png, image/jpeg, image/avif"
-                                onChange={(e) => {
-                                    const file = e.target.files?.[0];
-                                    if (file) {
-                                        handleFileUpload(file);
-                                    }
-                                }}
-                            />
-                            <div className="w-40 h-40 bg-white rounded-2xl flex items-center justify-center mb-4 group-hover:bg-blue-50 transition-all duration-300 shadow-sm">
-                                {previewUrl ? (
-                                    <Image
-                                        src={previewUrl}
-                                        alt="Company logo preview"
-                                        width={160}
-                                        height={160}
-                                        className="w-full h-full object-cover rounded-2xl"
-                                    />
-                                ) : (
-                                    <svg
-                                        className="w-16 h-16 text-gray-400 group-hover:text-blue-500 transition-all duration-300"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={1.5}
-                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                        />
-                                    </svg>
-                                )}
-                            </div>
-                            <p className="text-sm text-gray-500 mb-3 text-center">
-                                Drag and drop your logo here, or click to browse
-                            </p>
-                            <button
-                                className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 shadow-sm"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    fileInputRef.current?.click();
-                                }}
-                            >
-                                Upload Logo
-                            </button>
+            <div className="w-full max-w-6xl mx-auto bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden">
+                {/* Header */}
+                <div className="px-8 py-6 border-b border-gray-100 bg-gradient-to-r from-cyan-50 via-white to-cyan-50">
+                    <div className="flex items-center gap-4">
+                        <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500 to-cyan-600 shadow-sm">
+                            <IoInformationCircleOutline className="text-white text-xl" />
+                        </div>
+                        <div>
+                            <h1 className="text-2xl font-bold text-gray-900">Company Settings</h1>
+                            <p className="text-gray-600 mt-1">Update your company information and branding</p>
                         </div>
                     </div>
                 </div>
 
-                {/* Company Information Section */}
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transform transition-all duration-300 hover:shadow-md">
-                    <div className="p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
-                        <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
-                            <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            Company Information
-                        </h2>
-                        <p className="mt-1 text-sm text-gray-500">Update your company details and contact information</p>
+                <form onSubmit={handleSubmit(onSubmit)} className="p-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        {/* Logo Upload Section */}
+                        <div className="space-y-6">
+                            <div className="group">
+                                <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <div className="p-1.5 rounded-lg bg-pink-100">
+                                        <IoImageOutline className="text-pink-600 text-lg" />
+                                    </div>
+                                    Company Logo
+                                </label>
+                                <div
+                                    className="w-full bg-gradient-to-br from-gray-50 to-white border-2 border-dashed border-gray-300 rounded-2xl flex items-center justify-center cursor-pointer group relative overflow-hidden transition-all duration-300 hover:border-pink-400 hover:shadow-lg focus-within:border-pink-500"
+                                    onDragOver={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                    }}
+                                    onDrop={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        const file = e.dataTransfer.files[0];
+                                        if (file && file.type.startsWith('image/')) {
+                                            handleFileUpload(file);
+                                        } else {
+                                            errorNotification('Please upload an image file');
+                                        }
+                                    }}
+                                    onClick={() => fileInputRef.current?.click()}
+                                    role="button"
+                                    tabIndex={0}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            e.preventDefault();
+                                            fileInputRef.current?.click();
+                                        }
+                                    }}
+                                >
+                                    <div className="aspect-square w-full max-w-48 mx-auto flex items-center justify-center p-6">
+                                        {previewUrl ? (
+                                            <>
+                                                <Image
+                                                    src={previewUrl}
+                                                    alt="Company logo preview"
+                                                    fill
+                                                    className="object-cover rounded-2xl transition-all duration-300 group-hover:opacity-80"
+                                                />
+                                                <div className="absolute inset-0 flex items-center justify-center bg-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl">
+                                                    <div className="bg-white/90 backdrop-blur-sm rounded-xl p-3">
+                                                        <IoImageOutline className="text-pink-700 text-2xl" />
+                                                    </div>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <div className="text-center">
+                                                <div className="w-16 h-16 bg-gradient-to-br from-pink-100 to-pink-200 rounded-2xl flex items-center justify-center mb-4 mx-auto">
+                                                    <IoImageOutline className="w-8 h-8 text-pink-600" />
+                                                </div>
+                                                <p className="text-sm font-medium text-gray-700 mb-1">Upload Logo</p>
+                                                <p className="text-xs text-gray-500">Click or drag to upload</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <input
+                                        type="file"
+                                        ref={fileInputRef}
+                                        className="sr-only"
+                                        accept="image/png, image/jpeg, image/avif"
+                                        onChange={(e) => {
+                                            const file = e.target.files?.[0];
+                                            if (file) {
+                                                handleFileUpload(file);
+                                            }
+                                        }}
+                                        aria-label="Upload company logo"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Company Information Section */}
+                        <div className="space-y-6">
+                            {/* Company Name */}
+                            <div className="group">
+                                <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <div className="p-1.5 rounded-lg bg-blue-100">
+                                        <IoBusinessOutline className="text-blue-600 text-lg" />
+                                    </div>
+                                    Company Name
+                                </label>
+                                <input
+                                    type="text"
+                                    {...register("name")}
+                                    disabled
+                                    id="name"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all text-base group-hover:border-gray-300"
+                                    placeholder="Enter company name"
+                                />
+                            </div>
+
+                            {/* Email */}
+                            <div className="group">
+                                <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <div className="p-1.5 rounded-lg bg-green-100">
+                                        <IoMailOutline className="text-green-600 text-lg" />
+                                    </div>
+                                    Email
+                                </label>
+                                <input
+                                    disabled
+                                    {...register("email")}
+                                    type="email"
+                                    id="email"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all text-base group-hover:border-gray-300"
+                                    placeholder="Enter company email"
+                                />
+                            </div>
+
+                            {/* Phone */}
+                            <div className="group">
+                                <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <div className="p-1.5 rounded-lg bg-purple-100">
+                                        <IoCallOutline className="text-purple-600 text-lg" />
+                                    </div>
+                                    Phone
+                                </label>
+                                <input
+                                    type="tel"
+                                    {...register("phone")}
+                                    id="phone"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all text-base placeholder:text-gray-400 group-hover:border-gray-300"
+                                    placeholder="Enter company phone"
+                                />
+                            </div>
+
+                            {/* Address */}
+                            <div className="group">
+                                <label htmlFor="address" className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <div className="p-1.5 rounded-lg bg-orange-100">
+                                        <IoLocationOutline className="text-orange-600 text-lg" />
+                                    </div>
+                                    Address
+                                </label>
+                                <textarea
+                                    id="address"
+                                    {...register("address")}
+                                    rows={3}
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-100 transition-all text-base placeholder:text-gray-400 resize-none group-hover:border-gray-300"
+                                    placeholder="Enter company address"
+                                />
+                            </div>
+
+                            {/* Description */}
+                            <div className="group">
+                                <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <div className="p-1.5 rounded-lg bg-teal-100">
+                                        <IoDocumentTextOutline className="text-teal-600 text-lg" />
+                                    </div>
+                                    Description
+                                </label>
+                                <textarea
+                                    id="description"
+                                    {...register("description")}
+                                    rows={3}
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-teal-500 focus:ring-4 focus:ring-teal-100 transition-all text-base placeholder:text-gray-400 resize-none group-hover:border-gray-300"
+                                    placeholder="Enter company description"
+                                />
+                            </div>
+                        </div>
                     </div>
-                    <div className="p-6 space-y-6">
-                        <div className="space-y-2">
-                            <label htmlFor="companyName" className="block text-sm font-medium text-gray-700 flex items-center gap-2">
-                                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                </svg>
-                                Company Name
-                            </label>
-                            <input
-                                type="text"
-                                {...register("name")}
-                                disabled
-                                id="companyName"
-                                className="w-full disabled:text-gray-300 px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 "
-                                placeholder="Enter company name"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 flex items-center gap-2">
-                                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
-                                Email
-                            </label>
-                            <input
-                                disabled
-                                {...register("email")}
-                                type="email"
-                                id="email"
-                                className="w-full disabled:text-gray-300 px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                                placeholder="Enter company email"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 flex items-center gap-2">
-                                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                </svg>
-                                Phone
-                            </label>
-                            <input
-                                type="tel"
-                                {...register("phone")}
-                                id="phone"
-                                className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white"
-                                placeholder="Enter company phone"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label htmlFor="address" className="block text-sm font-medium text-gray-700 flex items-center gap-2">
-                                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                                Address
-                            </label>
-                            <textarea
-                                id="address"
-                                {...register("address")}
-                                rows={3}
-                                className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none bg-white"
-                                placeholder="Enter company address"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label htmlFor="description" className="block text-sm font-medium text-gray-700 flex items-center gap-2">
-                                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
-                                </svg>
-                                Description
-                            </label>
-                            <textarea
-                                id="description"
-                                {...register("description")}
-                                rows={3}
-                                className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none bg-white"
-                                placeholder="Enter company description"
-                            />
-                        </div>
-                        <button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-4 rounded-lg font-medium hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 shadow-sm">
+
+                    {/* Submit Button */}
+                    <div className="mt-10 flex justify-end">
+                        <button
+                            type="submit"
+                            className="px-8 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-semibold hover:from-cyan-600 hover:to-cyan-700 transition-all text-base focus:outline-none focus:ring-4 focus:ring-cyan-100 shadow-lg"
+                        >
                             Save Changes
                         </button>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </>
     )
 }

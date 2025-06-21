@@ -11,8 +11,6 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 interface Props {
     totalItems: number,
     totalPages: number,
-
-
 }
 
 export const Pagination = ({ totalItems, totalPages }: Props) => {
@@ -40,7 +38,7 @@ export const Pagination = ({ totalItems, totalPages }: Props) => {
         }
 
         if (+pageNumber <= 0) {
-            return `${pathname}`; 
+            return `${pathname}`;
         }
 
         if (+pageNumber > totalPages) { // Next > 
@@ -56,71 +54,68 @@ export const Pagination = ({ totalItems, totalPages }: Props) => {
 
 
     return (
-        <section className="px-6 py-4 w-full grid gap-3 md:flex md:justify-between md:items-center">
+        <section className="px-6 py-4 w-full grid gap-4 md:flex md:justify-between md:items-center">
             <div>
                 <p className="text-sm text-gray-600">
                     <span className="font-semibold text-gray-800">
-                        {`${totalItems} resultado${totalItems !== 1 ? 's' : ''}`}
+                        {`${totalItems} result${totalItems !== 1 ? 's' : ''}`}
                     </span>
                 </p>
             </div>
 
+            <div className="flex justify-center">
+                <nav aria-label="Page navigation" className="flex items-center gap-1">
+                    {/* Previous Button */}
+                    <Link
+                        className={`inline-flex items-center justify-center w-9 h-9 text-sm font-medium rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${currentPage <= 1
+                            ? 'border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed'
+                            : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-400'
+                            }`}
+                        href={currentPage <= 1 ? '#' : createPageUrl(currentPage - 1)}
+                        onClick={currentPage <= 1 ? (e) => e.preventDefault() : undefined}
+                    >
+                        <IoIosArrowBack className="w-4 h-4" />
+                    </Link>
 
-            <div className="flex text-center justify-center  ">
+                    {/* Page Numbers */}
+                    <div className="flex items-center gap-1">
+                        {allPages.map((page, index) => {
+                            // Handle ellipsis
+                            if (page === '...') {
+                                return (
+                                    <span key={`ellipsis-${index}`} className="px-2 text-gray-400">
+                                        ...
+                                    </span>
+                                );
+                            }
 
-                <nav aria-label="Page navigation example">
+                            // Handle numeric pages
+                            return (
+                                <Link
+                                    key={page}
+                                    className={`inline-flex items-center justify-center w-9 h-9 text-sm font-medium rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${page === currentPage
+                                        ? 'border-blue-500 bg-blue-500 text-white shadow-sm'
+                                        : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-400'
+                                        }`}
+                                    href={createPageUrl(page)}
+                                >
+                                    {page}
+                                </Link>
+                            );
+                        })}
+                    </div>
 
-                    <ul className="flex gap-x-2 list-style-none">
-                        <li className="page-item">
-                            <Link
-                                className=" py-1.5 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50"
-                                href={createPageUrl(currentPage - 1)}
-                            >
-                                <span className='flex items-center'>
-                                    <IoIosArrowBack />
-                                    Ant
-                                </span>
-                            </Link>
-                        </li>
-
-                        {
-                            allPages.map((page, index) => (
-
-                                <li key={page} className="page-item">
-                                    <Link
-                                        className={
-                                            clsx(
-                                                "page-link relative block py-1.5 px-3 border-0 outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none",
-                                                {
-                                                    'bg-demoHover shadow-sm text-white hover:text-white hover:bg-[#5dade2]': page === currentPage
-                                                }
-                                            )
-                                        }
-                                        href={createPageUrl(page)}
-                                    >
-                                        {page}
-                                    </Link>
-                                </li>
-
-                            ))
-
-                        }
-
-
-
-
-                        <li className="page-item">
-                            <Link
-                                className="py-1.5 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50"
-                                href={createPageUrl(currentPage + 1)}
-                            >
-                                <span className='flex items-center'>
-                                    Sig
-                                    <IoIosArrowForward />
-                                </span>
-                            </Link>
-                        </li>
-                    </ul>
+                    {/* Next Button */}
+                    <Link
+                        className={`inline-flex items-center justify-center w-9 h-9 text-sm font-medium rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${currentPage >= totalPages
+                            ? 'border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed'
+                            : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-400'
+                            }`}
+                        href={currentPage >= totalPages ? '#' : createPageUrl(currentPage + 1)}
+                        onClick={currentPage >= totalPages ? (e) => e.preventDefault() : undefined}
+                    >
+                        <IoIosArrowForward className="w-4 h-4" />
+                    </Link>
                 </nav>
             </div>
         </section>

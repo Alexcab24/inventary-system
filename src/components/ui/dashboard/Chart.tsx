@@ -18,7 +18,7 @@ import { MdBarChart } from "react-icons/md";
 
 const chartConfig = {
     desktop: {
-        label: "Products",
+        label: "Inbound Quantity",
         color: "#2563eb", // blue-600
     },
 } satisfies ChartConfig;
@@ -33,8 +33,8 @@ export default function Component({ chartData, numberOfMonths }: ChartComponentP
     const year = date.getFullYear();
 
     const footerDescription = numberOfMonths > 1
-        ? `Showing total products for the last ${numberOfMonths} months, including this month.`
-        : `Showing products for this month.`;
+        ? `Showing total inbound quantity for the last ${numberOfMonths} months, including this month.`
+        : `Showing inbound quantity for this month.`;
 
     const barSize = chartData.length <= 4 ? 60 : chartData.length <= 8 ? 40 : 30;
     const chartWidth = Math.max(chartData.length * 80, 300);
@@ -47,7 +47,7 @@ export default function Component({ chartData, numberOfMonths }: ChartComponentP
                         <MdBarChart size={24} className="text-blue-600" />
                     </div>
                     <div>
-                        <CardTitle className="text-xl font-semibold text-gray-800">Products Added by Month</CardTitle>
+                        <CardTitle className="text-xl font-semibold text-gray-800">Inbound Movements by Month</CardTitle>
                         <CardDescription className="text-sm text-gray-500 mt-1">
                             January - December {year}
                         </CardDescription>

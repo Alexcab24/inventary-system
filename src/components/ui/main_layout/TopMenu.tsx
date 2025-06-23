@@ -19,7 +19,6 @@ interface Props {
 }
 
 export const TopMenu = ({ user, onHamburgerClick }: Props) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const expanded = useSidebarStore((s: any) => s.expanded);
   const toggleSidebar = useSidebarStore((s: any) => s.toggle);
 
@@ -104,10 +103,10 @@ export const TopMenu = ({ user, onHamburgerClick }: Props) => {
                     </>
                   )
                 }
-                <a className="flex items-center gap-x-3.5 py-2.5 px-3 rounded-lg text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus:bg-gray-50 transition-colors" href={ROUTES.PROFILE}>
+                <Link href={ROUTES.EDIT_PROFILE} className="flex items-center gap-x-3.5 py-2.5 px-3 rounded-lg text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus:bg-gray-50 transition-colors">
                   <TfiSettings size={20} className="text-gray-500" />
                   Edit Profile
-                </a>
+                </Link>
                 <div>
                   <hr className='border-gray-100 my-2' />
                 </div>

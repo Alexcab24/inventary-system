@@ -20,6 +20,6 @@ export const adminMenuItems = [
     {
         icon: <MdSettings />,
         title: 'Edit Profile',
-        path: ROUTES.PROFILE,
+        path: ROUTES.EDIT_PROFILE,
     },
 ];

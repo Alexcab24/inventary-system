@@ -40,9 +40,9 @@ export const CategoryModal = ({ onClose }: Props) => {
                         <div className="flex items-center gap-3">
                             <div className="p-2 rounded-lg bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-sm">
                                 <TbCategoryPlus size={20} className="text-white" />
-                            </div>
-                            <div>
-                                <h3 className="text-lg font-semibold text-gray-800">Create Category</h3>
+                        </div>
+                        <div>
+                            <h3 className="text-lg font-semibold text-gray-800">Create Category</h3>
                                 <p className="text-sm text-gray-600">Add a new category to organize your products</p>
                             </div>
                         </div>

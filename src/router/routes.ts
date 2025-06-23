@@ -12,7 +12,7 @@ export const ROUTES = {
     USERS: '/management/users',
     CREATE_USER: '/management/users/create',
     COMPANY: '/management/company',
-    PROFILE: '/management/profile',
+    EDIT_PROFILE: '/management/edit-profile',
 
 
 

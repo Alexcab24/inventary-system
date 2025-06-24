@@ -23,6 +23,7 @@ interface Props {
 }
 
 export const FormEdit = ({ userSession, userById }: Props) => {
+    console.log(userById)
     const { id } = userById;
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();

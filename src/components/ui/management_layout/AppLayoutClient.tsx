@@ -27,7 +27,7 @@ const AppLayoutAdmin = ({ user, children }: Props) => {
             />
             {/* Main Content Area */}
             <div className={`transition-all duration-300 ${expanded ? 'lg:pl-72' : 'lg:pl-20'} pl-0`}>
-                <TopMenu user={user} onHamburgerClick={() => setMobileOpen(true)} />
+                <TopMenu user={user} profilePic={user.image || "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"} onHamburgerClick={() => setMobileOpen(true)} />
                 <main className="py-6">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         {children}

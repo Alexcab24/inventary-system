@@ -6,14 +6,18 @@ import type { User } from '@/interfaces';
 import { useSidebarStore } from '../../../store/sidebarStore';
 import { clientMenuItems } from "@/router/client.routes";
 
+
 interface Props {
     user: User;
+    profilePic: string;
     children: React.ReactNode;
 }
 
-const AppLayoutClient = ({ user, children }: Props) => {
+const AppLayoutClient = ({ user, children, profilePic }: Props) => {
     const [mobileOpen, setMobileOpen] = useState(false);
     const expanded = useSidebarStore((s) => s.expanded);
+
+    console.log(user.image)
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -26,7 +30,11 @@ const AppLayoutClient = ({ user, children }: Props) => {
             />
             {/* Main Content Area */}
             <div className={`transition-all duration-300 ${expanded ? 'lg:pl-72' : 'lg:pl-20'} pl-0`}>
-                <TopMenu user={user} onHamburgerClick={() => setMobileOpen(true)} />
+                <TopMenu
+                    user={user}
+                    onHamburgerClick={() => setMobileOpen(true)}
+                    profilePic={profilePic}
+                />
                 <main className="py-6">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         {children}

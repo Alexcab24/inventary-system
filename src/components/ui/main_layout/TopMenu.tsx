@@ -15,17 +15,18 @@ import { ROUTES } from '@/router/routes';
 
 interface Props {
   user: User
+  profilePic: string;
   onHamburgerClick?: () => void;
 }
 
-export const TopMenu = ({ user, onHamburgerClick }: Props) => {
+export const TopMenu = ({ user, onHamburgerClick, profilePic }: Props) => {
   const expanded = useSidebarStore((s: any) => s.expanded);
   const toggleSidebar = useSidebarStore((s: any) => s.toggle);
 
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
       <div className="h-16 flex items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Botón hamburguesa solo móvil/tablet */}
+
         <button
           className="lg:hidden mr-2 p-2 rounded-full hover:bg-gray-100 transition-colors"
           aria-label="Abrir menú"
@@ -33,7 +34,7 @@ export const TopMenu = ({ user, onHamburgerClick }: Props) => {
         >
           <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
-        {/* Botón collapse sidebar solo desktop */}
+
         <button
           className="hidden lg:block mr-2 p-2 rounded-full hover:bg-gray-100 transition-colors"
           aria-label={expanded ? 'Colapsar menú' : 'Expandir menú'}
@@ -76,11 +77,15 @@ export const TopMenu = ({ user, onHamburgerClick }: Props) => {
           {/* Perfil y Dropdown */}
           <div className="hs-dropdown [--placement:bottom-right] relative inline-flex">
             <button id="hs-dropdown-account" type="button" className="size-[38px] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-gray-200 hover:border-gray-300 text-gray-800 focus:outline-none disabled:opacity-50 disabled:pointer-events-none dark:text-white" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-              <Image src={'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541'} width={500}
-                height={500}
-                alt="Profile picture"
-                className='rounded-full'
-              />
+              <div className="w-9 h-9 rounded-full overflow-hidden flex items-center justify-center bg-gray-100">
+                <Image
+                  src={profilePic || 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541'}
+                  width={38}
+                  height={38}
+                  alt="Profile picture"
+                  className="w-full h-full object-cover rounded-full"
+                />
+              </div>
             </button>
 
             <div className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-64 bg-white shadow-lg rounded-xl mt-2 border border-gray-100" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">

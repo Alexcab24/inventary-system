@@ -2,7 +2,7 @@ import Image from "next/image";
 import { MdInventory } from "react-icons/md";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../card";
 import { getLastProducts } from "@/actions/products/get-products-by-company";
-import { cn } from "@/lib/utils";
+
 
 export const LastedProducts = async () => {
     const { lastFourProducts = [] } = await getLastProducts();
@@ -17,7 +17,7 @@ export const LastedProducts = async () => {
                     <div>
                         <CardTitle className="text-xl font-semibold text-gray-800">Latest Added Products</CardTitle>
                         <CardDescription className="text-sm text-gray-500 mt-1">
-                            Last 6 products added recently
+                            Last 4 products added recently
                         </CardDescription>
                     </div>
                 </div>

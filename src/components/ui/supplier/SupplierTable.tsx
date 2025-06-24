@@ -62,14 +62,14 @@ export const SupplierTable = async ({ suppliers }: Props) => {
                                 </td>
                                 <td className="whitespace-nowrap py-4 px-6">
                                     <div className="flex items-center gap-x-3">
-                                        <div className="relative size-10 rounded-full overflow-hidden ring-2 ring-gray-100">
+                                        {/* <div className="relative size-10 rounded-full overflow-hidden ring-2 ring-gray-100">
                                             <Image
                                                 className="object-cover"
                                                 src={supplier.logo || "https://images.unsplash.com/photo-1670272505340-d906d8d77d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"}
                                                 alt={`Logo of ${supplier.name}`}
                                                 fill
                                             />
-                                        </div>
+                                        </div> */}
                                         <div className="grow">
                                             <span className="block text-sm font-medium text-gray-800">
                                                 {supplier.name}

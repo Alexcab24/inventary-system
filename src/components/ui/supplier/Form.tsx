@@ -40,7 +40,7 @@ const Form = ({ user }: Props) => {
 
             if (resp.ok) {
                 successNotification(resp.message || '');
-                router.push('/dashboard/suppliers');
+                router.push(ROUTES.SUPPLIER);
             } else {
                 errorNotification(resp.message || '');
             }

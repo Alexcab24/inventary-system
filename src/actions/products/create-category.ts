@@ -3,6 +3,7 @@
 import { auth } from "@/auth.config";
 import { Category } from "@/interfaces/category.interfaces";
 import prisma from "@/lib/prisma";
+import { ROUTES } from "@/router/routes";
 import { validateCategory } from "@/schemas/validation/categoryValidation";
 import { revalidatePath } from "next/cache";
 
@@ -18,10 +19,9 @@ export const createCategory = async (name: string) => {
     }
 
 
-    const category: Category = {
+    const category = {
         name,
-        isActive: true,
-        // companyId,
+        companyId,
     };
 
     const result = validateCategory(category);
@@ -39,17 +39,17 @@ export const createCategory = async (name: string) => {
             data: result.data
         });
 
-        revalidatePath('/inventory/create');
+        revalidatePath(ROUTES.CREATE_PRODUCT);
 
         return {
             ok: true,
-            message: 'Categoría creada correctamente'
+            message: 'Category created successfully'
         }
     } catch (error) {
         console.log(error)
         return {
             ok: false,
-            message: 'Error al intentar crear cartegoría'
+            message: 'Error trying to create category'
         }
     }
 }

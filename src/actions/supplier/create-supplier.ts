@@ -2,6 +2,7 @@
 
 import { Supplier } from "@/interfaces/supplier.interface";
 import prisma from "@/lib/prisma";
+import { ROUTES } from "@/router/routes";
 import { validateSupplier } from "@/schemas/validation/supplierValidation";
 import { revalidatePath } from "next/cache";
 
@@ -57,17 +58,17 @@ export const createSupplier = async (
             }
         })
 
-        revalidatePath('/dashboard/suppliers');
+        revalidatePath(ROUTES.SUPPLIER);
         return {
             ok: true,
-            message: 'Suplidor creado con éxito',
+            message: 'Supplier successfully created',
             newSupplier
         }
     } catch (error) {
         console.error(error)
         return {
             ok: false,
-            message: 'Error a crear suplidor'
+            message: 'Error creating supplier'
         }
     }
 

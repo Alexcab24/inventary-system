@@ -15,7 +15,7 @@ const categorySchema = z.object({
 
 
 
-export function validateCategory(object: Category) {
+export function validateCategory(object: any) {
     return categorySchema.safeParse(object)
 }
 

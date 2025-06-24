@@ -8,8 +8,11 @@ import { redirect } from "next/navigation";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Inventary App",
-    description: "Inventary App project",
+    title: "Inventory System",
+    description: "Inventory System description",
+    icons: {
+        icon: "/favicon-inventory.svg"
+    }
 };
 
 
@@ -25,7 +28,7 @@ export default async function RootLayout({
 
 
     const session = await auth();
-    
+
     if (session?.user) {
         redirect('/dashboard')
     }

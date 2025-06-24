@@ -10,8 +10,11 @@ import { ROUTES } from "@/router/routes";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Inventary System",
-  description: "Inventary System description",
+  title: "Inventory System",
+  description: "Inventory System description",
+  icons: {
+    icon: "/favicon-inventory.svg"
+  }
 };
 
 export default async function RootLayout({

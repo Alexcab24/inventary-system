@@ -6,6 +6,7 @@ import prisma from "@/lib/prisma";
 import { companySchema } from "@/schemas/validation/company/companySchema";
 import { revalidatePath } from "next/cache";
 import { UploadImage } from '@/utils/uploadImages';
+import { ROUTES } from "@/router/routes";
 
 
 
@@ -58,7 +59,7 @@ export const updateCompany = async (formData: FormData) => {
             data: updateData,
         });
 
-        revalidatePath('/management/company');
+        revalidatePath(ROUTES.COMPANY);
 
         return {
             ok: true,

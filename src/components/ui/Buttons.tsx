@@ -8,14 +8,16 @@ export const CreateButton = ({ label, url, className }: { label: string, url: st
         <Link
             href={url}
             className={cn(
-                "py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-demoHover text-white hover:bg-demo transition-all duration-300 disabled:pointer-events-none",
+                "group relative inline-flex items-center gap-x-2 px-4 py-2.5 text-sm font-semibold rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-sm hover:from-blue-700 hover:to-blue-800 hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
                 className
             )}
         >
-            <GoPlus size={24} />
-            <span className="hidden md:flex">
-                {label}
-            </span>
+            <div className="flex items-center gap-x-2">
+                <GoPlus size={18} className="transition-transform group-hover:scale-110" />
+                <span className="hidden md:inline-block">
+                    {label}
+                </span>
+            </div>
         </Link>
     )
 }

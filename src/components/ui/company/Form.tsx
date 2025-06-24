@@ -8,6 +8,8 @@ import { updateCompany } from "@/actions/company/update-company";
 import { LoadingOverlay } from "../LoadingOverlay";
 import Image from "next/image";
 import { IoBusinessOutline, IoMailOutline, IoCallOutline, IoLocationOutline, IoDocumentTextOutline, IoImageOutline, IoInformationCircleOutline } from 'react-icons/io5';
+import { ROUTES } from "@/router/routes";
+import { useRouter } from "next/navigation";
 
 interface Props {
     company: Company;
@@ -24,6 +26,7 @@ interface FormInputs {
 
 export const Form = ({ company }: Props) => {
     const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
     const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>({
         defaultValues: {
             ...company
@@ -60,6 +63,7 @@ export const Form = ({ company }: Props) => {
 
             if (ok) {
                 successNotification(message || '');
+                router.push(ROUTES.DASHBOARD);
             } else {
                 errorNotification(message || '');
             }

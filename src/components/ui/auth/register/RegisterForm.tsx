@@ -10,6 +10,7 @@ import { registerCompany } from '@/actions/auth/register-company';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerCompanySchema } from '@/schemas/validation/company/registerCompanySchema';
 import { LoadingOverlay } from '../../LoadingOverlay';
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 import type { z } from 'zod';
 
@@ -100,29 +101,23 @@ export const RegisterForm = () => {
                 {/* Password */}
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
-                    <input
-                        type="password"
-                        {...register('password')}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    <PasswordInput
+                        register={register('password')}
+                        error={errors.password?.message}
                         placeholder="Enter your password"
+                        name="password"
                     />
-                    {errors.password && (
-                        <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
-                    )}
                 </div>
 
                 {/* Confirm Password */}
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
-                    <input
-                        type="password"
-                        {...register('confirmPassword')}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    <PasswordInput
+                        register={register('confirmPassword')}
+                        error={errors.confirmPassword?.message}
                         placeholder="Confirm your password"
+                        name="confirmPassword"
                     />
-                    {errors.confirmPassword && (
-                        <p className="mt-1 text-sm text-red-600">{errors.confirmPassword.message}</p>
-                    )}
                 </div>
 
                 {/* Workspace */}
@@ -162,3 +157,35 @@ export const RegisterForm = () => {
         </>
     );
 };
+
+function PasswordInput({ register, error, placeholder, name }: {
+    register: any;
+    error?: string;
+    placeholder?: string;
+    name: string;
+}) {
+    const [show, setShow] = useState(false);
+    return (
+        <div className="relative">
+            <input
+                type={show ? "text" : "password"}
+                {...register}
+                name={name}
+                className="w-full px-4 py-3 pr-10 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                placeholder={placeholder}
+            />
+            <button
+                type="button"
+                tabIndex={-1}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 focus:outline-none"
+                onClick={() => setShow((prev) => !prev)}
+                aria-label={show ? "Hide password" : "Show password"}
+            >
+                {show ? <FiEyeOff className="h-5 w-5" /> : <FiEye className="h-5 w-5" />}
+            </button>
+            {error && (
+                <p className="mt-1 text-sm text-red-600">{error}</p>
+            )}
+        </div>
+    );
+}

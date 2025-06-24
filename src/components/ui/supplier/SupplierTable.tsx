@@ -95,7 +95,7 @@ export const SupplierTable = async ({ suppliers }: Props) => {
                                             aria-label={`Update supplier ${supplier.name}`}
                                         />
 
-                                        <button
+                                        {/* <button
                                             className={cn(
                                                 "inline-flex items-center justify-center h-6 w-6 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2",
                                                 supplier.isActive
@@ -110,7 +110,7 @@ export const SupplierTable = async ({ suppliers }: Props) => {
                                             ) : (
                                                 <IoEyeOff size={14} className="text-white" />
                                             )}
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </td>
                             </tr>

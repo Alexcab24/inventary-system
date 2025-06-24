@@ -158,30 +158,7 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
                                 )}
                             </div>
 
-                            {/* Stock */}
-                            <div className="group">
-                                <label htmlFor="stock" className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                                    <div className="p-1.5 rounded-lg bg-purple-100">
-                                        <IoLayersOutline className="text-purple-600 text-lg" />
-                                    </div>
-                                    Stock Quantity
-                                </label>
-                                <input
-                                    id="stock"
-                                    type="number"
-                                    min={1}
-                                    {...register("stock", { required: "Stock quantity is required" })}
-                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all text-base placeholder:text-gray-400 group-hover:border-gray-300"
-                                    placeholder="Available stock quantity"
-                                    aria-describedby={errors.stock ? "stock-error" : undefined}
-                                />
-                                {errors.stock && (
-                                    <p id="stock-error" className="text-sm text-red-600 mt-2 flex items-center gap-1" role="alert">
-                                        <span className="w-1 h-1 bg-red-600 rounded-full"></span>
-                                        {errors.stock.message}
-                                    </p>
-                                )}
-                            </div>
+                     
 
                             {/* Description */}
                             <div className="group">

@@ -38,11 +38,11 @@ export const CategoriesTable = ({ categories }: Props) => {
                             </div>
                         </th>
 
-                        <th scope="col" className="px-6 py-4 text-end">
+                        {/* <th scope="col" className="px-6 py-4 text-end">
                             <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">
                                 Actions
                             </span>
-                        </th>
+                        </th> */}
                     </tr>
                 </thead>
 
@@ -71,9 +71,9 @@ export const CategoriesTable = ({ categories }: Props) => {
                                         </span>
                                     </div>
                                 </td>
-
+{/* 
                                 <td className="whitespace-nowrap py-4 px-6">
-                                    <div className="flex items-center justify-end gap-x-2">
+                                    <div className="flex items-center justify-end gap-x-2"> */}
                                         {/* <UpdateButton
                                             id={category.id || ''}
                                             url="/inventory/categories"
@@ -86,7 +86,7 @@ export const CategoriesTable = ({ categories }: Props) => {
                                         >
                                             <IoTrashOutline size={14} />
                                         </button> */}
-                                        <button
+                                        {/* <button
                                             className={cn(
                                                 "inline-flex items-center justify-center h-6 w-6 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2",
                                                 category.isActive
@@ -101,9 +101,9 @@ export const CategoriesTable = ({ categories }: Props) => {
                                             ) : (
                                                 <IoEyeOff size={14} className="text-white" />
                                             )}
-                                        </button>
-                                    </div>
-                                </td>
+                                        </button> */}
+                                    {/* </div>
+                                </td> */}
                             </tr>
                         ))
                     ) : (

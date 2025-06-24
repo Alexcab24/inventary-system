@@ -6,7 +6,8 @@ import { useFormState } from "react-dom";
 import { IoInformationOutline } from "react-icons/io5";
 import { Spinner } from "../../Spinner";
 import { authenticate } from "@/actions/auth/login";
-import { FiMail, FiLock } from "react-icons/fi";
+import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
+import { useState } from "react";
 
 export const LoginForm = () => {
   const [state, dispatch] = useFormState(authenticate, undefined);
@@ -43,26 +44,18 @@ export const LoginForm = () => {
           <label htmlFor="password" className="block text-sm font-medium text-gray-700">
             Password
           </label>
-          <a
+          {/* <a
             className="text-sm font-medium text-blue-600 hover:text-blue-500 transition-colors"
             href="#"
           >
             Forgot password?
-          </a>
+          </a> */}
         </div>
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <FiLock className="h-5 w-5 text-gray-400" />
           </div>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-            placeholder="••••••••"
-            required
-            aria-describedby="password-error"
-          />
+          <PasswordInput />
         </div>
         <p className="hidden text-xs text-red-600 mt-1" id="password-error">
           Password must be at least 8 characters
@@ -108,5 +101,31 @@ function LoginButton() {
         "Sign in"
       )}
     </button>
+  );
+}
+
+function PasswordInput() {
+  const [showPassword, setShowPassword] = useState(false);
+  return (
+    <>
+      <input
+        type={showPassword ? "text" : "password"}
+        id="password"
+        name="password"
+        className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+        placeholder="••••••••"
+        required
+        aria-describedby="password-error"
+      />
+      <button
+        type="button"
+        tabIndex={-1}
+        className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 focus:outline-none"
+        onClick={() => setShowPassword((prev) => !prev)}
+        aria-label={showPassword ? "Hide password" : "Show password"}
+      >
+        {showPassword ? <FiEyeOff className="h-5 w-5" /> : <FiEye className="h-5 w-5" />}
+      </button>
+    </>
   );
 }

@@ -59,7 +59,7 @@ export const TopMenu = ({ user, onHamburgerClick, profilePic }: Props) => {
         </div>
         {/* Acciones */}
         <div className="flex items-center gap-4">
-          <button
+          {/* <button
             type="button"
             className="relative p-2 rounded-full text-gray-500 hover:bg-gray-100 transition-colors"
             aria-label="Notificaciones"
@@ -73,7 +73,7 @@ export const TopMenu = ({ user, onHamburgerClick, profilePic }: Props) => {
             aria-label="Configuración"
           >
             <MdSettings className="w-5 h-5" />
-          </button>
+          </button> */}
           {/* Perfil y Dropdown */}
           <div className="hs-dropdown [--placement:bottom-right] relative inline-flex">
             <button id="hs-dropdown-account" type="button" className="size-[38px] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-gray-200 hover:border-gray-300 text-gray-800 focus:outline-none disabled:opacity-50 disabled:pointer-events-none dark:text-white" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">

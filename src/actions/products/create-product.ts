@@ -19,7 +19,6 @@ export const createProduct = async (formData: FormData) => {
         }
     }
 
-
     const imageData = formData.get("image") as File | null;
     if (imageData && imageData.size > 0 && !isCloudinaryConfigured()) {
         return {
@@ -49,24 +48,22 @@ export const createProduct = async (formData: FormData) => {
             companyId: workspace
         };
 
-        try {
-            if (imageData && imageData.size > 0) {
+        if (imageData && imageData.size > 0) {
+            try {
                 const image = await UploadImage(imageData);
                 if (!image) {
-                    throw new Error('Image cannot be uploaded');
+                    throw new Error('No se pudo subir la imagen');
                 }
-                console.log(image);
-
-                newData.logotype = image;
-
-
+                console.log('Imagen subida exitosamente:', image);
+                newData.image = image;
+            } catch (uploadError) {
+                console.error('Error al subir imagen:', uploadError);
+                return {
+                    ok: false,
+                    message: uploadError instanceof Error ? uploadError.message : 'Error al subir la imagen'
+                };
             }
-        } catch (error) {
-            console.error(error)
         }
-
-
-
 
         const createdProduct = await prisma.products.create({
             data: newData,
@@ -89,10 +86,10 @@ export const createProduct = async (formData: FormData) => {
         };
 
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error general:", error);
         return {
             ok: false,
-            message: 'Error creating product',
+            message: error instanceof Error ? error.message : 'Error creating product',
         };
     }
 };

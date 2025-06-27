@@ -14,6 +14,7 @@ import { ROUTES } from '@/router/routes';
 import { LoadingOverlay } from '../LoadingOverlay';
 import { IoCubeOutline, IoDocumentTextOutline, IoImageOutline, IoInformationCircleOutline, IoLayersOutline, IoPencil, IoPeopleOutline, IoPricetagOutline } from 'react-icons/io5';
 import Image from 'next/image';
+import { CloudinaryDebug } from '../CloudinaryDebug';
 
 interface FormInputs {
     name: string;
@@ -85,18 +86,23 @@ export const Form = ({ user, suppliers, categories }: Props) => {
             if (productData.description) formData.append('description', productData.description);
             if (imageFile) formData.append('image', imageFile)
 
+            console.log('Enviando formulario con imagen:', imageFile ? 'Sí' : 'No');
+
             const resp = await createProduct(formData);
 
             if (resp.ok) {
-                successNotification(resp.message || '');
+                successNotification(resp.message || 'Producto creado exitosamente');
                 router.push(ROUTES.PRODUCTS);
                 reset();
                 setPreviewImage(null);
+                setImageFile(null);
             } else {
-                errorNotification(resp.message || '');
+                console.error('Error en createProduct:', resp.message);
+                errorNotification(resp.message || 'Error al crear el producto');
             }
         } catch (error) {
-            errorNotification('An error occurred while creating the product');
+            console.error('Error general en onSubmit:', error);
+            errorNotification(error instanceof Error ? error.message : 'An error occurred while creating the product');
         } finally {
             setIsLoading(false);
         }
@@ -121,6 +127,11 @@ export const Form = ({ user, suppliers, categories }: Props) => {
                 </div>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="p-8">
+                    {/* Debug Component - Temporal */}
+                    <div className="mb-6">
+                        <CloudinaryDebug />
+                    </div>
+
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         {/* Left Column */}
                         <div className="space-y-6">

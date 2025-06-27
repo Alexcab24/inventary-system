@@ -82,9 +82,13 @@ A modern and comprehensive inventory management system built with Next.js 14, Ty
    AUTH_URL="http://subdomain.localhost:3000"
 
    # Cloudinary (optional, for image uploads)
-   CLOUDINARY_CLOUD_NAME="your-cloud-name"
-   CLOUDINARY_API_KEY="your-api-key"
-   CLOUDINARY_API_SECRET="your-api-secret"
+   # Opción 1: Usar URL completa (recomendado)
+   CLOUDINARY_URL="cloudinary://API_KEY:API_SECRET@CLOUD_NAME"
+   
+   # Opción 2: Usar variables separadas
+   # CLOUDINARY_CLOUD_NAME="your-cloud-name"
+   # CLOUDINARY_API_KEY="your-api-key"
+   # CLOUDINARY_API_SECRET="your-api-secret"
    ```
 
 4. **Start the database with Docker**

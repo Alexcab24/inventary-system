@@ -4,7 +4,7 @@ import { auth } from "@/auth.config";
 import prisma from "@/lib/prisma";
 import { ROUTES } from "@/router/routes";
 import { productSchema } from "@/schemas/validation/productValidation";
-import { UploadImage } from "@/utils/uploadImages";
+import { UploadImage, isCloudinaryConfigured } from "@/utils/uploadImages";
 import { revalidatePath } from "next/cache";
 
 
@@ -18,6 +18,16 @@ export const createProduct = async (formData: FormData) => {
             message: 'Debe de estar autenticado como admin'
         }
     }
+
+
+    const imageData = formData.get("image") as File | null;
+    if (imageData && imageData.size > 0 && !isCloudinaryConfigured()) {
+        return {
+            ok: false,
+            message: 'Cloudinary no está configurado correctamente. No se pueden subir imágenes.'
+        };
+    }
+
     const data = Object.fromEntries(formData.entries());
 
     delete data.image;
@@ -33,9 +43,6 @@ export const createProduct = async (formData: FormData) => {
     const product = productParsed.data;
     const workspace = session.user.companyId;
 
-    const imageData = formData.get("image") as File | null;
-
-
     try {
         const newData: any = {
             ...product,
@@ -44,12 +51,16 @@ export const createProduct = async (formData: FormData) => {
 
 
         if (imageData && imageData.size > 0) {
-            const productImage = await UploadImage(imageData);
-
-            if (!productImage || typeof productImage !== "string") {
-                throw new Error("Image upload failed or did not return a valid URL");
+            try {
+                const productImage = await UploadImage(imageData);
+                newData.image = productImage;
+            } catch (uploadError) {
+                console.error("Error uploading image:", uploadError);
+                return {
+                    ok: false,
+                    message: uploadError instanceof Error ? uploadError.message : 'Error al subir la imagen'
+                };
             }
-            newData.image = productImage;
         }
 
         const createdProduct = await prisma.products.create({
@@ -69,7 +80,7 @@ export const createProduct = async (formData: FormData) => {
 
         return {
             ok: true,
-            message: 'Product updated successfully'
+            message: 'Product created successfully'
         };
 
     } catch (error) {

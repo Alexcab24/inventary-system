@@ -1,9 +1,7 @@
 import { Supplier } from '@/interfaces/supplier.interface'
-import { cn } from '@/lib/utils'
-import Image from 'next/image'
 import React from 'react'
 import { UpdateButton } from '../Buttons'
-import { IoEye, IoEyeOff } from 'react-icons/io5'
+
 
 interface Props {
     suppliers: Supplier[]

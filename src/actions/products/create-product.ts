@@ -49,19 +49,18 @@ export const createProduct = async (formData: FormData) => {
             companyId: workspace
         };
 
-
         if (imageData && imageData.size > 0) {
-            try {
-                const productImage = await UploadImage(imageData);
-                newData.image = productImage;
-            } catch (uploadError) {
-                console.error("Error uploading image:", uploadError);
-                return {
-                    ok: false,
-                    message: uploadError instanceof Error ? uploadError.message : 'Error al subir la imagen'
-                };
+            const image = await UploadImage(imageData);
+            if (!image) {
+                throw new Error('Image cannot be uploaded');
             }
+            console.log(image);
+
+            newData.logotype = image;
+
+
         }
+
 
         const createdProduct = await prisma.products.create({
             data: newData,

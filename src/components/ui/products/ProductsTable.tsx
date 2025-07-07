@@ -91,14 +91,14 @@ export const ProductsTable = ({ products }: Props) => {
 
                                     <td className="whitespace-nowrap py-4 px-6">
                                         <div className="flex items-center gap-x-3">
-                                            <div className="relative size-10 rounded-full overflow-hidden ring-2 ring-gray-100">
+                                            {/* <div className="relative size-10 rounded-full overflow-hidden ring-2 ring-gray-100">
                                                 <Image
                                                     className="object-cover"
                                                     src={product.image || '/images/placeholders/product-placeholder.png'}
                                                     fill
                                                     alt={product.name}
                                                 />
-                                            </div>
+                                            </div> */}
                                             <div className="grow">
                                                 <span className="block text-sm font-medium text-gray-800">{product.name}</span>
                                             </div>

@@ -19,13 +19,13 @@ const ProductCard = ({ products }: Props) => {
                             <div className="flex flex-col flex-grow">
                                 <div className='flex items-center gap-2'>
 
-                                    <Image
+                                    {/* <Image
                                         className="rounded-full inline-block size-[36px]"
                                         src={product.image || '/images/placeholders/product-placeholder.png'}
                                         width={50}
                                         height={50}
                                         alt="Avatar"
-                                    />
+                                    /> */}
                                     <span className="text-gray-700 text-lg font-bold">
                                         {product.name}
                                     </span>

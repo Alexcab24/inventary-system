@@ -127,11 +127,6 @@ export const Form = ({ user, suppliers, categories }: Props) => {
                 </div>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="p-8">
-                    {/* Debug Component - Temporal */}
-                    <div className="mb-6">
-                        <CloudinaryDebug />
-                    </div>
-
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         {/* Left Column */}
                         <div className="space-y-6">
@@ -234,7 +229,7 @@ export const Form = ({ user, suppliers, categories }: Props) => {
                         {/* Right Column */}
                         <div className="space-y-6">
                             {/* Image Upload */}
-                            <div>
+                            {/* <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
                                     <div className="p-1.5 rounded-lg bg-pink-100">
                                         <IoImageOutline className="text-pink-600 text-lg" />
@@ -307,7 +302,7 @@ export const Form = ({ user, suppliers, categories }: Props) => {
                                         aria-label="Upload product image"
                                     />
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* Category */}
                             <div className="group">

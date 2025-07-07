@@ -181,7 +181,7 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
                         {/* Right Column */}
                         <div className="space-y-6">
                             {/* Image Upload */}
-                            <div className="group">
+                            {/* <div className="group">
                                 <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
                                     <div className="p-1.5 rounded-lg bg-pink-100">
                                         <IoImageOutline className="text-pink-600 text-lg" />
@@ -239,7 +239,7 @@ export const FormEdit = ({ userSession, productById, categories, suppliers }: Pr
                                         aria-label="Upload product image"
                                     />
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* Category */}
                             <div className="group">

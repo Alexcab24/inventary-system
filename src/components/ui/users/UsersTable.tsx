@@ -73,7 +73,7 @@ export const UsersTable = async ({ users }: Props) => {
                                                     "object-cover",
                                                     user.disabled && "opacity-50"
                                                 )}
-                                                src="https://images.unsplash.com/photo-1670272505340-d906d8d77d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
+                                                src={user.image || 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541'}
                                                 alt={`Avatar of ${user.name}`}
                                                 fill
                                             />
